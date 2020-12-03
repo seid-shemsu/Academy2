@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/musicplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical"
+            android:paddingTop="2dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/starttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="22dp"
+                    android:layout_weight="1"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="left"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/pause_play_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:src="@drawable/pause" />
+
+                <TextView
+                    android:id="@+id/endtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="22dp"
+                    android:layout_weight="1"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="right"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekbar1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:progressTint="@color/colorPrimary"
+                android:scrollbarSize="5dp"
+                android:thumbTint="@color/white" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            app:cardCornerRadius="20dp">
+
+            <ImageView
+                android:id="@+id/youtube"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@drawable/background"
+                android:gravity="center"
+                android:scaleType="center"
+                android:src="@drawable/play_btn" />
+        </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/audio"
+                android:layout_width="145dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:text="@string/listen_audio"
+                android:gravity="start|center_vertical"
+                android:paddingStart="25dp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/headset"
+                android:textColor="@color/white"
+                android:background="@drawable/backbtn" />
+
+            <TextView
+                android:id="@+id/pdf"
+                android:layout_width="145dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|start"
+                android:paddingStart="25dp"
+                android:paddingEnd="15dp"
+                android:drawableStart="@drawable/book"
+                android:textColor="@color/white"
+                android:drawablePadding="10dp"
+                android:background="@drawable/backbtn"
+                android:layout_alignParentRight="true"
+                android:text="@string/read_pdf"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/quiz"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/linear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/exambg"
+        android:text="@string/take_quiz"
+        android:textColor="@color/white" />
+</RelativeLayout>

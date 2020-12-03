@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">اكدمية الافرقية</string>
+    <string name="register">تسجل</string>
+    <string name="save_to_phone">ابق على الهاتف</string>
+    <string name="ok">طيب</string>
+    <string name="to_next">الى التالى</string>
+    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">الف مبرك انهيت الدراسة</string>
+    <string name="view_certificate">امظر الشهادة</string>
+    <string name="take_quiz">الاختبار</string>
+    <string name="part_one">فصل الاول</string>
+    <string name="part_two">فصل الثاني</string>
+    <string name="final_exam">الامتحان الاخير</string>
+    <string name="congratulation_n_next_part_is_unlocked">الدرس التالي مفتوحا</string>
+    <string name="submit">ارسال</string>
+    <string name="soryy_this_phone_has_been_registered_before_ntty_later">sorry this phone has been registered before. Tty later.</string>
+    <string name="english">english</string>
+
+    <string name="attemt_all_question">حاول كل الاسالة</string>
+    <string name="take_the_previous_quiz">خذ الاختبار القادم اولا</string>
+    <string name="view_answers">انظر الى الاجوبة</string>
+    <string name="sign_in">ادخل</string>
+    <string name="phone_international_format">رقم الهاتف</string>
+    <string name="connet_internet">اتصل بالانترنت</string>
+    <string name="unregistered_phone_number">رقم الهاتف لم يسجل</string>
+    <string name="registered_successfully">registered successfully</string>
+    <string name="final_exam_taken">لقد امتحنت من قبل</string>
+    <string name="follow_lecture">شاهد او استمع او اقرء الدرس اولا</string>
+    <string name="name">اسم</string>
+    <string name="phone">هاتف</string>
+    <string name="emial_if_any">بريد</string>
+    <string name="personal_information">شخصية</string>
+    <string name="register_new">سجل</string>
+    <string name="login">ادخل</string>
+    <string name="part_three">فصل الثالث</string>
+    <string name="part_four">فصل الرابع</string>
+    <string name="part_five">فصل الخامس</string>
+    <string name="part_six">فصل السادس</string>
+    <string name="part_seven">فصل السالبع</string>
+    <string name="part_eight">فصل الثامن</string>
+    <string name="part_nine">فصل التاسع</string>
+    <string name="part_ten">فصل العاشر</string>
+    <string name="part_eleven">فصل الحاد عشر</string>
+    <string name="part_twelve">فصل الثاني عشر</string>
+    <string name="part_thirteen">فصل الثالث عشر</string>
+    <string name="part_fourteen">فصل الرابع عشر</string>
+    <string name="part_fifteen">فصل الخامس عشر</string>
+    <string name="_1">١</string>
+    <string name="_2">٢</string>
+    <string name="_3">٣</string>
+    <string name="_4">٤</string>
+    <string name="_5">٥</string>
+    <string name="_6">٦</string>
+    <string name="_7">٧</string>
+    <string name="_8">٨</string>
+    <string name="_9">٩</string>
+    <string name="_10">١٠</string>
+    <string name="_11">١١</string>
+    <string name="_12">١٢</string>
+    <string name="watch_youtube">شاهد يوتوب</string>
+    <string name="listen_audio">استمع الصوت</string>
+    <string name="read_pdf">اقرء الكتاب</string>
+    <string name="fiqhulibadat">ففه العبادات</string>
+    <string name="sheikh">فضلة الشيخ محمد زين زهرالدين خليل</string>
+    <string name="paper2">دراسة</string>
+    <string name="paper2_1">يمكتك متابعة الدراسة بصوت او بقرائة او بمشاهدة يوتوب</string>
+    <string name="paper3">الاختبار</string>
+    <string name="paper3_1">جهز كفيك لامتحان الاخير بتدريب في الاختبار</string>
+    <string name="paper4">شهادة</string>
+    <string name="paper4_1">سيكون هناك شهادة بعد انتياه الدراسة</string>
+    <string name="get_started">ابدء</string>
+    <string name="account_confirmed">تم تأكيد الحساب</string>
+    <string name="user_info">معلمات</string>
+    <string name="email">بريد</string>
+    <string name="language">لغة</string>
+    <string name="setting">ضبط</string>
+    <string name="more">اكثر</string>
+    <string name="ask_question">سال</string>
+    <string name="FAQ">تفصيل</string>
+    <string name="about">عنا</string>
+    <string name="empty">خالي</string>
+    <string name="enter_your_question_here">اكتب سالك هنا</string>
+    <string name="minimum_letters">استعمل ١٠٠ حرف على اقل</string>
+    <string name="question_review">سألك يجاب قريبا</string>
+
+    <string name="saved_to_phone">تم البقاء في الهاتف</string>
+    <string name="take_final_exam_first">ما امتحنت امتحان الاخير</string>
+    <string name="version_1_0">نص 1.0</string>
+    <string name="read_the_previous_lesson">تابع الدرس القادم اولا</string>
+    <string name="you_want_to_download_the_audio">تريد ان تحمل الصوت؟</string>
+    <string name="file_size">ملف قدر :2.7 مب </string>
+    <string name="download">تحميل</string>
+    <string name="cancel">الغي</string>
+    <string name="certificate">شهادة</string>
+    <string name="swipe">صفعة</string>
+    <string name="log_out">log out</string>
+
+
+    <string-array name="country">
+        <item>أثيوبيا</item>
+        <item>أفغانستان</item>
+        <item>ألبانيا</item>
+        <item>الجزائر</item>
+        <item>أندورا</item>
+        <item>أنغولا</item>
+        <item>الأرجنتين</item>
+        <item>أرمينيا</item>
+        <item>أروبا</item>
+        <item>أستراليا</item>
+        <item>النمسا</item>
+        <item>أذربيجان</item>
+        <item>جزر البهاما</item>
+        <item>البحرين</item>
+        <item>بنغلاديش</item>
+        <item>بربادوس</item>
+        <item>بيلاروسيا</item>
+        <item>بلجيكا</item>
+        <item>بليز</item>
+        <item>بنين</item>
+        <item>بوتان</item>
+        <item>بوليفيا</item>
+        <item>البوسنة</item>
+        <item>بوتسوانا</item>
+        <item>البرازيل</item>
+        <item>بروناي</item>
+        <item>بلغاريا</item>
+        <item>بوركينا فاسو</item>
+        <item>بوروندي</item>
+        <item>كمبوديا</item>
+        <item>الكاميرون</item>
+        <item>كندا</item>
+        <item>الرأس الأخضر</item>
+        <item>تشاد</item>
+        <item>تشيلي</item>
+        <item>الصين</item>
+        <item>جزر الكريسماس</item>
+        <item>كولومبيا</item>
+        <item>جزر القمر</item>
+        <item>الكونغو (جمهورية الكونغو الديمقراطية)</item>
+        <item>الكونغو برازافيل</item>
+        <item>كوستا ريكا</item>
+        <item>كوت ديفوار</item>
+        <item>كرواتيا</item>
+        <item>كوبا</item>
+        <item>قبرص</item>
+        <item>جمهورية التشيك </item>
+        <item>الدنمارك</item>
+        <item>جيبوتي</item>
+        <item>الاكوادور</item>
+        <item>مصر</item>
+        <item>السلفادور </item>
+        <item>غينيا الإستوائية</item>
+        <item>إريتريا</item>
+        <item>إستونيا</item>
+        <item>فيجي</item>
+        <item>فنلندا</item>
+        <item>فرنسا</item>
+        <item>الجابون</item>
+        <item>غامبيا</item>
+        <item>جورجيا</item>
+        <item>ألمانيا</item>
+        <item>غانا</item>
+        <item>جبل طارق</item>
+        <item>اليونان</item>
+        <item>الأرض الخضراء</item>
+        <item>غواتيمالا</item>
+        <item>غيرنسي</item>
+        <item>غينيا</item>
+        <item>غينيا بيساو</item>
+        <item>غيانا</item>
+        <item>هايتي</item>
+        <item>هندوراس</item>
+        <item>هونج كونج</item>
+        <item>هنغاريا</item>
+        <item>أيسلندا</item>
+        <item>الهند</item>
+        <item>إندونيسيا</item>
+        <item>إيران</item>
+        <item>العراق</item>
+        <item>أيرلندا</item>
+        <item>إسرائيل</item>
+        <item>إيطاليا</item>
+        <item>جامايكا</item>
+        <item>اليابان</item>
+        <item>جيرسي</item>
+        <item>الأردن</item>
+        <item>كازاخستان</item>
+        <item>كينيا</item>
+        <item>كيريباتي</item>
+        <item>الكويت</item>
+        <item>قيرغيزستان</item>
+        <item>لاتفيا</item>
+        <item>لبنان</item>
+        <item>ليسوتو</item>
+        <item>ليبيريا</item>
+        <item>ليبيا</item>
+        <item>ليختنشتاين</item>
+        <item>ليتوانيا</item>
+        <item>لوكسمبورغ</item>
+        <item>مقدونيا</item>
+        <item>مدغشقر</item>
+        <item>ملاوي</item>
+        <item>ماليزيا</item>
+        <item>جزر المالديف</item>
+        <item>مالي</item>
+        <item>مالطا</item>
+        <item>موريتانيا</item>
+        <item>موريشيوس</item>
+        <item>المكسيك</item>
+        <item>ميكرونيزيا</item>
+        <item>مولدوفا</item>
+        <item>موناكو</item>
+        <item>منغوليا</item>
+        <item>الجبل الأسود</item>
+        <item>مونتسيرات</item>
+        <item>المغرب</item>
+        <item>موزمبيق</item>
+        <item>ميانمار</item>
+        <item>ناميبيا</item>
+        <item>ناورو</item>
+        <item>نيبال</item>
+        <item>هولندا</item>
+        <item>نيوزيلاندا</item>
+        <item>نيكاراغوا</item>
+        <item>النيجر</item>
+        <item>نيجيريا</item>
+        <item>كوريا الشمالية</item>
+        <item>النرويج</item>
+        <item>سلطنة عمان</item>
+        <item>باكستان</item>
+        <item>فلسطين</item>
+        <item>بنما</item>
+        <item>باراغواي</item>
+        <item>بيرو</item>
+        <item>الفلبين</item>
+        <item>بولندا</item>
+        <item>البرتغال</item>
+        <item>دولة قطر</item>
+        <item>رومانيا</item>
+        <item>روسيا</item>
+        <item>رواندا</item>
+        <item>سان مارينو</item>
+        <item>المملكة العربية السعودية</item>
+        <item>السنغال</item>
+        <item>صربيا</item>
+        <item>سيشيل</item>
+        <item>سيرا ليون</item>
+        <item>سنغافورة</item>
+        <item>سلوفاكيا</item>
+        <item>سلوفينيا</item>
+        <item>الصومال</item>
+        <item>جنوب أفريقيا</item>
+        <item>كوريا الجنوبية</item>
+        <item>جنوب السودان</item>
+        <item>إسبانيا</item>
+        <item>سيريلانكا</item>
+        <item>السودان</item>
+        <item>سوازيلاند</item>
+        <item>السويد</item>
+        <item>سويسرا</item>
+        <item>سوريا</item>
+        <item>تايوان</item>
+        <item>طاجيكستان</item>
+        <item>تنزانيا</item>
+        <item>تايلاند</item>
+        <item>توجو</item>
+        <item>تونس</item>
+        <item>ترك</item>
+        <item>تركمانستان</item>
+        <item>أوغندا</item>
+        <item>أوكرانيا</item>
+        <item>الإمارات العربية المتحدة</item>
+        <item>المملكة المتحدة</item>
+        <item>الولايات المتحدة الأمريكية</item>
+        <item>أوروغواي</item>
+        <item>أوزبكستان</item>
+        <item>مدينة الفاتيكان</item>
+        <item>فنزويلا</item>
+        <item>فيتنام</item>
+        <item>اليمن</item>
+        <item>زامبيا</item>
+        <item>زمبابوي</item>
+    </string-array>
+    <string-array name="parts">
+        <item>الدرس الاول</item>
+        <item>الدرس الثاني</item>
+        <item>الدرس الثالث</item>
+        <item>الدرس الرابع</item>
+        <item>الدرس الخامس</item>
+        <item>الدرس السادس</item>
+        <item>الدرس السابع</item>
+        <item>الدرس الثامن</item>
+        <item>الدرس التاسع</item>
+        <item>الدرس العاشر</item>
+        <item>الدرس الحادي عشر</item>
+        <item>الدرس الثاني عشر</item>
+        <item>الدرس الثالث عشر</item>
+        <item>الدرس الرابع عشر</item>
+        <item>الدرس الخامس عشر</item>
+        <item>الدرس السادس عشر</item>
+        <item>الدرس السابع عشر</item>
+        <item>الدرس الثامن عشر</item>
+        <item>الدرس التاسع عشر</item>
+        <item>الدرس العشرون</item>
+    </string-array>
+    <string-array name="courses">
+        <item>الدورة الأولى</item>
+        <item>الدورة الثانية</item>
+        <item>الدورة الثالثة</item>
+        <item>الدورة الرابعة</item>
+        <item>الدورة الخامسة</item>
+        <item>الدورة السادسة</item>
+        <item>الدورة السابعة</item>
+        <item>الدورة الثامنة</item>
+        <item>الدورة التاسعة</item>
+        <item>الدورة العاشرة</item>
+        <item>الدورة الحادية عشرة</item>
+        <item>الدورة الثانية عشرة</item>
+        <item>الدورة الثالثة عشرة</item>
+        <item>الدورة الرابعة عشرة</item>
+        <item>الدورة الخامسة عشرة</item>
+    </string-array>
+
+    <string name="skip">تخطى</string>
+    <string name="learn">دراسة</string>
+    <string name="kitab">الدورات</string>
+    <string name="test">اختبار</string>
+    <string name="reward">شهادة</string>
+    <string name="kita_text">سيتم إجراء الدورات من قبل علماء مشهورين.</string>
+    <string name="learn_text">يمكنك الدراسة باستخدام الصوت أو القراءة أو مشاهدة اليوتيوب.</string>
+    <string name="test_text">جهز يديك للاختبارات والامتحان النهائي.</string>
+    <string name="reward_text">ستكون هناك شهادة بعد الانتهاء من الدورة.</string>
+    <string name="hello_blank_fragment">hhhhhhhh</string>
+    <string name="sign_up">sign up</string>
+    <string name="phone_number">phone number</string>
+    <string name="country">country</string>
+    <string name="no_course_have_been_added_yet">No course have been added yet.</string>
+    <string name="courses">courses</string>
+    <string name="start">start</string>
+    <string name="continue_">continue</string>
+</resources>

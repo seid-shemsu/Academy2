@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="@string/congratulation_n_you_have_complete_the_course_n_nthank_you"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/passed" />
+
+    <Button
+        android:id="@+id/passed_btn"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@drawable/btnbgsolid"
+        android:text="asses course"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/view_final_result"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btnbgstroke"
+        android:text="@string/view_answers"
+        android:textColor="@color/colorPrimary" />
+</LinearLayout>

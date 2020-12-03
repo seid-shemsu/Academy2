@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">አፍሪካ አካዳሚ</string>
+    <string name="register">ተመዝገብ</string>
+    <string name="save_to_phone">ወደ ስልኩ አስቅምጥ</string>
+    <string name="ok">እሺ</string>
+    <string name="to_next">ወደ ቀጣይ</string>
+    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">እንኳን ደስ አሎት። \n ይህን ኮርስ አጠናቀዋል። \n እናመሰግናለን።</string>
+    <string name="view_certificate">ሰርተፊኬት እይ</string>
+    <string name="part_one">ክፍል አንድ</string>
+    <string name="part_two">ክፍል ሁለት</string>
+    <string name="take_quiz">መልመጃ</string>
+    <string name="final_exam">ማጠቃለያ ፈተና</string>
+    <string name="congratulation_n_next_part_is_unlocked">ቀጣዩ ክፍል ተከፍቷል።</string>
+    <string name="submit">አስግባ</string>
+    <string name="soryy_this_phone_has_been_registered_before_ntty_later">ይቅርታ ይህ ስልክ ከዚህ በፊት ተመዝግቧል. ቡሃላ ይሞክሩ።</string>
+    <string name="english">english</string>
+    <string name="attemt_all_question">እባክዎ ሁሉንም ጥያቄ ይሞክሩ።</string>
+    <string name="take_the_previous_quiz">እባክዎ የቀዳሚውን ክፍል መልመጃ ይፈተኑ።</string>
+    <string name="saved_to_phone">ወደ ስልኩ ተቀምጧል።</string>
+    <string name="view_answers">መልስ ይመልከቱ</string>
+    <string name="sign_in">ግባ</string>
+    <string name="phone_international_format">ስልክ (አለም አቀፍ ይዘት)</string>
+    <string name="connet_internet">እባክዎ የኢንተርኔትዎን ግንኙነትዎን ያረጋግጡ።</string>
+    <string name="unregistered_phone_number">ያስገቡት ስልክ አልተመዘገበም። እባክዎ ቅድሚያ ይመዝገቡ።</string>
+    <string name="registered_successfully">በትክክል ተመዝግበዋል።</string>
+    <string name="final_exam_taken">ማጠቃለያ ፈተናውን ወስደዋል።</string>
+    <string name="follow_lecture">እባክዎ ቅድሚያ ትምህርቱን በምስል ፣ በድምፅ ወይም በፅሁፍ ይከታተሉ።</string>
+    <string name="name">ስም</string>
+    <string name="phone">ስልክ</string>
+    <string name="emial_if_any">ኢሜል (ካለ)</string>
+    <string name="personal_information">የራስ መረጃ</string>
+    <string name="register_new">ተመዝገብ</string>
+    <string name="login">ግባ</string>
+    <string name="part_three">ክፍል ሶስት</string>
+    <string name="part_four">ክፍል አራት</string>
+    <string name="part_five">ክፍል አምስት</string>
+    <string name="part_six">ክፍል ስድስት</string>
+    <string name="part_seven">ክፍል ሰባት</string>
+    <string name="part_eight">ክፍል ስምንት</string>
+    <string name="part_nine">ክፍል ዘጠኝ</string>
+    <string name="part_ten">ክፍል አስር</string>
+    <string name="part_eleven">ክፍል አስራ አንድ</string>
+    <string name="part_twelve">ክፍል አስራ ሁለት</string>
+    <string name="part_thirteen">ክፍል አስራ ሶስት</string>
+    <string name="part_fourteen">ክፍል አስራ አራት</string>
+    <string name="part_fifteen">ክፍል አስራ አምስት</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_10">10</string>
+    <string name="_11">11</string>
+    <string name="_12">12</string>
+    <string name="watch_youtube">ዩቱብ ተመልከት</string>
+    <string name="listen_audio">ድምፅ አዳምጥ</string>
+    <string name="read_pdf">ፅሁፍ አንብብ</string>
+    <string name="fiqhulibadat">ففه العبادات</string>
+    <string name="sheikh">በክቡር ሽይኽ ሙሀመድዘይን ዛህረዲን ኸሊል።</string>
+    <string name="paper2">መማርያ</string>
+    <string name="paper2_1">ትምትህርቱን በዩቱብ ፣ በድምፅ እንዲሁም በፅሁፍ ይከታተላሉ።</string>
+    <string name="paper3">ምዘና</string>
+    <string name="paper3_1">መልመጃዎችን በመስራት ራሶን ለማጠቃለያ ፈተና ያዘጋጃሉ።</string>
+    <string name="paper4">ዕውቅና</string>
+    <string name="paper4_1">ትምትህርቱን ካጠናቀቁ ቡሃላ ሰርተክፌዎን በነፃ ያገኛሉ።</string>
+    <string name="get_started">ጀምር</string>
+    <string name="account_confirmed">አካውንቱ ተረጋግጦአል</string>
+    <string name="user_info">መረጃ</string>
+    <string name="email">ኢሜል</string>
+    <string name="language">ቋንቋ</string>
+    <string name="setting">መቼት</string>
+    <string name="more">የበለጠ</string>
+    <string name="ask_question">ጥያቄ</string>
+    <string name="FAQ">ማብራሪያ</string>
+    <string name="about">ስለ እኛ</string>
+    <string name="empty">ባዶ ነው</string>
+    <string name="enter_your_question_here">ጥያቄ እዚህ ጋር አስገባ</string>
+    <string name="minimum_letters">በትንሹ 100 ፊደል ያስፈልጋል</string>
+    <string name="question_review">ጥያቄው በቅርቡ ይታያል</string>
+    <string name="take_final_exam_first">ማጠቃለያ ፈተና አልተፈተኑም</string>
+    <string name="version_1_0">እትም 1.0</string>
+    <string name="read_the_previous_lesson">የቀዳሚውን ክፍል ትምህርት ይከታተሉ</string>
+    <string name="you_want_to_download_the_audio">ድምጽ ከ ኢንተርኔት ይውርድ?</string>
+    <string name="file_size">የ ድምጹ መጠን ፡ 2.7 ሜ.ባ</string>
+    <string name="download">አውርድ</string>
+    <string name="cancel">አቋርጥ</string>
+    <string name="certificate">ሰርቲፊኬት</string>
+    <string name="swipe">ወደ ቀኝ</string>
+    <string name="log_out">log out</string>
+
+    <string-array name="country">
+        <item>ኢትዮጵያ</item>
+        <item>አፍጋኒስታን</item>
+        <item>አልባኒያ</item>
+        <item>አልጄሪያ</item>
+        <item>አንዶራ</item>
+        <item>አንጎላ</item>
+        <item>አርጀንቲና</item>
+        <item>አርሜኒያ</item>
+        <item>አሩባ</item>
+        <item>አውስትራሊያ</item>
+        <item>ኦስትራ</item>
+        <item>አዘርባጃን</item>
+        <item>ባሐማስ</item>
+        <item>ባሃሬን</item>
+        <item>ባንግላድሽ</item>
+        <item>ባርባዶስ</item>
+        <item>ቤላሩስ</item>
+        <item>ቤልጄም</item>
+        <item>ቤሊዜ</item>
+        <item>ቤኒኒ</item>
+        <item>በሓቱን</item>
+        <item>ቦሊቪያ</item>
+        <item>ቦስኒያ</item>
+        <item>ቦትስዋና</item>
+        <item>ብራዚል</item>
+        <item>ብሩኔይ</item>
+        <item>ቡልጋሪያ</item>
+        <item>ቡርክናፋሶ</item>
+        <item>ቡሩንዲ</item>
+        <item>ካምቦዲያ</item>
+        <item>ካሜሩን</item>
+        <item>ካናዳ</item>
+        <item>ኬፕ ቬሪዴ</item>
+        <item>ቻድ</item>
+        <item>ቺሊ</item>
+        <item>ቻይና</item>
+        <item>የገና ደሴቶች</item>
+        <item>ኮሎምቢያ</item>
+        <item>ኮሞሮስ</item>
+        <item>ኮንጎ (ዲ.ሲ.)</item>
+        <item>ኮንጎ-ብራዛቪል</item>
+        <item>ኮስታ ሪካ</item>
+        <item>ኮትዲቫር</item>
+        <item>ክሮሽያ</item>
+        <item>ኩባ</item>
+        <item>ቆጵሮስ</item>
+        <item>ቼክ ሪፐብሊክ</item>
+        <item>ዴንማሪክ</item>
+        <item>ጅቡቲ</item>
+        <item>ኢኳዶር</item>
+        <item>ግብጽ</item>
+        <item>ኤልሳልቫዶር</item>
+        <item>ኢኳቶሪያል ጊኒ</item>
+        <item>ኤርትሪያ</item>
+        <item>ኢስቶኒያ</item>
+        <item>ፊጂ</item>
+        <item>ፊኒላንድ</item>
+        <item>ፈረንሳይ</item>
+        <item>ጋቦን</item>
+        <item>ጋምቢያ</item>
+        <item>ጆርጂያ</item>
+        <item>ጀርመን</item>
+        <item>ጋና</item>
+        <item>ጊብራልታር</item>
+        <item>ግሪክ</item>
+        <item>ግሪንላንድ</item>
+        <item>ጓቴማላ</item>
+        <item>ጉርነሴ</item>
+        <item>ጊኒ</item>
+        <item>ጊኒ - ቢሳው </item>
+        <item>ጉያና</item>
+        <item>ሓይቲ</item>
+        <item>ሆንዱራስ</item>
+        <item>ሆንግ ኮንግ</item>
+        <item>ሃንጋሪ</item>
+        <item>አይስላንድ</item>
+        <item>ህንድ</item>
+        <item>ኢንዶኔዥያ</item>
+        <item>ኢራን</item>
+        <item>ኢራቅ</item>
+        <item>አየርላንድ</item>
+        <item>እስራኤል</item>
+        <item>ጣልያን</item>
+        <item>ጃማይካ</item>
+        <item>ጃፓን</item>
+        <item>ጀርሲ</item>
+        <item>ጆርዳን</item>
+        <item>ካዛኪስታን</item>
+        <item>ኬንያ</item>
+        <item>ኪሪባቲ</item>
+        <item>ኵዌት</item>
+        <item>ክይርጋዝስታን</item>
+        <item>ላቲቪያ </item>
+        <item>ሊባኖስ</item>
+        <item>ሌሴቶ</item>
+        <item>ላይቤሪያ</item>
+        <item>ሊቢያ</item>
+        <item>ለይችቴንስቴይን</item>
+        <item>ሊቱአኒያ</item>
+        <item>ሉዘምቤርግ</item>
+        <item>መቄዶኒያ</item>
+        <item>ማዳጋስካር</item>
+        <item>ማላዊ</item>
+        <item>ማሌዥያ</item>
+        <item>ማልዲቬስ</item>
+        <item>ማሊ</item>
+        <item>ማልታ</item>
+        <item>ሞሪታኒያ</item>
+        <item>ሞሪሼስ</item>
+        <item>ሜክስኮ</item>
+        <item>ሚክሮኔዥያ</item>
+        <item>ሞልዶቫ</item>
+        <item>ሞናኮ</item>
+        <item>ሞንጎሊያ</item>
+        <item>ሞንቴኔግሮ</item>
+        <item>ሞንትሴራት</item>
+        <item>ሞሮኮ</item>
+        <item>ሞዛምቢክ</item>
+        <item>ማይንማር</item>
+        <item>ናምቢያ</item>
+        <item>ናኡሩ</item>
+        <item>ኔፓል</item>
+        <item>ኔዜሪላንድ</item>
+        <item>ኒውዚላንድ</item>
+        <item>ኒካራጉአ</item>
+        <item>ኒጀር</item>
+        <item>ናይጄሪያ</item>
+        <item>ሰሜናዊ ኮሪያ</item>
+        <item>ኖርዌይ</item>
+        <item>ኦማን </item>
+        <item>ፓኪስታን</item>
+        <item>ፍልስጥኤም</item>
+        <item>ፓናማ </item>
+        <item>ፓራጓይ</item>
+        <item>ፔሩ</item>
+        <item>ፊሊፕንሲ</item>
+        <item>ፖላንድ </item>
+        <item>ፖርቹጋል</item>
+        <item>ኳታር</item>
+        <item>ሮማኒያ</item>
+        <item>ሩሲያ</item>
+        <item>ሩዋንዳ</item>
+        <item>ሳን ማሪኖ</item>
+        <item>ሳውዲ አረብያ</item>
+        <item>ሴኔጋል </item>
+        <item>ሰርቢያ </item>
+        <item>ሲሼልስ</item>
+        <item>ሰራሊዮን</item>
+        <item>ስንጋፖር</item>
+        <item>ስሎቫኪያ</item>
+        <item>ስሎቬኒያ</item>
+        <item>ሶማሊያ </item>
+        <item>ደቡብ አፍሪካ</item>
+        <item>ደቡብ ኮሪያ</item>
+        <item>ደቡብ ሱዳን</item>
+        <item>ስፔን</item>
+        <item>ስሪ ላንካ</item>
+        <item>ሱዳን</item>
+        <item>ስዋዝላድ</item>
+        <item>ስዊዲን</item>
+        <item>ስዊዘሪላንድ</item>
+        <item>ሶሪያ</item>
+        <item>ታይዋን</item>
+        <item>ታጂኪስታን</item>
+        <item>ታንዛኒያ</item>
+        <item>ታይላንድ</item>
+        <item>ቶጎ </item>
+        <item>ቲኒዚያ</item>
+        <item>ቱርክ</item>
+        <item>ቱርክሜኒስታን</item>
+        <item>ኡጋንዳ </item>
+        <item>ዩክሬን</item>
+        <item>ዱባይ</item>
+        <item>እንግሊዝ</item>
+        <item>አሜሪካ</item>
+        <item>ኡራጓይ</item>
+        <item>ኡዝበኪስታን</item>
+        <item>የቫቲካን ከተማ</item>
+        <item>ቨንዙዋላ</item>
+        <item>ቪትናም</item>
+        <item>የመን</item>
+        <item>ዛምቢያ</item>
+        <item>ዝምባቡዌ</item>
+    </string-array>
+
+    <string-array name="parts">
+        <item>ትምህርት አንድ</item>
+        <item>ትምህርት ሁለት</item>
+        <item>ትምህርት ሶስት </item>
+        <item>ትምህርት አራት </item>
+        <item>ትምህርት አምስት </item>
+        <item>ትምህርት ስድስት </item>
+        <item>ትምህርት ሰባት </item>
+        <item>ትምህርት ስምንት </item>
+        <item>ትምህርት ዘጠኝ </item>
+        <item>ትምህርት አስር </item>
+        <item>ትምህርት አስራ አንድ </item>
+        <item>ትምህርት አስራ ሁለት </item>
+        <item>ትምህርት አስራ ሶስት </item>
+        <item>ትምህርት አስራ አራት </item>
+        <item>ትምህርት አስራ አምስት </item>
+        <item>ትምህርት አስራ ስድስት </item>
+        <item>ትምህርት አስራ ሰባት </item>
+        <item>ትምህርት አስራ ስምንት </item>
+        <item>ትምህርት አስራ ዘጠኝ</item>
+        <item>ትምህርት ሃያ</item>
+    </string-array>
+
+    <string-array name="courses">
+        <item>የመጀመሪያ ኮርስ</item>
+        <item>ሁለተኛ ኮርስ</item>
+        <item>ሦስተኛ ኮርስ</item>
+        <item>አራተኛ ኮርስ</item>
+        <item>አምስተኛው ኮርሶችe</item>
+        <item>ስድስተኛ ኮርስ</item>
+        <item>ሰባተኛ ኮርስ</item>
+        <item>ስምንተኛ ኮርስ</item>
+        <item>ዘጠነኛ ኮርስ</item>
+        <item>አስረኛ ኮርስ</item>
+        <item>አስራ አንደኛ ኮርስ</item>
+        <item>አስራ ሁለተኛ ኮርስ</item>
+        <item>አስራ ሶስተኛ ኮርስ</item>
+        <item>አስራ አራተኛ ኮርስ</item>
+        <item>አስራ አምስተኛ ኮርስ</item>
+    </string-array>
+
+    <string name="skip">ዝለል</string>
+    <string name="learn">ማጥናት</string>
+    <string name="kitab">ትምህርቶች</string>
+    <string name="test">ሙከራ</string>
+    <string name="reward">የምስክር ወረቀት</string>
+    <string name="kita_text">ትምህርቶች የሚካሄዱት በታዋቂ ምሁራን ነው ፡፡</string>
+    <string name="learn_text">በድምጽ ወይም በማንበብ ወይም ዩቲዩብን በመመልከት ማጥናት ይችላሉ ፡፡</string>
+    <string name="test_text">ለሙከራዎች እና ለመጨረሻ ፈተና እጆችዎን ቀድመው ያዘጋጁ ፡፡</string>
+    <string name="reward_text">ኮርሱ ከተጠናቀቀ በኋላ የምስክር ወረቀት ይኖራል ፡፡</string>
+    <string name="hello_blank_fragment">hhhhhhhh</string>
+    <string name="sign_up">sign up</string>
+    <string name="phone_number">phone number</string>
+    <string name="country">country</string>
+    <string name="no_course_have_been_added_yet">No course have been added yet.</string>
+    <string name="courses">courses</string>
+    <string name="start">start</string>
+    <string name="continue_">continue</string>
+</resources>

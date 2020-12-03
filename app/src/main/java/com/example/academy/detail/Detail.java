@@ -1,0 +1,434 @@
+package com.example.academy.detail;
+
+
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import android.os.Environment;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.academy.MainActivity;
+import com.example.academy.MusicManager;
+import com.example.academy.R;
+import com.example.academy.Reader;
+import com.example.academy.VideoPlayManager;
+import com.example.academy.test.Test;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class Detail extends Fragment {
+
+
+    public Detail() {
+        // Required empty public constructor
+    }
+
+
+    ProgressDialog progressDialog;
+    DatabaseReference databaseReference;
+    ImageView youtube;
+    TextView audio, pdf;
+    Button quiz;
+    SharedPreferences lang;
+    String language, course_name, part_number, course_code;
+    private String youtube_link, audio_link, pdf_link;
+
+
+    double p;
+    private Handler handler = new Handler();
+    //music player elements
+    LinearLayout linearLayout;
+    public TextView startTimeField;
+    public TextView endTimeField;
+    private MediaPlayer mediaPlayer;
+    private Handler myHandler = new Handler();
+    private SeekBar seekbar;
+    private ImageButton playButton;
+    public static int oneTimeOnly = 0;
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_detail, container, false);
+        youtube = root.findViewById(R.id.youtube);
+        audio = root.findViewById(R.id.audio);
+        pdf = root.findViewById(R.id.pdf);
+        quiz = root.findViewById(R.id.quiz);
+        lang = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        language = lang.getString("lang", "am");
+        course_name = getArguments().getString("course_name");
+        course_code = getArguments().getString("course_code");
+        part_number = getArguments().getString("part_number");
+
+        ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
+        progressDialog = new ProgressDialog(getContext());
+        DatabaseReference test = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
+        test.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.hasChild("test"))
+                    quiz.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        getLinks();
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mediaPlayer.pause();
+                } catch (Exception e) {
+
+                } finally {
+                    startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name+part_number));
+                }
+            }
+        });
+        audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        download();
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    }
+                } else {
+                    download();
+                }
+            }
+        });
+        pdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        downloadPdf();
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    }
+                } else {
+                    downloadPdf();
+                }
+            }
+        });
+        quiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child(course_code+part_number);
+                final ArrayList<String> questions = new ArrayList<>();
+                final ArrayList<String> answers = new ArrayList<>();
+                test.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChildren()) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                if (snapshot.getKey().equals("questions"))
+                                    for (DataSnapshot snapshot1 : snapshot.getChildren())
+                                        questions.add(snapshot1.getValue().toString());
+                                else
+                                    for (DataSnapshot snapshot1 : snapshot.getChildren())
+                                        answers.add(snapshot1.getValue().toString());
+                            }
+                            startActivity(new Intent(getContext(), Test.class).putStringArrayListExtra("questions", questions).putStringArrayListExtra("answers", answers).putExtra("quiz",part_number));
+                            onDestroy();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        linearLayout = root.findViewById(R.id.musicplayer);
+        startTimeField = root.findViewById(R.id.starttime);
+        endTimeField = root.findViewById(R.id.endtime);
+        seekbar = root.findViewById(R.id.seekbar1);
+        playButton = root.findViewById(R.id.pause_play_btn);
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress);
+                    seekBar.setProgress(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    playButton.setImageResource(R.drawable.play);
+                } else {
+                    mediaPlayer.start();
+                    playButton.setImageResource(R.drawable.pause);
+                }
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////end
+        return root;
+    }
+
+    private void downloadPdf() {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File dir = new File(root + "/africa/" + course_code + "/pdfs");
+        dir.mkdirs();
+        final File file = new File( dir, course_code + part_number + ".html");
+        if (file.isFile() && file.length() > 0) {
+            startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+        }
+        else {
+            final Dialog dialog = new Dialog(getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setContentView(R.layout.wait);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
+            try {
+                file.createNewFile();
+                storageReference.getFile(file)
+                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                dialog.dismiss();
+                                startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                dialog.dismiss();
+                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+            }
+            catch (Exception e) {
+                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void getLinks() {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    youtube_link = dataSnapshot.child("youtube").getValue().toString();
+                    audio_link = dataSnapshot.child("music").getValue().toString();
+                    pdf_link = dataSnapshot.child("pdf").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    TextView percent;
+
+    private void download() {
+        //final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), course_code + part_number + ".ogg");
+        String root = Environment.getExternalStorageDirectory().toString();
+        File dir = new File(root + "/africa/" + course_code + "/audios");
+        dir.mkdirs();
+        final File file = new File( dir, course_code + part_number + ".ogg");
+        if (file.isFile() && file.length() > 0) {
+            play();
+        }
+        else {
+            final Dialog dialog = new Dialog(getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.confirmation);
+            final Button download = dialog.findViewById(R.id.download);
+            final Button cancel = dialog.findViewById(R.id.cancel);
+            percent = dialog.findViewById(R.id.percent);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            download.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    download.setVisibility(View.GONE);
+                    cancel.setText("Hide");
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            audio.setEnabled(false);
+                        }
+                    });
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(audio_link);
+                    try {
+                        file.createNewFile();
+                        storageReference.getFile(file)
+                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        dialog.dismiss();
+                                        play();
+                                    }
+                                })
+                                .addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onProgress(final FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        percent.setText("Downloading\n%..." + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                    }
+
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        dialog.dismiss();
+                                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+    }
+
+
+    public void play() {
+        linearLayout.setVisibility(View.VISIBLE);
+        playButton.setImageResource(R.drawable.pause);
+        mediaPlayer = null;
+        mediaPlayer = new MediaPlayer();
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+            File dir = new File(root + "/africa/" + course_code + "/audios");
+            final File file = new File( dir, course_code + part_number + ".ogg");
+            mediaPlayer.setDataSource(file.toString());
+            mediaPlayer.prepare();
+        } catch (final Exception e) {
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+        MusicManager.stop();
+        MusicManager.Player(mediaPlayer);
+        int finalTime = mediaPlayer.getDuration();
+        int startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax(finalTime);
+            oneTimeOnly = 0;
+        }
+        endTimeField.setText(String.format("%d:%d",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
+                                toMinutes((long) finalTime)))
+        );
+        startTimeField.setText(String.format("%d:%d",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
+                                toMinutes((long) startTime)))
+        );
+        seekbar.setProgress(startTime);
+        myHandler.postDelayed(UpdateSongTime, 100);
+    }
+
+    private Runnable UpdateSongTime = new Runnable() {
+        @SuppressLint("DefaultLocale")
+        public void run() {
+            int startTime = mediaPlayer.getCurrentPosition();
+            startTimeField.setText(String.format("%d:%d",
+                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) startTime)))
+            );
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    linearLayout.setVisibility(View.GONE);
+                }
+            });
+            seekbar.setProgress(startTime);
+            myHandler.postDelayed(this, 1000);
+        }
+    };
+
+}
