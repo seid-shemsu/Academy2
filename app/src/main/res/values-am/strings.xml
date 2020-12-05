@@ -337,4 +337,5 @@
     <string name="courses">courses</string>
     <string name="start">start</string>
     <string name="continue_">continue</string>
+    <string name="clear">clear</string>
 </resources>

@@ -143,7 +143,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void RegisterToDatabase(final EditText name, final EditText email, final TextView code, final EditText phone, final Spinner country, final View v, final CircularProgressBar progressBar, final Button register) {
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         final String fullPhone = phone.getText().toString();
@@ -153,12 +153,13 @@ public class Register extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    snackbar = Snackbar.make(v, getResources().getString(R.string.soryy_this_phone_has_been_registered_before_ntty_later), Snackbar.LENGTH_INDEFINITE);
+                    phone.setError("registered phone");
+                    /*snackbar = Snackbar.make(v, getResources().getString(R.string.soryy_this_phone_has_been_registered_before_ntty_later), Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                         }
-                    }).show();
+                    }).show();*/
                     progressBar.setVisibility(View.GONE);
                     register.setVisibility(View.VISIBLE);
                 }

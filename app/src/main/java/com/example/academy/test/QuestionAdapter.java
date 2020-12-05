@@ -94,12 +94,12 @@ public class QuestionAdapter extends ArrayAdapter<String>{
             }
             else if (answerCheck[position] == 1 ){
                 if (tr.isChecked()){
-                    tr.setTextColor(Color.GREEN);
+                    tr.setTextColor(context.getResources().getColor(R.color.green));
                     //tr.setBackgroundResource(R.drawable.correct_bg);
                     tr.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, view.getResources().getDrawable(R.drawable.circle_correct), null);
                 }
                 else{
-                    fl.setTextColor(Color.GREEN);
+                    tr.setTextColor(context.getResources().getColor(R.color.green));
                     fl.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, view.getResources().getDrawable(R.drawable.circle_correct), null);
                     //fl.setBackgroundResource(R.drawable.correct_bg);
                 }

@@ -4,9 +4,7 @@ package com.example.academy.detail;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -65,23 +63,17 @@ public class Detail extends Fragment {
         // Required empty public constructor
     }
 
-
-    ProgressDialog progressDialog;
-    DatabaseReference databaseReference;
-    ImageView youtube;
-    TextView audio, pdf;
-    Button quiz;
-    SharedPreferences lang;
-    String language, course_name, part_number, course_code;
+    private SharedPreferences has_quiz;
+    private SharedPreferences passed;
+    private SharedPreferences.Editor lesson_editor, quiz_editor, editor_passed;
+    private TextView audio;
+    private Button quiz;
+    private String language, course_name, part_number, course_code;
     private String youtube_link, audio_link, pdf_link;
-
-
-    double p;
-    private Handler handler = new Handler();
     //music player elements
-    LinearLayout linearLayout;
-    public TextView startTimeField;
-    public TextView endTimeField;
+    private LinearLayout linearLayout;
+    private TextView startTimeField;
+    private TextView endTimeField;
     private MediaPlayer mediaPlayer;
     private Handler myHandler = new Handler();
     private SeekBar seekbar;
@@ -94,24 +86,32 @@ public class Detail extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_detail, container, false);
-        youtube = root.findViewById(R.id.youtube);
+        ImageView youtube = root.findViewById(R.id.youtube);
         audio = root.findViewById(R.id.audio);
-        pdf = root.findViewById(R.id.pdf);
+        TextView pdf = root.findViewById(R.id.pdf);
         quiz = root.findViewById(R.id.quiz);
-        lang = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        SharedPreferences lang = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         language = lang.getString("lang", "am");
         course_name = getArguments().getString("course_name");
         course_code = getArguments().getString("course_code");
         part_number = getArguments().getString("part_number");
-
+        SharedPreferences lessons = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+        has_quiz = getContext().getSharedPreferences("has_quiz", Context.MODE_PRIVATE);
+        passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
+        editor_passed = passed.edit();
+        lesson_editor = lessons.edit();
+        quiz_editor = has_quiz.edit();
+        if (has_quiz.getBoolean(course_code+part_number, false) && lessons.getBoolean(course_code+part_number, false))
+            quiz.setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
-        progressDialog = new ProgressDialog(getContext());
         DatabaseReference test = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
         test.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.hasChild("test"))
-                    quiz.setVisibility(View.GONE);
+                if (dataSnapshot.hasChild("test")){
+                    quiz_editor.putBoolean(course_code+part_number, true);
+                    quiz_editor.apply();
+                }
             }
 
             @Override
@@ -126,9 +126,19 @@ public class Detail extends Fragment {
             public void onClick(View v) {
                 try {
                     mediaPlayer.pause();
+                    playButton.setImageResource(R.drawable.pause);
                 } catch (Exception e) {
 
                 } finally {
+
+                    if (has_quiz.getBoolean(course_code+part_number, false))
+                        quiz.setVisibility(View.VISIBLE);
+                    else {
+                        lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
+                        lesson_editor.apply();
+                        editor_passed.putBoolean(course_code+part_number, true);
+                        editor_passed.apply();
+                    }
                     startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name+part_number));
                 }
             }
@@ -181,8 +191,11 @@ public class Detail extends Fragment {
                                     for (DataSnapshot snapshot1 : snapshot.getChildren())
                                         answers.add(snapshot1.getValue().toString());
                             }
-                            startActivity(new Intent(getContext(), Test.class).putStringArrayListExtra("questions", questions).putStringArrayListExtra("answers", answers).putExtra("quiz",part_number));
-                            onDestroy();
+                            startActivity(new Intent(getContext(), Test.class)
+                                    .putStringArrayListExtra("questions", questions)
+                                    .putStringArrayListExtra("answers", answers)
+                                    .putExtra("course_code", course_code)
+                                    .putExtra("quiz",part_number));
                         }
 
                     }
@@ -261,6 +274,15 @@ public class Detail extends Fragment {
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                 dialog.dismiss();
+
+                                if (has_quiz.getBoolean(course_code+part_number, false))
+                                    quiz.setVisibility(View.VISIBLE);
+                                else {
+                                    lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
+                                    lesson_editor.commit();
+                                    editor_passed.putBoolean(course_code+part_number, true);
+                                    editor_passed.apply();
+                                }
                                 startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
                             }
                         })
@@ -281,7 +303,7 @@ public class Detail extends Fragment {
     }
 
     private void getLinks() {
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -374,6 +396,14 @@ public class Detail extends Fragment {
 
 
     public void play() {
+        if (has_quiz.getBoolean(course_code+ part_number, false))
+            quiz.setVisibility(View.VISIBLE);
+        else {
+            lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
+            lesson_editor.commit();
+            editor_passed.putBoolean(course_code+part_number, true);
+            editor_passed.apply();
+        }
         linearLayout.setVisibility(View.VISIBLE);
         playButton.setImageResource(R.drawable.pause);
         mediaPlayer = null;

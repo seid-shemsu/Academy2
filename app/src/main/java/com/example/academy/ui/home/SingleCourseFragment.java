@@ -1,8 +1,11 @@
 package com.example.academy.ui.home;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SingleCourseFragment extends Fragment implements View.OnClickListener {
+public class SingleCourseFragment extends Fragment {
 
 
     public SingleCourseFragment() {
@@ -61,21 +65,61 @@ public class SingleCourseFragment extends Fragment implements View.OnClickListen
             }
         });
         ((MainActivity) getActivity()).setActionBarTitle(name);
-        start.setOnClickListener(this);
-        cont.setOnClickListener(this);
-        return root;
-    }
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.clear_progress);
+                Button clear = dialog.findViewById(R.id.clear);
+                Button canel = dialog.findViewById(R.id.cancel);
+                clear.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+                        SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
+                        SharedPreferences has_test = getContext().getSharedPreferences("has_test", Context.MODE_PRIVATE);
+                        has_test.edit().clear().apply();
+                        lesson.edit().clear().apply();
+                        passed.edit().clear().apply();
+                        passed.edit().putBoolean(getArguments().getString("code" + 0), true).apply();
+                        lesson.edit().putBoolean(getArguments().getString("course_code" +1), true).apply();
+                        Fragment coursePartFragment = new CoursePartFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("course_name", name);
+                        bundle.putString("title", course_name.getText().toString());
+                        bundle.putString("course_code", getArguments().getString("course_code"));
+                        coursePartFragment.setArguments(bundle);
+                        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();
+                    }
+                });
+                canel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
 
-    @Override
-    public void onClick(View v) {
-        Fragment coursePartFragment = new CoursePartFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        Bundle bundle = new Bundle();
-        bundle.putString("course_name", name);
-        bundle.putString("title", course_name.getText().toString());
-        bundle.putString("course_code", getArguments().getString("course_code"));
-        coursePartFragment.setArguments(bundle);
-        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();
+        });
+        cont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment coursePartFragment = new CoursePartFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                Bundle bundle = new Bundle();
+                bundle.putString("course_name", name);
+                bundle.putString("title", course_name.getText().toString());
+                bundle.putString("course_code", getArguments().getString("course_code"));
+                coursePartFragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();
+            }
+        });
+        return root;
     }
 
 }

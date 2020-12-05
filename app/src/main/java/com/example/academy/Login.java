@@ -89,9 +89,9 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private void account_exist(String phone, final Button signIn, final CircularProgressBar progressBar) {
+    private void account_exist(String phone_number, final Button signIn, final CircularProgressBar progressBar) {
 
-        DatabaseReference mdata = FirebaseDatabase.getInstance().getReference().child("users").child(phone);
+        DatabaseReference mdata = FirebaseDatabase.getInstance().getReference().child("users").child(phone_number);
         mdata.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -118,12 +118,7 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    snackbar = Snackbar.make(signIn, getResources().getString(R.string.unregistered_phone_number), Snackbar.LENGTH_INDEFINITE);
-                    snackbar.setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    }).show();
+                    phone.setError("unregistered number");
                     signIn.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
                 }

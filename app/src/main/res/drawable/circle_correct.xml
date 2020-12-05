@@ -2,7 +2,7 @@
     android:width="15dp"
     android:height="15dp"
     android:autoMirrored="true"
-    android:tint="#43F702"
+    android:tint="#36AF0A"
     android:viewportWidth="24.0"
     android:viewportHeight="24.0">
     <path

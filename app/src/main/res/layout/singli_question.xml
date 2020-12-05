@@ -22,7 +22,6 @@
             android:padding="5dp"
             android:text="this is sample question type?"
             android:textAlignment="textStart"
-            android:textSize="17sp"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
@@ -42,7 +41,6 @@
                 android:padding="5dp"
                 android:text="እውነት"
                 android:textColor="@color/colorPrimary"
-                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <RadioButton
@@ -53,12 +51,7 @@
                 android:padding="5dp"
                 android:textColor="@color/colorPrimary"
                 android:text="ሀሰት"
-                android:textSize="17sp"
                 android:textStyle="bold" />
         </RadioGroup>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/background"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

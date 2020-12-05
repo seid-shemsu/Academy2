@@ -1,6 +1,7 @@
 package com.example.academy.ui.home;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
 
         @Override
         public void onClick(View v) {
+            SharedPreferences lessons = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
+            lessons.edit().putBoolean(getAdapterPosition()+1 + "1", true).apply();
+            SharedPreferences passed  = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
+            passed.edit().putBoolean(getAdapterPosition()+1 + "0", true).apply();
             Fragment singleCourseFragment = new SingleCourseFragment();
             Bundle bundle = new Bundle();
             bundle.putString("course_name", courseObjects.get(getAdapterPosition()).getCourse_name());

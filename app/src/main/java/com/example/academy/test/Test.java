@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -37,22 +39,25 @@ import java.util.List;
 import java.util.Locale;
 
 public class Test extends AppCompatActivity {
-    ListView listView;
-    Button submit;
-    String quiz;
-    List<String> answers;
-    int[] answersCheck = new int[15];
-    String[] answered = new String[15];
-    String[] question;
-    int pass;
-    Snackbar snackbar;
-    ArrayList<String> questions, answer;
+    private ListView listView;
+    private Button submit;
+    private String quiz, course_code;
+    private List<String> answers;
+    private int[] answersCheck = new int[15];
+    private String[] answered = new String[15];
+    private String[] question;
+    private int pass;
+    private Snackbar snackbar;
+    private ArrayList<String> questions, answer;
+    private SharedPreferences passed, lessons;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLanguage();
         setContentView(R.layout.question_list);
         quiz = getIntent().getExtras().getString("quiz");
+        course_code = getIntent().getExtras().getString("course_code");
         listView = findViewById(R.id.question_list);
         //question = getQuestion(quiz);
         questions = getIntent().getExtras().getStringArrayList("questions");
@@ -72,6 +77,14 @@ public class Test extends AppCompatActivity {
                     Toast.makeText(Test.this, getResources().getString(R.string.attemt_all_question), Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    lessons = getSharedPreferences("lessons", MODE_PRIVATE);
+                    passed = getSharedPreferences("passed", MODE_PRIVATE);
+                    editor = lessons.edit();
+                    editor.putBoolean(course_code + (Integer.parseInt(quiz) +1), true);
+                    editor.apply();
+                    editor = passed.edit();
+                    editor.putBoolean(course_code+quiz, true);
+                    editor.apply();
                     ArrayList<String> defaultAnswerString = getDefaultAnswer();
                     for (int i = 0; i < answers.size(); i++)
                         if (answers.get(i).equals(defaultAnswerString.get(i))) {
@@ -131,6 +144,9 @@ public class Test extends AppCompatActivity {
                         }
                     }
                     else {
+
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         dialog.setContentView(R.layout.passed);
                         TextView result = dialog.findViewById(R.id.result);
                         String s = pass + "/" + questions.size();

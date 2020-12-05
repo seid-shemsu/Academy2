@@ -2,12 +2,14 @@ package com.example.academy.PartAdapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -67,15 +69,20 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
 
         @Override
         public void onClick(View v) {
-            Fragment detail = new Detail();
-            Bundle bundle = new Bundle();
-            bundle.putString("part_number", Integer.toString(getAdapterPosition() + 1));
-            bundle.putString("course_name", name);
-            bundle.putString("title", titles.get(getAdapterPosition()));
-            bundle.putString("course_code", course_code);
-            detail.setArguments(bundle);
-            fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, detail).addToBackStack(null).commit();
-
+            SharedPreferences passed = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
+            if (passed.getBoolean(course_code + (getAdapterPosition()), false)){
+                Fragment detail = new Detail();
+                Bundle bundle = new Bundle();
+                bundle.putString("part_number", Integer.toString(getAdapterPosition() + 1));
+                bundle.putString("course_name", name);
+                bundle.putString("title", titles.get(getAdapterPosition()));
+                bundle.putString("course_code", course_code);
+                detail.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, detail).addToBackStack(null).commit();
+            }
+            else {
+                Toast.makeText(context, "please pass the previous part first", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
