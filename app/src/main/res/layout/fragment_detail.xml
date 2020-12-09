@@ -107,6 +107,7 @@
                 android:textColor="@color/white"
                 android:background="@drawable/backbtn" />
 
+
             <TextView
                 android:id="@+id/pdf"
                 android:layout_width="145dp"
@@ -118,7 +119,7 @@
                 android:textColor="@color/white"
                 android:drawablePadding="10dp"
                 android:background="@drawable/backbtn"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:text="@string/read_pdf"/>
         </RelativeLayout>
     </LinearLayout>

@@ -2,14 +2,18 @@ package com.example.academy;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.academy.intro.MainIntro;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Locale;
 
 public class Start extends AppCompatActivity {
     TextView amh, ara, eng;
@@ -20,8 +24,8 @@ public class Start extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLanguage();
         setContentView(R.layout.activity_start);
-        setTitle(getResources().getString(R.string.app_name));
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         if (sharedPreferences.getBoolean("registered", false)){
@@ -72,11 +76,22 @@ public class Start extends AppCompatActivity {
                     startActivity(new Intent(Start.this, MainIntro.class));
                     finish();
                 }
+                else {
+                    Toast.makeText(Start.this, getResources().getString(R.string.select_language), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     private boolean getPermission(int permission) {
         return permission == 1;
+    }
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 }

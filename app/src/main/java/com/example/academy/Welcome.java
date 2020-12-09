@@ -34,9 +34,6 @@ import java.util.Locale;
 
 public class Welcome extends AppCompatActivity{
     Button login, register;
-    Snackbar snackbar;
-    SharedPreferences sharedPreferences;
-    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +46,14 @@ public class Welcome extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Welcome.this, Login.class));
+                finish();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Welcome.this, Register.class));
+                finish();
             }
         });
     }
@@ -68,5 +67,6 @@ public class Welcome extends AppCompatActivity{
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
+
 }
 

@@ -1,4 +1,4 @@
-package com.example.academy;
+package com.example.academy.tabs;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.academy.tabs.CourseObject;
+import com.example.academy.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,7 +39,10 @@ public class CourseProgressAdapter extends RecyclerView.Adapter<CourseProgressAd
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         CourseObject currentObject = courseObjects.get(position);
         holder.course_name.setText(currentObject.getCourse_name());
-        holder.course_rate.setRating(currentObject.getRating());
+        Picasso.with(context).load(currentObject.getImg_url()).placeholder(R.drawable.kitab).into(holder.course_img);
+        int progress = Integer.parseInt(currentObject.getProgress());
+        holder.completion_progress.setText(progress + " % completed");
+        holder.progress_bar.setProgress(progress);
     }
 
     @Override

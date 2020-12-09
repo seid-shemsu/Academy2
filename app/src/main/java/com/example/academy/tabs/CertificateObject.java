@@ -2,12 +2,20 @@ package com.example.academy.tabs;
 
 public class CertificateObject {
     String course_name, img_url;
-    int rating;
+    int rating, code;
 
     public CertificateObject(String course_name, String img_url, int rating) {
         this.course_name = course_name;
         this.img_url = img_url;
         this.rating = rating;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getCourse_name() {

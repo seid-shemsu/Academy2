@@ -18,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -66,9 +67,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Setting.class));
+                finish();
             }
         });
         ImageView imageView = header.findViewById(R.id.imageView);
+        try {
+            Picasso.Builder builder = new Picasso.Builder(this);
+            builder.build().load(sharedPreferences.getString("uri", "")).into(imageView);
+            imageView.setBackground(getResources().getDrawable(R.drawable.circle_img_bg));
+        }
+        catch (Exception e){
+        }
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

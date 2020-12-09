@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:padding="5dp"
-            android:text="this is sample question type?"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />

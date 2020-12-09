@@ -79,39 +79,4 @@ public class VideoPlayManager extends AppCompatActivity {
         else
             super.onBackPressed();
     }
-    /*private String getVideoId(String part) {
-        switch (part){
-            case "one":
-                return videoLinks[0];
-            case "two":
-                return videoLinks[1];
-            case "three":
-                return videoLinks[2];
-            case "four":
-                return videoLinks[3];
-            case "five":
-                return videoLinks[4];
-            case "six":
-                return videoLinks[5];
-            case "seven":
-                return videoLinks[6];
-            case "eight":
-                return videoLinks[7];
-            case "nine":
-                return videoLinks[8];
-            case "ten":
-                return videoLinks[9];
-            case "eleven":
-                return videoLinks[10];
-            case "twelve":
-                return videoLinks[11];
-            case "thirteen":
-                return videoLinks[12];
-            case "fourteen":
-                return videoLinks[13];
-            case "fifteen":
-                return videoLinks[14];
-        }
-        return null;
-    }*/
 }

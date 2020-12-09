@@ -84,8 +84,8 @@ public class SingleCourseFragment extends Fragment {
                         has_test.edit().clear().apply();
                         lesson.edit().clear().apply();
                         passed.edit().clear().apply();
-                        passed.edit().putBoolean(getArguments().getString("code" + 0), true).apply();
-                        lesson.edit().putBoolean(getArguments().getString("course_code" +1), true).apply();
+                        passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
+                        lesson.edit().putBoolean(getArguments().getString("course_code") +1, true).apply();
                         Fragment coursePartFragment = new CoursePartFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         Bundle bundle = new Bundle();

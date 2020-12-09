@@ -36,7 +36,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private CircularProgressBar progressBar;
     private TextView textView;
-    private String[] courses;
+    private List<Integer> codes = new ArrayList<>();
+    private int i = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +47,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         progressBar = root.findViewById(R.id.progress_bar);
         textView = root.findViewById(R.id.no_course);
-        courses = getContext().getResources().getStringArray(R.array.courses);
         sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         String language = sharedPreferences.getString("lang", "am");
         databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child("courses");
@@ -58,11 +58,12 @@ public class HomeFragment extends Fragment {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                i = 1;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String name = snapshot.child("name").getValue().toString();
                     String img_url = snapshot.child("img_url").getValue().toString();
                     int rating = Integer.parseInt(snapshot.child("rate").getValue().toString());
-                    courseObjects.add(new CourseObject(name, img_url, rating));
+                    courseObjects.add(new CourseObject(name, img_url, rating, i++));
                 }
                 FragmentManager fragmentManager = getFragmentManager();
                 CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);

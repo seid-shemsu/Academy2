@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.academy.R;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +57,6 @@ public class CertificateTab extends Fragment {
         return view;
     }
 
-    String img_url;
     private void getCertificates() {
         SharedPreferences info = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = info.getString("phone", "");
@@ -66,18 +66,17 @@ public class CertificateTab extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        String name = snapshot.getKey();
-                        String rate = snapshot.child("rate").getValue().toString();
+                        String name = snapshot.child("course_name").getValue().toString();
+                        String rate = snapshot.child("rating").getValue().toString();
                         String img_url = snapshot.child("img_url").getValue().toString();
                         certificates.add(new CertificateObject(name, img_url, Integer.parseInt(rate)));
                     }
                     TabAdapter tabAdapter = new TabAdapter(getContext(), certificates);
                     recyclerView.setAdapter(tabAdapter);
-                }
-                else {
-                    no.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
                 }
+                else
+                    no.setVisibility(View.VISIBLE);
             }
 
             @Override

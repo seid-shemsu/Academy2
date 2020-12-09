@@ -2,6 +2,7 @@ package com.example.academy.ui.home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -14,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.academy.MainActivity;
 import com.example.academy.PartAdapters.IconAdapter;
 import com.example.academy.PartAdapters.NumberAdapter;
 import com.example.academy.PartAdapters.TitleAdapter;
 import com.example.academy.R;
+import com.example.academy.test.Test;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,12 +43,14 @@ public class CoursePartFragment extends Fragment {
         // Required empty public constructor
     }
 
-    RecyclerView number, title, icon;
-    List<String> titles = new ArrayList<>();
-    List<String> numbers = new ArrayList<>();
-    List<String> icons = new ArrayList<>();
-    String name, course_code;
-    String[] numbersArray, titlesArray;
+    private RecyclerView number, title, icon;
+    private Button final_btn ;
+    private List<String> titles = new ArrayList<>();
+    private List<String> numbers = new ArrayList<>();
+    private List<String> icons = new ArrayList<>();
+    private String name, course_code;
+    //private String[] numbersArray, titlesArray;
+    private int i = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class CoursePartFragment extends Fragment {
         number = root.findViewById(R.id.number_recycler);
         title = root.findViewById(R.id.title_recycler);
         icon = root.findViewById(R.id.icon_recycler);
+        final_btn = root.findViewById(R.id.final_btn);
         icon.setHasFixedSize(true);
         number.setHasFixedSize(true);
         title.setHasFixedSize(true);
@@ -63,6 +70,46 @@ public class CoursePartFragment extends Fragment {
         course_code = getArguments().getString("course_code");
         ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
         getItems();
+        final_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
+                if (passed.getBoolean(course_code + i, false)){
+                    DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child("finals").child(course_code);
+                    final ArrayList<String> questions = new ArrayList<>();
+                    final ArrayList<String> answers = new ArrayList<>();
+                    test.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.hasChildren()) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    if (snapshot.getKey().equals("questions"))
+                                        for (DataSnapshot snapshot1 : snapshot.getChildren())
+                                            questions.add(snapshot1.getValue().toString());
+                                    else
+                                        for (DataSnapshot snapshot1 : snapshot.getChildren())
+                                            answers.add(snapshot1.getValue().toString());
+                                }
+                                startActivity(new Intent(getContext(), Test.class)
+                                        .putStringArrayListExtra("questions", questions)
+                                        .putStringArrayListExtra("answers", answers)
+                                        .putExtra("course_code", course_code)
+                                        .putExtra("quiz","final"));
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(getContext(), "take all tests first", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return root;
     }
     private void getItems(){
@@ -76,13 +123,14 @@ public class CoursePartFragment extends Fragment {
                     titles.clear();
                     numbers.clear();
                     icons.clear();
-                    int i = 1;
+                    i = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         if (snapshot.hasChildren()){
+                            i++;
                             titles.add(snapshot.child("name").getValue().toString());
                             numbers.add(Integer.toString(i));
                             icons.add(course_code + i);
-                            i++;
+
                         }
                     }
                     FragmentManager fragmentManager = getFragmentManager();

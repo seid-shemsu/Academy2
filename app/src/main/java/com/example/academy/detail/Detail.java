@@ -36,6 +36,7 @@ import com.example.academy.MusicManager;
 import com.example.academy.R;
 import com.example.academy.Reader;
 import com.example.academy.VideoPlayManager;
+import com.example.academy.tabs.CourseObject;
 import com.example.academy.test.Test;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -139,6 +140,7 @@ public class Detail extends Fragment {
                         editor_passed.putBoolean(course_code+part_number, true);
                         editor_passed.apply();
                     }
+                    setProgress();
                     startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name+part_number));
                 }
             }
@@ -213,6 +215,7 @@ public class Detail extends Fragment {
         endTimeField = root.findViewById(R.id.endtime);
         seekbar = root.findViewById(R.id.seekbar1);
         playButton = root.findViewById(R.id.pause_play_btn);
+
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -251,13 +254,53 @@ public class Detail extends Fragment {
         return root;
     }
 
+    String img_url;
+    String name;
+    String part;
+    int p = 0;
+    private void setProgress() {
+        SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String phone = user.getString("phone", "");
+        DatabaseReference course = FirebaseDatabase.getInstance().getReference(language).child("courses").child(course_code);
+        final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(course_code);
+        course.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                img_url = dataSnapshot.child("img_url").getValue().toString();
+                name = dataSnapshot.child("name").getValue().toString();
+                part = dataSnapshot.child("parts").getValue().toString();
+                p = (int) ((double) Integer.parseInt(part_number) / ( double)Integer.parseInt(part) * 100);
+                progress.child("course_name").setValue(name);
+                progress.child("progress").setValue(p);
+                progress.child("img_url").setValue(img_url);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //CourseObject single_course = new CourseObject(course_name, Integer.toString(p), img_url);
+
+
+    }
+
     private void downloadPdf() {
+        if (has_quiz.getBoolean(course_code+part_number, false))
+            quiz.setVisibility(View.VISIBLE);
+        else {
+            lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
+            lesson_editor.commit();
+            editor_passed.putBoolean(course_code+part_number, true);
+            editor_passed.apply();
+        }
         String root = Environment.getExternalStorageDirectory().toString();
         File dir = new File(root + "/africa/" + course_code + "/pdfs");
         dir.mkdirs();
         final File file = new File( dir, course_code + part_number + ".html");
         if (file.isFile() && file.length() > 0) {
             startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+            setProgress();
         }
         else {
             final Dialog dialog = new Dialog(getContext());
@@ -274,16 +317,8 @@ public class Detail extends Fragment {
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                 dialog.dismiss();
-
-                                if (has_quiz.getBoolean(course_code+part_number, false))
-                                    quiz.setVisibility(View.VISIBLE);
-                                else {
-                                    lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
-                                    lesson_editor.commit();
-                                    editor_passed.putBoolean(course_code+part_number, true);
-                                    editor_passed.apply();
-                                }
                                 startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+                                setProgress();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -345,6 +380,7 @@ public class Detail extends Fragment {
                 @Override
                 public void onClick(View v) {
                     download.setVisibility(View.GONE);
+                    percent.setVisibility(View.VISIBLE);
                     cancel.setText("Hide");
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -395,7 +431,7 @@ public class Detail extends Fragment {
     }
 
 
-    public void play() {
+    private void play() {
         if (has_quiz.getBoolean(course_code+ part_number, false))
             quiz.setVisibility(View.VISIBLE);
         else {
@@ -404,6 +440,7 @@ public class Detail extends Fragment {
             editor_passed.putBoolean(course_code+part_number, true);
             editor_passed.apply();
         }
+        setProgress();
         linearLayout.setVisibility(View.VISIBLE);
         playButton.setImageResource(R.drawable.pause);
         mediaPlayer = null;

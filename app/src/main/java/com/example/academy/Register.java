@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +32,6 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -69,11 +67,9 @@ public class Register extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_item, countries);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         country.setAdapter(adapter);
-        //countryCode = getResources().getStringArray(R.array.code);
         country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //code.setText(countryCode[position]);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -88,7 +84,7 @@ public class Register extends AppCompatActivity {
                     if(check(name, phone, email)){
                         progressBar.setVisibility(View.VISIBLE);
                         register.setVisibility(View.GONE);
-                        RegisterToDatabase(name, email, code, phone, country, v, progressBar, register);
+                        RegisterToDatabase(name, email, phone, country, v, progressBar, register);
                     }
                 }
                 else {
@@ -111,6 +107,7 @@ public class Register extends AppCompatActivity {
 
     private boolean connectionCheck() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
         NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
         int connected = 0;
         for (NetworkInfo networkInfo : info) {
@@ -127,7 +124,7 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean check(EditText name, EditText phone, EditText email) {
-        if (name.getText().toString().length() < 6 && !name.getText().toString().contains(" ")){
+        if (name.getText().toString().length() < 5 && !name.getText().toString().contains(" ")){
             name.setError("full name required");
             return false;
         }
@@ -142,7 +139,7 @@ public class Register extends AppCompatActivity {
         return true;
     }
 
-    private void RegisterToDatabase(final EditText name, final EditText email, final TextView code, final EditText phone, final Spinner country, final View v, final CircularProgressBar progressBar, final Button register) {
+    private void RegisterToDatabase(final EditText name, final EditText email, final EditText phone, final Spinner country, final View v, final CircularProgressBar progressBar, final Button register) {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -153,13 +150,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    phone.setError("registered phone");
-                    /*snackbar = Snackbar.make(v, getResources().getString(R.string.soryy_this_phone_has_been_registered_before_ntty_later), Snackbar.LENGTH_INDEFINITE);
-                    snackbar.setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    }).show();*/
+                    phone.setError(getResources().getString(R.string.registerd_phone));
                     progressBar.setVisibility(View.GONE);
                     register.setVisibility(View.VISIBLE);
                 }
@@ -175,6 +166,7 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(Register.this, getResources().getString(R.string.registered_successfully), Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(Register.this, MainActivity.class));
                                     finish();
                                 }

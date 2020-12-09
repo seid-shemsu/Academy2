@@ -9,7 +9,7 @@ import com.example.academy.tabs.CertificateTab;
 import com.example.academy.tabs.CoursesTab;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    int tab_numbers;
+    private int tab_numbers;
     public PagerAdapter(@NonNull FragmentManager fm, int tab_numbers) {
         super(fm);
         this.tab_numbers = tab_numbers;

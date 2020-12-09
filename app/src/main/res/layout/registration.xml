@@ -29,6 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:scaleType="centerInside"
+        android:contentDescription="@string/logo"
         android:src="@drawable/logo" />
 
     <LinearLayout

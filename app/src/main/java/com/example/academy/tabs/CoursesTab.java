@@ -7,19 +7,22 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.academy.CourseProgressAdapter;
 import com.example.academy.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,35 +37,45 @@ public class CoursesTab extends Fragment {
     public CoursesTab() {
         // Required empty public constructor
     }
-    RecyclerView recyclerView;
-    CourseProgressAdapter courseProgressAdapter;
-    List<CourseObject> courseObjects;
+    private RecyclerView recyclerView;
+    private CircularProgressBar progressBar;
+    private TextView no_course;
+    private CourseProgressAdapter courseProgressAdapter;
+    private List<CourseObject> courseObjects = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_courses_tab, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
-        courseObjects = getCourseObjects();
-        courseProgressAdapter = new CourseProgressAdapter(getContext(), courseObjects);
-        recyclerView.setAdapter(courseProgressAdapter);
+        progressBar = root.findViewById(R.id.progress_bar);
+        no_course = root.findViewById(R.id.no_course);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        getCourseObjects();
         return root;
     }
 
-    private List<CourseObject> getCourseObjects() {
-        final List<CourseObject> courseObjects = new ArrayList<>();
+    private void getCourseObjects() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = sharedPreferences.getString("phone", "unknown");
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(phone);
-        databaseReference.child("finished_courses").addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        courseObjects.add((CourseObject) snapshot.getValue());
+                        String name = snapshot.child("course_name").getValue().toString();
+                        String img_url = snapshot.child("img_url").getValue().toString();
+                        String progress = snapshot.child("progress").getValue().toString();
+                        courseObjects.add(new CourseObject(name, progress, img_url));
                     }
+                    courseProgressAdapter = new CourseProgressAdapter(getContext(), courseObjects);
+                    recyclerView.setAdapter(courseProgressAdapter);
+                    progressBar.setVisibility(View.GONE);
                 }
-
+                else
+                    no_course.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -70,12 +83,6 @@ public class CoursesTab extends Fragment {
 
             }
         });
-        String current_course_name = sharedPreferences.getString("current_course", "null");
-        String progress = sharedPreferences.getString("current_course_progress", "0");
-        String current_course_img_url = sharedPreferences.getString("current_course_img_url","");
-        int rating = sharedPreferences.getInt("current_course_rating", 0);
-        courseObjects.add(new CourseObject(current_course_name, progress, current_course_img_url, rating));
-        return courseObjects;
     }
 
 }
