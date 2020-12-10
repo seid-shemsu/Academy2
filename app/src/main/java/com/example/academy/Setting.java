@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
@@ -33,7 +35,6 @@ public class Setting extends AppCompatActivity {
     TextView amh, ara, eng, language, pp;
     private ImageView image;
     int permission = 0, PICK_IMAGE_REQUEST = 1;
-
     Uri imgUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,29 @@ public class Setting extends AppCompatActivity {
         lang = getSharedPreferences("lang", MODE_PRIVATE);
         userEdit = userInfo.edit();
         langEdit = lang.edit();
+        ///////////////////////////////////////////////////////////////////////////
+        ImageView nameEdit = findViewById(R.id.name_edit);
+        ImageView phoneEdit = findViewById(R.id.phone_edit);
+        ImageView emailEdit = findViewById(R.id.email_edit);
+        nameEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name.setEnabled(true);
+            }
+        });
+        phoneEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phone.setEnabled(true);
+            }
+        });
+        emailEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email.setEnabled(true);
+            }
+        });
+        /////////////////////////////////////////////////////////////////////////
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);

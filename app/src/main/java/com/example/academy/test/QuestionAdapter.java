@@ -64,14 +64,12 @@ public class QuestionAdapter extends ArrayAdapter<String>{
         fl = view.findViewById(R.id.choice_2);
 //        linearLayout = view.findViewById(R.id.homeLinear);
         if (type == 0){
-
-            if (answer.get(position) == "true")
+            if (answer.get(position).equalsIgnoreCase("true"))
                 tr.setChecked(true);
-            else if (answer.get(position) == "false")
+            else if (answer.get(position).equals("false"))
                 fl.setChecked(true);
         }
         if (type == 1){
-
             tr.setTextColor(Color.BLACK);
             fl.setTextColor(Color.BLACK);
             if (answered[position] == "true")
@@ -99,7 +97,7 @@ public class QuestionAdapter extends ArrayAdapter<String>{
                     tr.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, view.getResources().getDrawable(R.drawable.circle_correct), null);
                 }
                 else{
-                    tr.setTextColor(context.getResources().getColor(R.color.green));
+                    fl.setTextColor(context.getResources().getColor(R.color.green));
                     fl.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, view.getResources().getDrawable(R.drawable.circle_correct), null);
                     //fl.setBackgroundResource(R.drawable.correct_bg);
                 }

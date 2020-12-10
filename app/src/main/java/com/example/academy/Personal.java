@@ -62,7 +62,13 @@ public class Personal extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        startActivity(new Intent(this, Setting.class));
+        if (item.getItemId() == R.id.settings){
+            startActivity(new Intent(this, Setting.class));
+            finish();
+        }
+        else {
+            onBackPressed();
+        }
         return true;
     }
 
@@ -84,11 +90,7 @@ public class Personal extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+
     private void setLanguage() {
         SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));

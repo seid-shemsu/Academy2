@@ -16,6 +16,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Environment;
 import android.os.Handler;
@@ -38,6 +39,7 @@ import com.example.academy.Reader;
 import com.example.academy.VideoPlayManager;
 import com.example.academy.tabs.CourseObject;
 import com.example.academy.test.Test;
+import com.example.academy.ui.home.CoursePartFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -83,8 +85,7 @@ public class Detail extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_detail, container, false);
         ImageView youtube = root.findViewById(R.id.youtube);
@@ -254,6 +255,14 @@ public class Detail extends Fragment {
         return root;
     }
 
+    /* Fragment coursePartFragment = new CoursePartFragment();
+           FragmentManager fragmentManager = getFragmentManager();
+           Bundle bundle = new Bundle();
+           bundle.putString("course_name", name);
+           bundle.putString("course_code", course_code);
+           bundle.putString("course_title", course_title);
+           coursePartFragment.setArguments(bundle);
+           fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();*/
     String img_url;
     String name;
     String part;
@@ -381,7 +390,7 @@ public class Detail extends Fragment {
                 public void onClick(View v) {
                     download.setVisibility(View.GONE);
                     percent.setVisibility(View.VISIBLE);
-                    cancel.setText("Hide");
+                    cancel.setText(getResources().getString(R.string.hide));
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -403,7 +412,7 @@ public class Detail extends Fragment {
                                 .addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
                                     @Override
                                     public void onProgress(final FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        percent.setText("Downloading\n%..." + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                        percent.setText(getResources().getString(R.string.downloading) +"\n..." + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount() + "%");
                                     }
 
                                 })

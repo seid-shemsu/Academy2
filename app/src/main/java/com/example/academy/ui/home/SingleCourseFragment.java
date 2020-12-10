@@ -80,7 +80,7 @@ public class SingleCourseFragment extends Fragment {
                         dialog.dismiss();
                         SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
                         SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
-                        SharedPreferences has_test = getContext().getSharedPreferences("has_test", Context.MODE_PRIVATE);
+                        SharedPreferences has_test = getContext().getSharedPreferences("has_quiz", Context.MODE_PRIVATE);
                         has_test.edit().clear().apply();
                         lesson.edit().clear().apply();
                         passed.edit().clear().apply();

@@ -36,7 +36,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
         View header = navigationView.getHeaderView(0);
         TextView name = header.findViewById(R.id.name);
         SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
@@ -74,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             Picasso.Builder builder = new Picasso.Builder(this);
             builder.build().load(sharedPreferences.getString("uri", "")).into(imageView);
-            imageView.setBackground(getResources().getDrawable(R.drawable.circle_img_bg));
         }
         catch (Exception e){
         }
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Personal.class));
+                finish();
             }
         });
     }
@@ -105,5 +107,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (drawer.isOpen()){
+            drawer.close();
+        }
+        else
+            super.onBackPressed();
+    }
 }

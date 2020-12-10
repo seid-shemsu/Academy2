@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="160dp"
     android:layout_marginTop="15dp"
+    android:layout_marginBottom="10dp"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -28,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="7dp"
         android:textStyle="bold"
         android:gravity="start"
         android:textColor="@color/bunny"/>
@@ -40,7 +40,6 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
         android:progressTint="@color/colorPrimary"
         android:numStars="5" />
 </RelativeLayout>

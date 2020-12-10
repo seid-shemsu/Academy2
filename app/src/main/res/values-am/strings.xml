@@ -5,10 +5,8 @@
     <string name="save_to_phone">ወደ ስልኩ አስቅምጥ</string>
     <string name="ok">እሺ</string>
     <string name="to_next">ወደ ቀጣይ</string>
-    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">እንኳን ደስ አሎት። \n ይህን ኮርስ አጠናቀዋል። \n እናመሰግናለን።</string>
+    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">እንኳን ደስ አሎት። \n ይህን ኮርስ አጠናቀዋል።</string>
     <string name="view_certificate">ሰርተፊኬት እይ</string>
-    <string name="part_one">ክፍል አንድ</string>
-    <string name="part_two">ክፍል ሁለት</string>
     <string name="take_quiz">መልመጃ</string>
     <string name="final_exam">ማጠቃለያ ፈተና</string>
     <string name="congratulation_n_next_part_is_unlocked">ቀጣዩ ክፍል ተከፍቷል።</string>
@@ -32,42 +30,10 @@
     <string name="personal_information">የራስ መረጃ</string>
     <string name="register_new">ተመዝገብ</string>
     <string name="login">ግባ</string>
-    <string name="part_three">ክፍል ሶስት</string>
-    <string name="part_four">ክፍል አራት</string>
-    <string name="part_five">ክፍል አምስት</string>
-    <string name="part_six">ክፍል ስድስት</string>
-    <string name="part_seven">ክፍል ሰባት</string>
-    <string name="part_eight">ክፍል ስምንት</string>
-    <string name="part_nine">ክፍል ዘጠኝ</string>
-    <string name="part_ten">ክፍል አስር</string>
-    <string name="part_eleven">ክፍል አስራ አንድ</string>
-    <string name="part_twelve">ክፍል አስራ ሁለት</string>
-    <string name="part_thirteen">ክፍል አስራ ሶስት</string>
-    <string name="part_fourteen">ክፍል አስራ አራት</string>
-    <string name="part_fifteen">ክፍል አስራ አምስት</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
-    <string name="_9">9</string>
-    <string name="_10">10</string>
-    <string name="_11">11</string>
-    <string name="_12">12</string>
     <string name="watch_youtube">ዩቱብ ተመልከት</string>
     <string name="listen_audio">ድምፅ አዳምጥ</string>
     <string name="read_pdf">ፅሁፍ አንብብ</string>
     <string name="fiqhulibadat">ففه العبادات</string>
-    <string name="sheikh">በክቡር ሽይኽ ሙሀመድዘይን ዛህረዲን ኸሊል።</string>
-    <string name="paper2">መማርያ</string>
-    <string name="paper2_1">ትምትህርቱን በዩቱብ ፣ በድምፅ እንዲሁም በፅሁፍ ይከታተላሉ።</string>
-    <string name="paper3">ምዘና</string>
-    <string name="paper3_1">መልመጃዎችን በመስራት ራሶን ለማጠቃለያ ፈተና ያዘጋጃሉ።</string>
-    <string name="paper4">ዕውቅና</string>
-    <string name="paper4_1">ትምትህርቱን ካጠናቀቁ ቡሃላ ሰርተክፌዎን በነፃ ያገኛሉ።</string>
     <string name="get_started">ጀምር</string>
     <string name="account_confirmed">አካውንቱ ተረጋግጦአል</string>
     <string name="user_info">መረጃ</string>
@@ -76,7 +42,6 @@
     <string name="setting">መቼት</string>
     <string name="more">የበለጠ</string>
     <string name="ask_question">ጥያቄ</string>
-    <string name="FAQ">ማብራሪያ</string>
     <string name="about">ስለ እኛ</string>
     <string name="empty">ባዶ ነው</string>
     <string name="enter_your_question_here">ጥያቄ እዚህ ጋር አስገባ</string>
@@ -91,7 +56,7 @@
     <string name="cancel">አቋርጥ</string>
     <string name="certificate">ሰርቲፊኬት</string>
     <string name="swipe">ወደ ቀኝ</string>
-    <string name="log_out">log out</string>
+    <string name="log_out">ውጣ</string>
 
     <string-array name="country">
         <item>ኢትዮጵያ</item>
@@ -279,46 +244,6 @@
         <item>ዝምባቡዌ</item>
     </string-array>
 
-    <string-array name="parts">
-        <item>ትምህርት አንድ</item>
-        <item>ትምህርት ሁለት</item>
-        <item>ትምህርት ሶስት </item>
-        <item>ትምህርት አራት </item>
-        <item>ትምህርት አምስት </item>
-        <item>ትምህርት ስድስት </item>
-        <item>ትምህርት ሰባት </item>
-        <item>ትምህርት ስምንት </item>
-        <item>ትምህርት ዘጠኝ </item>
-        <item>ትምህርት አስር </item>
-        <item>ትምህርት አስራ አንድ </item>
-        <item>ትምህርት አስራ ሁለት </item>
-        <item>ትምህርት አስራ ሶስት </item>
-        <item>ትምህርት አስራ አራት </item>
-        <item>ትምህርት አስራ አምስት </item>
-        <item>ትምህርት አስራ ስድስት </item>
-        <item>ትምህርት አስራ ሰባት </item>
-        <item>ትምህርት አስራ ስምንት </item>
-        <item>ትምህርት አስራ ዘጠኝ</item>
-        <item>ትምህርት ሃያ</item>
-    </string-array>
-
-    <string-array name="courses">
-        <item>የመጀመሪያ ኮርስ</item>
-        <item>ሁለተኛ ኮርስ</item>
-        <item>ሦስተኛ ኮርስ</item>
-        <item>አራተኛ ኮርስ</item>
-        <item>አምስተኛው ኮርሶችe</item>
-        <item>ስድስተኛ ኮርስ</item>
-        <item>ሰባተኛ ኮርስ</item>
-        <item>ስምንተኛ ኮርስ</item>
-        <item>ዘጠነኛ ኮርስ</item>
-        <item>አስረኛ ኮርስ</item>
-        <item>አስራ አንደኛ ኮርስ</item>
-        <item>አስራ ሁለተኛ ኮርስ</item>
-        <item>አስራ ሶስተኛ ኮርስ</item>
-        <item>አስራ አራተኛ ኮርስ</item>
-        <item>አስራ አምስተኛ ኮርስ</item>
-    </string-array>
 
     <string name="skip">ዝለል</string>
     <string name="learn">ማጥናት</string>
@@ -338,25 +263,33 @@
     <string name="start">ጀምር</string>
     <string name="continue_">ቀጥል</string>
     <string name="clear">አጥፋ</string>
-    <string name="registerd_phone">registered phone</string>
-    <string name="please_wait">please wait...</string>
-    <string name="logo">logo</string>
-    <string name="accomplishments">accomplishments</string>
-    <string name="change_profile_picture">change profile picture</string>
-    <string name="save">save</string>
-    <string name="your_progress_will_be_cleared">your progress will be cleared</string>
-    <string name="asses_course">asses course</string>
-    <string name="please_asses_the_course">please asses the course</string>
-    <string name="asses_the_teacher">asses the teacher</string>
-    <string name="very_good">very good</string>
-    <string name="good">good</string>
-    <string name="bad">bad</string>
-    <string name="done">done</string>
-    <string name="complete_assessment">please complete the assessment</string>
-    <string name="teaching_performance">teaching performance</string>
-    <string name="content_rating">Content rating</string>
-    <string name="how_much_have_you_learned">How much have you learned?</string>
-    <string name="more_than_70">More than 70%</string>
-    <string name="less_than_40">Less than 40%</string>
-    <string name="select_language">select language</string>
+    <string name="registerd_phone">የተመዘገበ ስልክ</string>
+    <string name="please_wait">ትንሽ ይጠብቁ</string>
+    <string name="logo">አርማ</string>
+    <string name="accomplishments">ስኬቶች</string>
+    <string name="change_profile_picture">የመገለጫ ስዕል ለውጥ</string>
+    <string name="save">አስቀምጥ</string>
+    <string name="your_progress_will_be_cleared">እድገትዎ ይጸዳል</string>
+    <string name="asses_course">ኮርሱን ይገምግሙ</string>
+    <string name="please_asses_the_course">እባክዎን ኮርሱን ይገምግሙ</string>
+    <string name="asses_the_teacher">አስተማሪውን ይገምግሙ</string>
+    <string name="very_good">በጣም ጥሩ</string>
+    <string name="good">ጥሩ</string>
+    <string name="bad">ደካማ</string>
+    <string name="done">ጨርስ</string>
+    <string name="complete_assessment">እባክዎ ግምገማውን ያጠናቅቁ</string>
+    <string name="teaching_performance">የማስተማር አፈፃፀም</string>
+    <string name="content_rating">የይዘት ደረጃ</string>
+    <string name="how_much_have_you_learned">ምን ያህል ተምረዋል?</string>
+    <string name="more_than_70">ከ 70% በላይ</string>
+    <string name="less_than_40">ከ 40% በታች</string>
+    <string name="select_language">ቋንቋ ይምረጡ</string>
+    <string name="send">ላክ</string>
+    <string name="send_question">ጥያቄ ላክ</string>
+    <string name="ask_a_question">ጥያቄ ይጠይቁ</string>
+    <string name="profile">መገለጫ</string>
+    <string name="edit">አርትዕ</string>
+    <string name="answer_submitted">answer submitted</string>
+    <string name="hide">Hide</string>
+    <string name="downloading">Downloading</string>
 </resources>

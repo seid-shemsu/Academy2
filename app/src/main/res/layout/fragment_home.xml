@@ -9,12 +9,11 @@
         android:id="@+id/c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
         android:text="@string/courses"
         android:textColor="@color/bunny"
-        android:textSize="23sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -22,8 +21,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/c"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="5dp" />
+        android:layout_centerVertical="true" />
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/progress_bar"
@@ -38,14 +36,4 @@
         app:cpb_progressbar_width="5dp"
         app:cpb_round_border="true" />
 
-    <TextView
-        android:id="@+id/no_course"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="@string/no_course_have_been_added_yet"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:visibility="gone" />
 </RelativeLayout>

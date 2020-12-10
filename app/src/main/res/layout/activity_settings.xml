@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="@color/white"
     tools:context=".Setting">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingEnd="10dp"
+        android:paddingStart="5dp"
         android:orientation="vertical">
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -19,9 +20,10 @@
             app:cardCornerRadius="60dp">
 
             <ImageView
+                android:contentDescription="@string/profile"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/circle_outlined"
+                android:src="@drawable/person"
                 android:id="@+id/circle"/>
         </androidx.cardview.widget.CardView>
         <TextView
@@ -32,75 +34,157 @@
             android:text="@string/change_profile_picture"
             android:gravity="center_horizontal"
             android:id="@+id/pp_change"
-
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="1dp"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:gravity="start|center_vertical"
             android:layout_gravity="start"
             android:drawableStart="@drawable/person_small"
             android:text="@string/personal_information"
-            android:textSize="18sp"
-            android:layout_margin="20dp"
+            android:textSize="17sp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:drawablePadding="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="15dp"
             android:textColor="@color/colorPrimary"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:layout_marginStart="20dp"
             android:textColor="@color/colorPrimary"/>
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textColor="#505050"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
             android:layout_marginBottom="5dp"
-            android:paddingTop="0dp"
-            android:id="@+id/name"/>
-
+            android:layout_marginStart="20dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="15sp"
+                android:enabled="false"
+                android:layout_marginEnd="0dp"
+                android:id="@+id/name"/>
+            <ImageView
+                android:contentDescription="@string/edit"
+                android:id="@+id/name_edit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/phone"
+            android:textStyle="bold"
             android:layout_marginStart="20dp"
             android:textColor="@color/colorPrimary"/>
-        <EditText
+        <!--<EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textColor="#505050"
             android:layout_marginBottom="5dp"
             android:paddingTop="0dp"
-            android:id="@+id/phone"/>
-
+            android:id="@+id/phone"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:textSize="15sp"
+                android:enabled="false"
+                android:layout_marginEnd="0dp"
+                android:inputType="phone"
+                android:id="@+id/phone"/>
+            <ImageView
+                android:contentDescription="@string/edit"
+                android:id="@+id/phone_edit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email"
+            android:textStyle="bold"
             android:layout_marginStart="20dp"
             android:textColor="@color/colorPrimary"/>
-        <EditText
+        <!--<EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="10dp"
             android:paddingTop="0dp"
             android:textColor="#505050"
-            android:id="@+id/email"/>
-
+            android:id="@+id/email"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:textSize="15sp"
+                android:enabled="false"
+                android:layout_marginEnd="0dp"
+                android:id="@+id/email"/>
+            <ImageView
+                android:contentDescription="@string/edit"
+                android:id="@+id/email_edit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/language"
+            android:textStyle="bold"
             android:layout_marginStart="20dp"
             android:textColor="@color/colorPrimary"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:textColor="#505050"
+            android:layout_marginEnd="10dp"
+            android:drawableTint="@color/colorPrimary"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:textSize="15sp"
             android:drawableEnd="@drawable/dropdown"
             android:id="@+id/language"/>
         <View
@@ -113,7 +197,7 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/btnbgsolid"
+            android:background="@drawable/settingbtnbg"
             android:layout_margin="20dp"
             android:text="@string/save"
             android:textColor="@color/white"

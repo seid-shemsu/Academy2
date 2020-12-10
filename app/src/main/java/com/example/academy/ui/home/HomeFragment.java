@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 i = 1;
+                courseObjects.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String name = snapshot.child("name").getValue().toString();
                     String img_url = snapshot.child("img_url").getValue().toString();

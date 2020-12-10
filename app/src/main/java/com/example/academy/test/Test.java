@@ -63,6 +63,7 @@ public class Test extends AppCompatActivity {
         setContentView(R.layout.question_list);
         quiz = getIntent().getExtras().getString("quiz");
         course_code = getIntent().getExtras().getString("course_code");
+        setTitle(getResources().getString(R.string.take_quiz) + " " +course_code);
         listView = findViewById(R.id.question_list);
         //question = getQuestion(quiz);
         questions = getIntent().getExtras().getStringArrayList("questions");
@@ -160,7 +161,7 @@ public class Test extends AppCompatActivity {
                         ok.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                onBackPressed();
+                                finish();
                             }
                         });
                         Button check = dialog.findViewById(R.id.check);

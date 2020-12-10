@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +44,13 @@ public class CoursePartFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private CircularProgressBar progress;
     private RecyclerView number, title, icon;
     private Button final_btn ;
     private List<String> titles = new ArrayList<>();
     private List<String> numbers = new ArrayList<>();
     private List<String> icons = new ArrayList<>();
-    private String name, course_code;
+    private String name, course_code, course_title;
     //private String[] numbersArray, titlesArray;
     private int i = 0;
     @Override
@@ -60,6 +62,7 @@ public class CoursePartFragment extends Fragment {
         title = root.findViewById(R.id.title_recycler);
         icon = root.findViewById(R.id.icon_recycler);
         final_btn = root.findViewById(R.id.final_btn);
+        progress = root.findViewById(R.id.progress);
         icon.setHasFixedSize(true);
         number.setHasFixedSize(true);
         title.setHasFixedSize(true);
@@ -68,7 +71,8 @@ public class CoursePartFragment extends Fragment {
         title.setLayoutManager(new LinearLayoutManager(getContext()));
         name = getArguments().getString("course_name");
         course_code = getArguments().getString("course_code");
-        ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
+        course_title  = getArguments().getString("title");
+        ((MainActivity) getActivity()).setActionBarTitle(course_title);
         getItems();
         final_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,16 +134,17 @@ public class CoursePartFragment extends Fragment {
                             titles.add(snapshot.child("name").getValue().toString());
                             numbers.add(Integer.toString(i));
                             icons.add(course_code + i);
-
                         }
                     }
                     FragmentManager fragmentManager = getFragmentManager();
-                    TitleAdapter titleAdapter = new TitleAdapter(getContext(), titles, fragmentManager, name, getArguments().getString("course_code"));
+                    TitleAdapter titleAdapter = new TitleAdapter(getContext(), titles, fragmentManager, name, course_code);
                     NumberAdapter numberAdapter = new NumberAdapter(getContext(), numbers, course_code);
                     IconAdapter iconAdapter = new IconAdapter(getContext(), icons);
                     icon.setAdapter(iconAdapter);
                     number.setAdapter(numberAdapter);
                     title.setAdapter(titleAdapter);
+                    final_btn.setVisibility(View.VISIBLE);
+                    progress.setVisibility(View.GONE);
                 }
             }
             @Override

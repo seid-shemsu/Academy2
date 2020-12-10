@@ -18,11 +18,9 @@
     <string name="save_to_phone">save to phone</string>
     <string name="ok">OK</string>
     <string name="to_next">to next</string>
-    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">congratulation\nyou have complete the course\nThank you</string>
+    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">congratulation\nyou have complete the course.</string>
     <string name="view_certificate">view certificate</string>
     <string name="take_quiz">quiz</string>
-    <string name="part_one">part one</string>
-    <string name="part_two">part two</string>
     <string name="final_exam">final exam</string>
     <string name="congratulation_n_next_part_is_unlocked">next part is unlocked</string>
     <string name="submit">submit</string>
@@ -418,39 +416,10 @@
     <string name="personal_information">Personal Information</string>
     <string name="register_new">register</string>
     <string name="login">Login</string>
-    <string name="part_three">part three</string>
-    <string name="part_four">part four</string>
-    <string name="part_five">part five</string>
-    <string name="part_six">part six</string>
-    <string name="part_seven">part seven</string>
-    <string name="part_eight">part eight</string>
-    <string name="part_nine">part nine</string>
-    <string name="part_ten">part ten</string>
-    <string name="part_eleven">part eleven</string>
-    <string name="part_twelve">part twelve</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
-    <string name="_9">9</string>
-    <string name="_10">10</string>
-    <string name="_11">11</string>
-    <string name="_12">12</string>
     <string name="watch_youtube">watch youtube</string>
     <string name="listen_audio">listen</string>
     <string name="read_pdf">Read</string>
     <string name="fiqhulibadat">ففه العبادات</string>
-    <string name="sheikh">በክቡር ሽይኽ ሙሀመድዘይን ዛህረዲን ኸሊል።</string>
-    <string name="paper2">መማርያ</string>
-    <string name="paper2_1">ትምትህርቱን በዩቱብ ፣ በድምፅ እንዲሁም በፅሁፍ ይከታተላሉ።</string>
-    <string name="paper3">ምዘና</string>
-    <string name="paper3_1">መልመጃዎችን በመስራት ራሶን ለማጠቃለያ ፈተና ያዘጋጃሉ።</string>
-    <string name="paper4">ዕውቅና</string>
-    <string name="paper4_1">ትምትህርቱን ካጠናቀቁ ቡሃላ ሰርተክፌዎን በነፃ ያገኛሉ።</string>
     <string name="get_started">get started</string>
     <string name="account_confirmed">account confirmed</string>
     <string name="user_info">info</string>
@@ -459,7 +428,6 @@
     <string name="setting">setting</string>
     <string name="more">more</string>
     <string name="ask_question">ask question</string>
-    <string name="FAQ">FAQ</string>
     <string name="about">about</string>
     <string name="empty">empty</string>
     <string name="enter_your_question_here">enter your question here</string>
@@ -467,9 +435,6 @@
     <string name="question_review">your question will be reviewed soon.</string>
     <string name="take_final_exam_first">take final exam first</string>
     <string name="version_1_0">version 1.0</string>
-    <string name="part_thirteen">thirteen</string>
-    <string name="part_fourteen">fourteen</string>
-    <string name="part_fifteen">fifteen</string>
     <string name="read_the_previous_lesson">attend the previous part first</string>
     <string name="you_want_to_download_the_audio">you want to download the audio?</string>
     <string name="file_size">file size : 2.7 MB</string>
@@ -479,86 +444,9 @@
     <string name="swipe">swipe</string>
     <string name="log_out">log out</string>
 
-    <string-array name="youtube_links">
-        <item>DvmRhzowwKU</item>
-        <item>X0KqJunfI2E</item>
-        <item>si-NnhBt6nQ</item>
-        <item>mKwsKcZc8KU</item>
-        <item>_0VbRIDYR4k</item>
-        <item>2Hc8hSP6Mkw</item>
-        <item>TdxxAe9gTSo</item>
-        <item>VWL5OyQINSc</item>
-        <item>-daCwAmZ-fY</item>
-        <item>rnzHdIUa-DU</item>
-        <item>Z7jwLL_bLhE</item>
-        <item>P0i1l4RX50o</item>
-        <item>ydv612nAXho</item>
-        <item>WlNFcWtQQA4</item>
-        <item>sltqFzzCGsk</item>
-    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string-array name="numbers">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-    </string-array>
-    <string-array name="parts">
-        <item>Lesson one</item>
-        <item>Lesson two</item>
-        <item>Lesson three</item>
-        <item>Lesson four</item>
-        <item>Lesson five</item>
-        <item>Lesson six</item>
-        <item>Lesson seven</item>
-        <item>Lesson eight</item>
-        <item>Lesson nine</item>
-        <item>Lesson ten</item>
-        <item>Lesson eleven</item>
-        <item>Lesson twelve</item>
-        <item>Lesson thirteen</item>
-        <item>Lesson fourteen</item>
-        <item>Lesson fifteen</item>
-        <item>Lesson sixteen</item>
-        <item>Lesson seventeen</item>
-        <item>Lesson eighteen</item>
-        <item>Lesson nineteen</item>
-        <item>Lesson twenty</item>
-    </string-array>
-    <string-array name="courses">
-        <item>First course</item>
-        <item>Second course</item>
-        <item>Third course</item>
-        <item>Fourth course</item>
-        <item>Fifth course</item>
-        <item>Sixth course</item>
-        <item>Seventh course</item>
-        <item>Eighth course</item>
-        <item>Ninth course</item>
-        <item>Tenth course</item>
-        <item>Eleventh course</item>
-        <item>Twelfth course</item>
-        <item>Thirteenth course</item>
-        <item>Fourteenth course</item>
-        <item>Fifteenth course</item>
-    </string-array>
+
     <string name="skip">skip</string>
     <string name="learn">Studying</string>
     <string name="kitab">Courses</string>
@@ -580,7 +468,6 @@
     <string name="select_language">select language</string>
     <string name="registerd_phone">registered phone</string>
     <string name="please_wait">please wait…</string>
-    <string name="logo">logo</string>
     <string name="accomplishments">accomplishments</string>
     <string name="change_profile_picture">change profile picture</string>
     <string name="save">save</string>
@@ -598,5 +485,14 @@
     <string name="how_much_have_you_learned">How much have you learned?</string>
     <string name="more_than_70">More than 70%</string>
     <string name="less_than_40">Less than 40%</string>
+    <string name="send">send</string>
+    <string name="send_question">send question</string>
+    <string name="ask_a_question">Ask a Question</string>
+    <string name="logo">logo</string>
+    <string name="profile">profile</string>
+    <string name="edit">edit</string>
+    <string name="answer_submitted">answer submitted</string>
+    <string name="hide">Hide</string>
+    <string name="downloading">Downloading</string>
 
 </resources>

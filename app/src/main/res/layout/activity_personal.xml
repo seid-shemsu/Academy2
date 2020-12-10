@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Personal">
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -14,6 +15,7 @@
         android:layout_centerHorizontal="true">
         <ImageView
             android:id="@+id/photo"
+            android:contentDescription="@string/profile"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/person"
@@ -61,11 +63,13 @@
         app:tabSelectedTextColor="@color/white"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorHeight="40dp"
+        app:tabTextAppearance="@style/TextAppearance"
         app:tabTextColor="@color/colorPrimary"
         android:id="@+id/tab">
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:text="@string/certificate"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
