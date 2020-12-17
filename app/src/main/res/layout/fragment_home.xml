@@ -12,9 +12,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
         android:text="@string/courses"
+        android:textStyle="bold"
         android:textColor="@color/bunny"
-        android:textSize="18sp" />
-
+        android:textSize="20sp" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="wrap_content"

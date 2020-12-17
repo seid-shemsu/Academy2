@@ -1,63 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">اكدمية الافرقية</string>
-    <string name="register">تسجل</string>
-    <string name="save_to_phone">ابق على الهاتف</string>
     <string name="ok">طيب</string>
     <string name="to_next">الى التالى</string>
     <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">الف مبرك انهيت الدراسة</string>
-    <string name="view_certificate">امظر الشهادة</string>
     <string name="take_quiz">الاختبار</string>
     <string name="final_exam">الامتحان الاخير</string>
     <string name="congratulation_n_next_part_is_unlocked">الدرس التالي مفتوحا</string>
     <string name="submit">ارسال</string>
-    <string name="soryy_this_phone_has_been_registered_before_ntty_later">sorry this phone has been registered before. Tty later.</string>
-    <string name="english">english</string>
 
     <string name="attemt_all_question">حاول كل الاسالة</string>
-    <string name="take_the_previous_quiz">خذ الاختبار القادم اولا</string>
     <string name="view_answers">انظر الى الاجوبة</string>
     <string name="sign_in">ادخل</string>
-    <string name="phone_international_format">رقم الهاتف</string>
     <string name="connet_internet">اتصل بالانترنت</string>
-    <string name="unregistered_phone_number">رقم الهاتف لم يسجل</string>
     <string name="registered_successfully">مسجل بنجاح</string>
-    <string name="final_exam_taken">لقد امتحنت من قبل</string>
-    <string name="follow_lecture">شاهد او استمع او اقرء الدرس اولا</string>
     <string name="name">اسم</string>
     <string name="phone">هاتف</string>
     <string name="emial_if_any">بريد</string>
     <string name="personal_information">شخصية</string>
     <string name="register_new">تسجيل</string>
-    <string name="login">الدخول</string>
-    <string name="watch_youtube">شاهد يوتوب</string>
     <string name="listen_audio">استمع الصوت</string>
     <string name="read_pdf">اقرء الكتاب</string>
-    <string name="fiqhulibadat">ففه العبادات</string>
-     <string name="get_started">ابدء</string>
-    <string name="account_confirmed">تم تأكيد الحساب</string>
-    <string name="user_info">معلمات</string>
+    <string name="get_started">ابدء</string>
     <string name="email">بريد</string>
     <string name="language">لغة</string>
     <string name="setting">ضبط</string>
-    <string name="more">اكثر</string>
     <string name="ask_question">سال</string>
     <string name="about">عنا</string>
-    <string name="empty">خالي</string>
     <string name="enter_your_question_here">اكتب سالك هنا</string>
-    <string name="minimum_letters">استعمل ١٠٠ حرف على اقل</string>
-    <string name="question_review">سألك يجاب قريبا</string>
 
     <string name="saved_to_phone">تم البقاء في الهاتف</string>
-    <string name="take_final_exam_first">ما امتحنت امتحان الاخير</string>
-    <string name="version_1_0">نص 1.0</string>
-    <string name="read_the_previous_lesson">تابع الدرس القادم اولا</string>
     <string name="you_want_to_download_the_audio">تريد ان تحمل الصوت؟</string>
     <string name="file_size">ملف قدر :2.7 مب </string>
     <string name="download">تحميل</string>
     <string name="cancel">الغي</string>
     <string name="certificate">شهادة</string>
-    <string name="swipe">صفعة</string>
     <string name="log_out">خروج</string>
 
 
@@ -258,8 +235,6 @@
     <string name="hello_blank_fragment">hhhhhhhh</string>
     <string name="sign_up">سجل</string>
     <string name="phone_number">رقم الهاتف</string>
-    <string name="country">بلد</string>
-    <string name="no_course_have_been_added_yet">لم تبدأ أي دورة بعد.</string>
     <string name="courses">الدورات</string>
     <string name="start">بداية</string>
     <string name="continue_">استمر</string>
@@ -273,7 +248,6 @@
     <string name="your_progress_will_be_cleared">سيتم مسح تقدمك</string>
     <string name="asses_course">تقويم الدورة</string>
     <string name="please_asses_the_course">يرجى تقييم الدورة</string>
-    <string name="asses_the_teacher">يقيم المعلم</string>
     <string name="very_good">ممتاز</string>
     <string name="good">جيد</string>
     <string name="bad">سيئة</string>
@@ -286,11 +260,18 @@
     <string name="less_than_40">أقل من 40٪</string>
     <string name="select_language">اختار اللغة</string>
     <string name="send">إرسال</string>
-    <string name="send_question">إرسال سؤال</string>
-    <string name="ask_a_question">Ask a Question</string>
+    <string name="ask_a_question">طرح سؤال</string>
     <string name="profile">الملف الشخصي</string>
     <string name="edit">تعديل</string>
-    <string name="answer_submitted">answer submitted</string>
-    <string name="hide">Hide</string>
-    <string name="downloading">Downloading</string>
+    <string name="answer_submitted">تم تقديم الإجابة</string>
+    <string name="hide">إخفاء</string>
+    <string name="downloading">جارى التحميل</string>
+    <string name="take_tests">قم بإجراء جميع الاختبارات أولاً</string>
+    <string name="take_prev_lesson">الرجاء تمرير الجزء السابق أولا</string>
+    <string name="question_sent">تم إرسال سؤالك بنجاح</string>
+    <string name="sign_out">خروج</string>
+    <string name="invalid_format">تنسيق غير صالح</string>
+    <string name="unregistered_number">رقم الهاتف غير المسجل</string>
+    <string name="name_required">الاسم الكامل مطلوب</string>
+    <string name="invalid_email">بريد إلكتروني خاطئ</string>
 </resources>

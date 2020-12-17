@@ -125,15 +125,15 @@ public class Register extends AppCompatActivity {
 
     private boolean check(EditText name, EditText phone, EditText email) {
         if (name.getText().toString().length() < 5 && !name.getText().toString().contains(" ")){
-            name.setError("full name required");
+            name.setError(getResources().getString(R.string.name_required));
             return false;
         }
         if (phone.getText().toString().length() < 9 ){
-            phone.setError("invalid phone number");
+            phone.setError(getResources().getString(R.string.invalid_format));
             return false;
         }
         if (email.getText().toString().length()>0 && !Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-            email.setError("invalid email");
+            email.setError(getResources().getString(R.string.invalid_email));
             return false;
         }
         return true;
@@ -188,6 +188,12 @@ public class Register extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, Welcome.class));
+        finish();
     }
 
     private void setLanguage() {

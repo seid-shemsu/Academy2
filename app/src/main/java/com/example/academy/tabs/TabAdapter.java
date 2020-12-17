@@ -45,7 +45,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         CertificateObject object = certificates.get(position);
         holder.name.setText(object.getCourse_name());
-        holder.rate.setRating(object.getRating());
+        holder.rate.setRating((float) object.getRating());
         Picasso.with(context).load(object.getImg_url()).placeholder(R.drawable.kitab).into(holder.image);
     }
 

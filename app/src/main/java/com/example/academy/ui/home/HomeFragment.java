@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String name = snapshot.child("name").getValue().toString();
                     String img_url = snapshot.child("img_url").getValue().toString();
-                    int rating = Integer.parseInt(snapshot.child("rate").getValue().toString());
+                    double rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
                     courseObjects.add(new CourseObject(name, img_url, rating, i++));
                 }
                 FragmentManager fragmentManager = getFragmentManager();

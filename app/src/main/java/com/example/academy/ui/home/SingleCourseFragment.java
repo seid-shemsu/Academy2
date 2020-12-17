@@ -86,6 +86,7 @@ public class SingleCourseFragment extends Fragment {
                         passed.edit().clear().apply();
                         passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
                         lesson.edit().putBoolean(getArguments().getString("course_code") +1, true).apply();
+                        deleteProgress();
                         Fragment coursePartFragment = new CoursePartFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         Bundle bundle = new Bundle();
@@ -120,6 +121,12 @@ public class SingleCourseFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void deleteProgress() {
+        SharedPreferences phone = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone.getString("phone", "")).child("progress");
+        user.child(getArguments().getString("course_code")).removeValue();
     }
 
 }

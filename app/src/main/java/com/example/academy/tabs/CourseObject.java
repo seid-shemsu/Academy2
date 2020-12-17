@@ -2,16 +2,16 @@ package com.example.academy.tabs;
 
 public class CourseObject {
     String course_name, progress, img_url;
-    int rating, code;
-
-    public CourseObject(String course_name, String progress, String img_url, int rating) {
+    int code;
+    double rating;
+    public CourseObject(String course_name, String progress, String img_url, double rating) {
         this.course_name = course_name;
         this.progress = progress;
         this.img_url = img_url;
         this.rating = rating;
     }
 
-    public CourseObject(String course_name, String img_url, int rating, int code) {
+    public CourseObject(String course_name, String img_url, double rating, int code) {
         this.course_name = course_name;
         this.img_url = img_url;
         this.rating = rating;
@@ -56,7 +56,7 @@ public class CourseObject {
         this.img_url = img_url;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 

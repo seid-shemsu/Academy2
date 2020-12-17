@@ -52,7 +52,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         final CourseObject courseObject = courseObjects.get(position);
         holder.course_name.setText(courseObject.getCourse_name());
-        holder.course_rate.setRating(courseObject.getRating());
+        holder.course_rate.setRating((float) courseObject.getRating());
         File img = context.getApplicationContext().getFileStreamPath(String.valueOf(courseObject.getCode()));
         if (img.exists()){
             holder.course_img.setImageBitmap(loadImage(context, String.valueOf(courseObject.getCode())));

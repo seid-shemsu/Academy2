@@ -52,8 +52,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -82,7 +85,7 @@ public class Detail extends Fragment {
     private SeekBar seekbar;
     private ImageButton playButton;
     public static int oneTimeOnly = 0;
-
+    private List<List<String>> choices = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,12 +129,6 @@ public class Detail extends Fragment {
         youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    mediaPlayer.pause();
-                    playButton.setImageResource(R.drawable.pause);
-                } catch (Exception e) {
-
-                } finally {
 
                     if (has_quiz.getBoolean(course_code+part_number, false))
                         quiz.setVisibility(View.VISIBLE);
@@ -143,7 +140,6 @@ public class Detail extends Fragment {
                     }
                     setProgress();
                     startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name+part_number));
-                }
             }
         });
         audio.setOnClickListener(new View.OnClickListener() {
@@ -255,14 +251,6 @@ public class Detail extends Fragment {
         return root;
     }
 
-    /* Fragment coursePartFragment = new CoursePartFragment();
-           FragmentManager fragmentManager = getFragmentManager();
-           Bundle bundle = new Bundle();
-           bundle.putString("course_name", name);
-           bundle.putString("course_code", course_code);
-           bundle.putString("course_title", course_title);
-           coursePartFragment.setArguments(bundle);
-           fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();*/
     String img_url;
     String name;
     String part;
@@ -282,6 +270,7 @@ public class Detail extends Fragment {
                 progress.child("course_name").setValue(name);
                 progress.child("progress").setValue(p);
                 progress.child("img_url").setValue(img_url);
+                progress.child("lesson").setValue(part_number);
             }
 
             @Override
@@ -295,147 +284,159 @@ public class Detail extends Fragment {
     }
 
     private void downloadPdf() {
-        if (has_quiz.getBoolean(course_code+part_number, false))
-            quiz.setVisibility(View.VISIBLE);
-        else {
-            lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
-            lesson_editor.commit();
-            editor_passed.putBoolean(course_code+part_number, true);
-            editor_passed.apply();
-        }
-        String root = Environment.getExternalStorageDirectory().toString();
-        File dir = new File(root + "/africa/" + course_code + "/pdfs");
-        dir.mkdirs();
-        final File file = new File( dir, course_code + part_number + ".html");
-        if (file.isFile() && file.length() > 0) {
-            startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
-            setProgress();
-        }
-        else {
-            final Dialog dialog = new Dialog(getContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setContentView(R.layout.wait);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
-            try {
-                file.createNewFile();
-                storageReference.getFile(file)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                dialog.dismiss();
-                                startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
-                                setProgress();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                dialog.dismiss();
-                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        try {
+            if (has_quiz.getBoolean(course_code+part_number, false))
+                quiz.setVisibility(View.VISIBLE);
+            else {
+                lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
+                lesson_editor.commit();
+                editor_passed.putBoolean(course_code+part_number, true);
+                editor_passed.apply();
+            }
+            String root = Environment.getExternalStorageDirectory().toString();
+            File dir = new File(root + "/africa/" + course_code + "/pdfs");
+            dir.mkdirs();
+            final File file = new File( dir, course_code + part_number + ".html");
+            if (file.isFile() && file.length() > 0) {
+                startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+                setProgress();
+            }
+            else {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.wait);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
+                try {
+                    file.createNewFile();
+                    storageReference.getFile(file)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    dialog.dismiss();
+                                    startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+                                    setProgress();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    dialog.dismiss();
+                                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
 
-                            }
-                        });
+                                }
+                            });
+                }
+                catch (Exception e) {
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
-            catch (Exception e) {
-                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getContext(), "ERROR 103\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private void getLinks() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    youtube_link = dataSnapshot.child("youtube").getValue().toString();
-                    audio_link = dataSnapshot.child("music").getValue().toString();
-                    pdf_link = dataSnapshot.child("pdf").getValue().toString();
+        try {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChildren()) {
+                        youtube_link = dataSnapshot.child("youtube").getValue().toString();
+                        audio_link = dataSnapshot.child("music").getValue().toString();
+                        pdf_link = dataSnapshot.child("pdf").getValue().toString();
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "ERROR 102\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     TextView percent;
 
     private void download() {
         //final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), course_code + part_number + ".ogg");
-        String root = Environment.getExternalStorageDirectory().toString();
-        File dir = new File(root + "/africa/" + course_code + "/audios");
-        dir.mkdirs();
-        final File file = new File( dir, course_code + part_number + ".ogg");
-        if (file.isFile() && file.length() > 0) {
-            play();
-        }
-        else {
-            final Dialog dialog = new Dialog(getContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.confirmation);
-            final Button download = dialog.findViewById(R.id.download);
-            final Button cancel = dialog.findViewById(R.id.cancel);
-            percent = dialog.findViewById(R.id.percent);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            download.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    download.setVisibility(View.GONE);
-                    percent.setVisibility(View.VISIBLE);
-                    cancel.setText(getResources().getString(R.string.hide));
-                    cancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                            audio.setEnabled(false);
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+            File dir = new File(root + "/africa/" + course_code + "/audios");
+            dir.mkdirs();
+            final File file = new File( dir, course_code + part_number + ".ogg");
+            if (file.isFile() && file.length() > 0) {
+                play();
+            }
+            else {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.confirmation);
+                final Button download = dialog.findViewById(R.id.download);
+                final Button cancel = dialog.findViewById(R.id.cancel);
+                percent = dialog.findViewById(R.id.percent);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        download.setVisibility(View.GONE);
+                        percent.setVisibility(View.VISIBLE);
+                        cancel.setText(getResources().getString(R.string.hide));
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                audio.setEnabled(false);
+                            }
+                        });
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(audio_link);
+                        try {
+                            file.createNewFile();
+                            storageReference.getFile(file)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            dialog.dismiss();
+                                            play();
+                                        }
+                                    })
+                                    .addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onProgress(final FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            percent.setText(getResources().getString(R.string.downloading) +"...\n" + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount() + "%");
+                                        }
+
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            dialog.dismiss();
+                                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                         }
-                    });
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(audio_link);
-                    try {
-                        file.createNewFile();
-                        storageReference.getFile(file)
-                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        dialog.dismiss();
-                                        play();
-                                    }
-                                })
-                                .addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onProgress(final FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        percent.setText(getResources().getString(R.string.downloading) +"\n..." + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount() + "%");
-                                    }
-
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        dialog.dismiss();
-                                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                    } catch (Exception e) {
-                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                     }
-                }
-            });
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "ERROR 101\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

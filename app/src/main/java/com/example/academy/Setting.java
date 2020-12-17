@@ -98,6 +98,8 @@ public class Setting extends AppCompatActivity {
                     userEdit.putString("email", email.getText().toString());
                     userEdit.putString("phone", phone.getText().toString());
                     userEdit.apply();
+                    langEdit.apply();
+                    setPic();
                     startActivity(new Intent(Setting.this, MainActivity.class));
                     finish();
                 }
@@ -124,6 +126,7 @@ public class Setting extends AppCompatActivity {
                         eng.setBackgroundResource(R.drawable.lang_bg);
                         permission = 1;
                         langEdit.putString("lang", "am");
+                        language.setText("አማርኛ");
                     }
                 });
                 ara.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +136,7 @@ public class Setting extends AppCompatActivity {
                         amh.setBackgroundResource(R.drawable.lang_bg);
                         eng.setBackgroundResource(R.drawable.lang_bg);
                         langEdit.putString("lang", "ar");
+                        language.setText("العربية");
                         permission = 1;
                     }
                 });
@@ -143,6 +147,7 @@ public class Setting extends AppCompatActivity {
                         ara.setBackgroundResource(R.drawable.lang_bg);
                         amh.setBackgroundResource(R.drawable.lang_bg);
                         langEdit.putString("lang", "en");
+                        language.setText("English");
                         permission = 1;
                     }
                 });
@@ -150,8 +155,6 @@ public class Setting extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (getPermission(permission)){
-                            langEdit.apply();
-                            setLang();
                             dialog.dismiss();
                         }
                         else
@@ -162,9 +165,14 @@ public class Setting extends AppCompatActivity {
             }
         });
     }
+
+    private void setPic() {
+    }
+
     private boolean getPermission(int permission) {
         return permission == 1;
     }
+
     private boolean checkInput() {
         if (name.getText().toString().length() < 5 && !name.getText().toString().contains(" ")){
             name.setError("full name required");

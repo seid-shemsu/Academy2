@@ -110,7 +110,7 @@ public class CoursePartFragment extends Fragment {
                     });
                 }
                 else {
-                    Toast.makeText(getContext(), "take all tests first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.take_tests), Toast.LENGTH_SHORT).show();
                 }
             }
         });

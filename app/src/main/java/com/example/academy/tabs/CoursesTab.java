@@ -72,10 +72,10 @@ public class CoursesTab extends Fragment {
                     }
                     courseProgressAdapter = new CourseProgressAdapter(getContext(), courseObjects);
                     recyclerView.setAdapter(courseProgressAdapter);
-                    progressBar.setVisibility(View.GONE);
                 }
                 else
                     no_course.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

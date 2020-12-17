@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if (connectionCheck()) {
                     if (phone.getText().toString().length() < 10) {
-                        phone.setError("invalid format");
+                        phone.setError(getResources().getString(R.string.invalid_format));
                     } else {
                         signIn.setVisibility(View.GONE);
                         progressBar.setVisibility(View.VISIBLE);
@@ -110,15 +110,18 @@ public class Login extends AppCompatActivity {
                             case "email":
                                 editor.putString("email", dataSnapshot1.getValue().toString());
                                 break;
+                            case "country":
+                                editor.putString("location", dataSnapshot1.getValue().toString());
                         }
                     }
+                    setProgresses();
                     editor.apply();
                     progressBar.setVisibility(View.GONE);
                     startActivity(new Intent(Login.this, MainActivity.class));
                     finish();
                 }
                 else {
-                    phone.setError("unregistered number");
+                    phone.setError(getResources().getString(R.string.unregistered_number));
                     signIn.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
                 }
@@ -131,6 +134,37 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void setProgresses() {
+        DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone.getText().toString()).child("progress");
+        user.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        if (snapshot.hasChild("lesson"))
+                            putProgress(snapshot.getKey(), snapshot.child("lesson").getValue().toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void putProgress(String key, String lesson) {
+        SharedPreferences lessons = getSharedPreferences("lessons", MODE_PRIVATE);
+        SharedPreferences passed = getSharedPreferences("passed", MODE_PRIVATE);
+        int j = Integer.parseInt(lesson);
+        for (int i = 0; i <= j; i++){
+            lessons.edit().putBoolean(key+i, true).apply();
+            passed.edit().putBoolean(key+i, true).apply();
+        }
+        passed.edit().putBoolean((key+j), false).apply();
+    }
+
     private void setLanguage() {
         SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
@@ -138,6 +172,12 @@ public class Login extends AppCompatActivity {
         Locale.setDefault(locale);
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, Welcome.class));
+        finish();
     }
 
 }

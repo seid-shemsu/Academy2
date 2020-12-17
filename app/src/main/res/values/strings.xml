@@ -1,31 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Africa Academy</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_title" translatable="false">Android Studio</string>
-    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
 
-    <string name="menu_home" tools:ignore="MissingTranslation">Home</string>
-    <string name="menu_gallery" translatable="false">Gallery</string>
-    <string name="menu_slideshow" translatable="false">Slideshow</string>
-    <string name="menu_tools" translatable="false">Tools</string>
-    <string name="menu_share" translatable="false">Share</string>
-    <string name="menu_send" translatable="false">Send</string>
-
-    <string name="register">register</string>
-    <string name="save_to_phone">save to phone</string>
     <string name="ok">OK</string>
     <string name="to_next">to next</string>
     <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">congratulation\nyou have complete the course.</string>
-    <string name="view_certificate">view certificate</string>
     <string name="take_quiz">quiz</string>
     <string name="final_exam">final exam</string>
     <string name="congratulation_n_next_part_is_unlocked">next part is unlocked</string>
     <string name="submit">submit</string>
-    <string name="soryy_this_phone_has_been_registered_before_ntty_later">sorry this phone has been registered before. Tty later.</string>
-    <string name="english">english</string>
 
     <string-array name="country">
         <item>Ethiopia</item>
@@ -213,241 +197,37 @@
         <item>Zimbabwe</item>
     </string-array>
 
-    <string-array name="code">
-        <item>+251</item>
-        <item>+93</item>
-        <item>+355</item>
-        <item>+213</item>
-        <item>+376</item>
-        <item>+244</item>
-        <item>+54</item>
-        <item>+374</item>
-        <item>+297</item>
-        <item>+61</item>
-        <item>+43</item>
-        <item>+994</item>
-        <item>+1242</item>
-        <item>+973</item>
-        <item>+880</item>
-        <item>+1246</item>
-        <item>+375</item>
-        <item>+32</item>
-        <item>+501</item>
-        <item>+229</item>
-        <item>+975</item>
-        <item>+591</item>
-        <item>387</item>
-        <item>+267</item>
-        <item>+55</item>
-        <item>+673</item>
-        <item>+359</item>
-        <item>+226</item>
-        <item>+257</item>
-        <item>+855</item>
-        <item>+237</item>
-        <item>+1</item>
-        <item>+238</item>
-        <item>+235</item>
-        <item>+56</item>
-        <item>+86</item>
-        <item>+61</item>
-        <item>+57</item>
-        <item>+269</item>
-        <item>243</item>
-        <item>+242</item>
-        <item>+506</item>
-        <item>+225</item>
-        <item>+385</item>
-        <item>+53</item>
-        <item>+357</item>
-        <item>+420</item>
-        <item>+45</item>
-        <item>+253</item>
-        <item>+593</item>
-        <item>+20</item>
-        <item>+503</item>
-        <item>+240</item>
-        <item>+291</item>
-        <item>+372</item>
-        <item>+679</item>
-        <item>+358</item>
-        <item>+33</item>
-        <item>+241</item>
-        <item>+220</item>
-        <item>+995</item>
-        <item>+49</item>
-        <item>+233</item>
-        <item>+350</item>
-        <item>+30</item>
-        <item>+299</item>
-        <item>+502</item>
-        <item>+44</item>
-        <item>+224</item>
-        <item>+245</item>
-        <item>+592</item>
-        <item>+509</item>
-        <item>+504</item>
-        <item>+852</item>
-        <item>+36</item>
-        <item>+354</item>
-        <item>+91</item>
-        <item>+62</item>
-        <item>+98</item>
-        <item>+964</item>
-        <item>+353</item>
-        <item>+972</item>
-        <item>+39</item>
-        <item>+1876</item>
-        <item>+81</item>
-        <item>+44</item>
-        <item>+962</item>
-        <item>+7</item>
-        <item>+254</item>
-        <item>+686</item>
-        <item>+965</item>
-        <item>+996</item>
-        <item>+371</item>
-        <item>+961</item>
-        <item>+266</item>
-        <item>+231</item>
-        <item>+218</item>
-        <item>+423</item>
-        <item>+370</item>
-        <item>+352</item>
-        <item>+389</item>
-        <item>+261</item>
-        <item>+265</item>
-        <item>+60</item>
-        <item>+960</item>
-        <item>+223</item>
-        <item>+356</item>
-        <item>+222</item>
-        <item>+230</item>
-        <item>+52</item>
-        <item>+691</item>
-        <item>+373</item>
-        <item>+377</item>
-        <item>+976</item>
-        <item>+382</item>
-        <item>+1664</item>
-        <item>+212</item>
-        <item>+258</item>
-        <item>+95</item>
-        <item>+264</item>
-        <item>+674</item>
-        <item>+977</item>
-        <item>+31</item>
-        <item>+64</item>
-        <item>+505</item>
-        <item>+227</item>
-        <item>+234</item>
-        <item>+850</item>
-        <item>+47</item>
-        <item>+968</item>
-        <item>+92</item>
-        <item>+970</item>
-        <item>+507</item>
-        <item>+595</item>
-        <item>+51</item>
-        <item>+63</item>
-        <item>+48</item>
-        <item>+351</item>
-        <item>+974</item>
-        <item>+40</item>
-        <item>+7</item>
-        <item>+250</item>
-        <item>+378</item>
-        <item>+966</item>
-        <item>+221</item>
-        <item>+381</item>
-        <item>+248</item>
-        <item>+232</item>
-        <item>+65</item>
-        <item>+421</item>
-        <item>+386</item>
-        <item>+252</item>
-        <item>+27</item>
-        <item>+82</item>
-        <item>+211</item>
-        <item>+34</item>
-        <item>+94</item>
-        <item>+249</item>
-        <item>+268</item>
-        <item>+46</item>
-        <item>+41</item>
-        <item>+963</item>
-        <item>+886</item>
-        <item>+992</item>
-        <item>+255</item>
-        <item>+66</item>
-        <item>+228</item>
-        <item>+216</item>
-        <item>+90</item>
-        <item>+993</item>
-        <item>+256</item>
-        <item>+380</item>
-        <item>+971</item>
-        <item>+44</item>
-        <item>+1</item>
-        <item>+598</item>
-        <item>+998</item>
-        <item>+39</item>
-        <item>+58</item>
-        <item>+84</item>
-        <item>+967</item>
-        <item>+260</item>
-        <item>+263</item>
-    </string-array>
-
     <string name="attemt_all_question">please attempt  all the question.</string>
-    <string name="take_the_previous_quiz">please take quiz of previous part first.</string>
     <string name="saved_to_phone">saved to Pictures folder</string>
     <string name="view_answers">view answers</string>
     <string name="sign_in">sign in</string>
-    <string name="phone_international_format">phone(international format)</string>
     <string name="connet_internet">please connect to internet</string>
-    <string name="unregistered_phone_number">unregistered phone number</string>
     <string name="registered_successfully">registered successfully</string>
-    <string name="final_exam_taken">you already take final exam</string>
-    <string name="follow_lecture">please read, watch or listen to the lecture first.</string>
     <string name="name">Name</string>
     <string name="phone">phone</string>
     <string name="emial_if_any">Emial (if any )</string>
     <string name="personal_information">Personal Information</string>
     <string name="register_new">register</string>
-    <string name="login">Login</string>
-    <string name="watch_youtube">watch youtube</string>
     <string name="listen_audio">listen</string>
     <string name="read_pdf">Read</string>
-    <string name="fiqhulibadat">ففه العبادات</string>
     <string name="get_started">get started</string>
-    <string name="account_confirmed">account confirmed</string>
-    <string name="user_info">info</string>
     <string name="email">email</string>
     <string name="language">language</string>
     <string name="setting">setting</string>
-    <string name="more">more</string>
     <string name="ask_question">ask question</string>
     <string name="about">about</string>
-    <string name="empty">empty</string>
     <string name="enter_your_question_here">enter your question here</string>
-    <string name="minimum_letters">use at least 100 letters to explain</string>
-    <string name="question_review">your question will be reviewed soon.</string>
-    <string name="take_final_exam_first">take final exam first</string>
-    <string name="version_1_0">version 1.0</string>
-    <string name="read_the_previous_lesson">attend the previous part first</string>
     <string name="you_want_to_download_the_audio">you want to download the audio?</string>
     <string name="file_size">file size : 2.7 MB</string>
     <string name="download">download</string>
     <string name="cancel">cancel</string>
     <string name="certificate">certificate</string>
-    <string name="swipe">swipe</string>
     <string name="log_out">log out</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="skip">skip</string>
+    <string name="skip">Skip</string>
     <string name="learn">Studying</string>
     <string name="kitab">Courses</string>
     <string name="test">Test</string>
@@ -457,42 +237,46 @@
     <string name="test_text">Prepare your hands for tests and final exam.</string>
     <string name="reward_text">There will be a certificate after the completion of a course.</string>
     <string name="hello_blank_fragment">hhhhhhhh</string>
-    <string name="sign_up">sign up</string>
-    <string name="phone_number">phone number</string>
-    <string name="country">country</string>
-    <string name="no_course_have_been_added_yet">No course have been added yet.</string>
-    <string name="courses">courses</string>
-    <string name="start">start</string>
-    <string name="continue_">continue</string>
-    <string name="clear">clear</string>
-    <string name="select_language">select language</string>
-    <string name="registerd_phone">registered phone</string>
-    <string name="please_wait">please wait…</string>
-    <string name="accomplishments">accomplishments</string>
-    <string name="change_profile_picture">change profile picture</string>
-    <string name="save">save</string>
-    <string name="your_progress_will_be_cleared">your progress will be cleared</string>
-    <string name="asses_course">asses course</string>
-    <string name="please_asses_the_course">please asses the course</string>
-    <string name="asses_the_teacher">asses the teacher</string>
-    <string name="very_good">very good</string>
-    <string name="good">good</string>
-    <string name="bad">bad</string>
-    <string name="done">done</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="phone_number">Phone number</string>
+    <string name="courses">Courses</string>
+    <string name="start">Start</string>
+    <string name="continue_">Continue</string>
+    <string name="clear">Clear</string>
+    <string name="select_language">Select language</string>
+    <string name="registerd_phone">Registered phone</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="accomplishments">Accomplishments</string>
+    <string name="change_profile_picture">Change profile picture</string>
+    <string name="save">Save</string>
+    <string name="your_progress_will_be_cleared">Your progress will be cleared</string>
+    <string name="asses_course">Asses course</string>
+    <string name="please_asses_the_course">Please asses the course</string>
+    <string name="very_good">Very good</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string name="done">Done</string>
     <string name="complete_assessment">please complete the assessment</string>
     <string name="teaching_performance">teaching performance</string>
     <string name="content_rating">Content rating</string>
     <string name="how_much_have_you_learned">How much have you learned?</string>
     <string name="more_than_70">More than 70%</string>
     <string name="less_than_40">Less than 40%</string>
-    <string name="send">send</string>
-    <string name="send_question">send question</string>
+    <string name="send">Send</string>
     <string name="ask_a_question">Ask a Question</string>
     <string name="logo">logo</string>
     <string name="profile">profile</string>
     <string name="edit">edit</string>
-    <string name="answer_submitted">answer submitted</string>
+    <string name="answer_submitted">Answer submitted</string>
     <string name="hide">Hide</string>
     <string name="downloading">Downloading</string>
+    <string name="take_tests">Take all tests first</string>
+    <string name="take_prev_lesson">Please pass the previous part first</string>
+    <string name="question_sent">Your question has been sent successfully</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="invalid_format">Invalid format</string>
+    <string name="unregistered_number">Unregistered number</string>
+    <string name="name_required">Full name required</string>
+    <string name="invalid_email">Invalid email</string>
 
 </resources>

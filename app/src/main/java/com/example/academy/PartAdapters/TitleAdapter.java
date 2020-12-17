@@ -81,7 +81,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
                 fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, detail).addToBackStack(null).commit();
             }
             else {
-                Toast.makeText(context, "please pass the previous part first", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.take_prev_lesson), Toast.LENGTH_SHORT).show();
             }
         }
     }

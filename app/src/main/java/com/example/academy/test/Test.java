@@ -69,7 +69,6 @@ public class Test extends AppCompatActivity {
         questions = getIntent().getExtras().getStringArrayList("questions");
         final QuestionAdapter questionAdapter = new QuestionAdapter(this, questions, 0);
         listView.setAdapter(questionAdapter);
-
         submit = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +203,7 @@ public class Test extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String rate = dataSnapshot.child("rate").getValue().toString();
-                            user.setValue(new CertificateObject(name, img_url, Integer.parseInt(rate)));
+                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate)));
                         }
 
                         @Override
