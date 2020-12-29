@@ -33,15 +33,16 @@
         android:textSize="17sp" />
 
         <Button
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:layout_height="35dp"
             android:text="@string/sign_in"
             android:id="@+id/sign_in"
             android:layout_below="@+id/login_phone"
             android:layout_centerHorizontal="true"
-            android:padding="10dp"
             android:textColor="#fff"
-            android:background="@drawable/btnbgsolid"/>
+            android:background="@drawable/settingbtnbg"/>
 
 
 

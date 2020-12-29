@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Africa Academy</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
@@ -12,7 +12,6 @@
     <string name="submit">submit</string>
 
     <string-array name="country">
-        <item>Ethiopia</item>
         <item>Afghanistan</item>
         <item>Albania</item>
         <item>Algeria</item>
@@ -196,6 +195,14 @@
         <item>Zambia</item>
         <item>Zimbabwe</item>
     </string-array>
+    <string-array name="gender">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="ethiopia">Ethiopia</string>
+    <string name="select_country">select living country</string>
+
 
     <string name="attemt_all_question">please attempt  all the question.</string>
     <string name="saved_to_phone">saved to Pictures folder</string>
@@ -204,25 +211,22 @@
     <string name="connet_internet">please connect to internet</string>
     <string name="registered_successfully">registered successfully</string>
     <string name="name">Name</string>
-    <string name="phone">phone</string>
-    <string name="emial_if_any">Emial (if any )</string>
-    <string name="personal_information">Personal Information</string>
-    <string name="register_new">register</string>
     <string name="listen_audio">listen</string>
     <string name="read_pdf">Read</string>
     <string name="get_started">get started</string>
-    <string name="email">email</string>
-    <string name="language">language</string>
-    <string name="setting">setting</string>
-    <string name="ask_question">ask question</string>
-    <string name="about">about</string>
-    <string name="enter_your_question_here">enter your question here</string>
-    <string name="you_want_to_download_the_audio">you want to download the audio?</string>
-    <string name="file_size">file size : 2.7 MB</string>
-    <string name="download">download</string>
-    <string name="cancel">cancel</string>
-    <string name="certificate">certificate</string>
-    <string name="log_out">log out</string>
+    <string name="email">Email</string>
+    <string name="language">Language</string>
+    <string name="setting">Settings</string>
+    <string name="ask_question">Ask Question</string>
+    <string name="about">About us</string>
+    <string name="enter_your_question_here">Enter your question here</string>
+    <string name="you_want_to_download_the_audio">You want to download the audio?</string>
+    <string name="file_size">File size : 2.7 MB</string>
+    <string name="download">Download</string>
+    <string name="cancel">Cancel</string>
+    <string name="certificate">Certificate</string>
+    <string name="log_out">Log out</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -236,7 +240,6 @@
     <string name="learn_text">You can study using audio or reading or watching YouTube.</string>
     <string name="test_text">Prepare your hands for tests and final exam.</string>
     <string name="reward_text">There will be a certificate after the completion of a course.</string>
-    <string name="hello_blank_fragment">hhhhhhhh</string>
     <string name="sign_up">Sign Up</string>
     <string name="phone_number">Phone number</string>
     <string name="courses">Courses</string>
@@ -278,5 +281,16 @@
     <string name="unregistered_number">Unregistered number</string>
     <string name="name_required">Full name required</string>
     <string name="invalid_email">Invalid email</string>
+    <string name="you_are_going_to_sign_out">you are going to sign out</string>
+    <string name="version">Version</string>
+    <string name="social_media">Social Media</string>
+    <string name="developer">Developer</string>
+    <string name="quiz">quiz</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="choose_your_account">choose your account</string>
+    <string name="help">help</string>
+    <string name="register">register</string>
+    <string name="use_name">Use a name that you want to be printed on the certificate</string>
+    <string name="attendants">attendants</string>
 
 </resources>

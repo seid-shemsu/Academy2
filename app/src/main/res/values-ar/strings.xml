@@ -1,45 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">اكدمية الافرقية</string>
-    <string name="ok">طيب</string>
-    <string name="to_next">الى التالى</string>
-    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">الف مبرك انهيت الدراسة</string>
-    <string name="take_quiz">الاختبار</string>
-    <string name="final_exam">الامتحان الاخير</string>
-    <string name="congratulation_n_next_part_is_unlocked">الدرس التالي مفتوحا</string>
-    <string name="submit">ارسال</string>
-
-    <string name="attemt_all_question">حاول كل الاسالة</string>
-    <string name="view_answers">انظر الى الاجوبة</string>
-    <string name="sign_in">ادخل</string>
-    <string name="connet_internet">اتصل بالانترنت</string>
-    <string name="registered_successfully">مسجل بنجاح</string>
-    <string name="name">اسم</string>
-    <string name="phone">هاتف</string>
-    <string name="emial_if_any">بريد</string>
-    <string name="personal_information">شخصية</string>
-    <string name="register_new">تسجيل</string>
-    <string name="listen_audio">استمع الصوت</string>
-    <string name="read_pdf">اقرء الكتاب</string>
-    <string name="get_started">ابدء</string>
-    <string name="email">بريد</string>
-    <string name="language">لغة</string>
-    <string name="setting">ضبط</string>
-    <string name="ask_question">سال</string>
-    <string name="about">عنا</string>
-    <string name="enter_your_question_here">اكتب سالك هنا</string>
-
-    <string name="saved_to_phone">تم البقاء في الهاتف</string>
-    <string name="you_want_to_download_the_audio">تريد ان تحمل الصوت؟</string>
-    <string name="file_size">ملف قدر :2.7 مب </string>
-    <string name="download">تحميل</string>
-    <string name="cancel">الغي</string>
-    <string name="certificate">شهادة</string>
-    <string name="log_out">خروج</string>
 
 
     <string-array name="country">
-        <item>أثيوبيا</item>
         <item>أفغانستان</item>
         <item>ألبانيا</item>
         <item>الجزائر</item>
@@ -223,55 +186,107 @@
         <item>زامبيا</item>
         <item>زمبابوي</item>
     </string-array>
-    <string name="skip">تخطى</string>
+    <string name="ethiopia">أثيوبيا</string>
+
+    <string name="app_name">أكاديمية أفريقيا</string>
+    <string name="ok">طيب</string>
+    <string name="to_next">الى الدرس التالى</string>
+    <string name="congratulation_n_you_have_complete_the_course_n_nthank_you">الف مبرك لقد أتممت الدراسة</string>
+    <string name="take_quiz">الاختبار</string>
+    <string name="final_exam">الامتحان الاخير</string>
+    <string name="congratulation_n_next_part_is_unlocked">الدرس التالي مفتوحا</string>
+    <string name="submit">ارسال</string>
+
+    <string name="attemt_all_question">فضلا قم بحل جميع الأسئلة</string>
+    <string name="view_answers">الإطلاع على الإجابات</string>
+    <string name="connet_internet">فضلا اتصل بالانترنت</string>
+    <string name="registered_successfully">تم التسجيل بنجاح</string>
+
+    <string name="listen_audio">استمع</string>
+    <string name="read_pdf">اقرء</string>
+    <string name="get_started">نقطة الانطلاق</string>
+
+    <string name="language">اللغة</string>
+    <string name="setting">الإعدادات</string>
+    <string name="ask_question">ارسل سؤال</string>
+    <string name="about"> من نحن</string>
+    <string name="enter_your_question_here">فضلا اكتب سؤالك هنا</string>
+
+    <string name="saved_to_phone">الحفظ في ملف الصور</string>
+    <string name="you_want_to_download_the_audio">هل ترغب بتحميل الملف الصوتي ؟</string>
+    <string name="file_size">حجم ملف :2.7 مب </string>
+    <string name="download">تحميل</string>
+    <string name="cancel">إلغاء</string>
+    <string name="certificate">شهاداتي</string>
+    <string name="log_out">خروج</string>
+
+
+
+    <string name="skip">تجاوز</string>
     <string name="learn">دراسة</string>
     <string name="kitab">الدورات</string>
     <string name="test">اختبار</string>
     <string name="reward">شهادة</string>
-    <string name="kita_text">سيتم إجراء الدورات من قبل علماء مشهورين.</string>
-    <string name="learn_text">يمكنك الدراسة باستخدام الصوت أو القراءة أو مشاهدة اليوتيوب.</string>
-    <string name="test_text">جهز يديك للاختبارات والامتحان النهائي.</string>
-    <string name="reward_text">ستكون هناك شهادة بعد الانتهاء من الدورة.</string>
-    <string name="hello_blank_fragment">hhhhhhhh</string>
-    <string name="sign_up">سجل</string>
-    <string name="phone_number">رقم الهاتف</string>
+    <string name="kita_text">الدورات تقدم من أشهر العلماء والدعاة</string>
+    <string name="learn_text">سهولة التعلم من خلال الاستماع أو القراءة أو مشاهدة الفيديوهات</string>
+    <string name="test_text">استعد لحل التمارين الدورية وتجاوز الإختبار</string>
+    <string name="reward_text">ستحصل على شهادة بعد إكمال متطلبات الدورة</string>
+    <string name="sign_up">التسجيل</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="phone_number">رقم الهاتف </string>
+    <string name="name">الإسم</string>
+    <string name="email">البريد الالكتروني</string>
+
+
     <string name="courses">الدورات</string>
-    <string name="start">بداية</string>
-    <string name="continue_">استمر</string>
+    <string name="start">انطلاق</string>
+    <string name="continue_">إستمرار</string>
     <string name="clear">مسح</string>
     <string name="registerd_phone">الهاتف المسجل</string>
-    <string name="please_wait">ارجوك انتظر...</string>
+    <string name="please_wait">انتظر قليلا...</string>
     <string name="logo">شعار</string>
-    <string name="accomplishments">الإنجازات</string>
-    <string name="change_profile_picture">تغيير صورة الملف الشخصي</string>
+    <string name="accomplishments">إنجازاتي</string>
+    <string name="change_profile_picture">غير صورة الملف الشخصي</string>
     <string name="save">حفظ</string>
     <string name="your_progress_will_be_cleared">سيتم مسح تقدمك</string>
-    <string name="asses_course">تقويم الدورة</string>
-    <string name="please_asses_the_course">يرجى تقييم الدورة</string>
-    <string name="very_good">ممتاز</string>
+    <string name="asses_course">قيَم الدورة</string>
+    <string name="please_asses_the_course">فضلا قيّم الدورة</string>
+    <string name="very_good">جيد جدا</string>
     <string name="good">جيد</string>
-    <string name="bad">سيئة</string>
-    <string name="done">منجز</string>
-    <string name="complete_assessment">الرجاء إكمال التقييم</string>
-    <string name="teaching_performance">أداء التدريس</string>
-    <string name="content_rating">تصنيف المحتوى</string>
-    <string name="how_much_have_you_learned">كم تعلمت؟</string>
+    <string name="bad">سيئ</string>
+    <string name="done">انتهى</string>
+    <string name="complete_assessment">فضلا اكمل التقييم</string>
+    <string name="teaching_performance">مستوى التعليم</string>
+    <string name="content_rating">تقييم المحتوى</string>
+    <string name="how_much_have_you_learned">مقدار الإنجاز في التعليم</string>
     <string name="more_than_70">أكثر من 70٪</string>
     <string name="less_than_40">أقل من 40٪</string>
     <string name="select_language">اختار اللغة</string>
     <string name="send">إرسال</string>
-    <string name="ask_a_question">طرح سؤال</string>
+    <string name="ask_a_question">ارسل سؤال</string>
     <string name="profile">الملف الشخصي</string>
     <string name="edit">تعديل</string>
-    <string name="answer_submitted">تم تقديم الإجابة</string>
+    <string name="answer_submitted">تم ارسال الإجابات</string>
     <string name="hide">إخفاء</string>
     <string name="downloading">جارى التحميل</string>
-    <string name="take_tests">قم بإجراء جميع الاختبارات أولاً</string>
-    <string name="take_prev_lesson">الرجاء تمرير الجزء السابق أولا</string>
+    <string name="take_tests">أكمل جميع الاختبارات السابقةً</string>
+    <string name="take_prev_lesson">فضلا اكمل الجزء السابق أولا</string>
     <string name="question_sent">تم إرسال سؤالك بنجاح</string>
     <string name="sign_out">خروج</string>
-    <string name="invalid_format">تنسيق غير صالح</string>
+    <string name="invalid_format">الصيغة المكتوبة غير صحيحة</string>
     <string name="unregistered_number">رقم الهاتف غير المسجل</string>
-    <string name="name_required">الاسم الكامل مطلوب</string>
-    <string name="invalid_email">بريد إلكتروني خاطئ</string>
+    <string name="name_required">مطلوب الاسم كامل</string>
+    <string name="invalid_email">البريد الإلكتروني غير صحيح</string>
+    <string name="you_are_going_to_sign_out">سوف تقوم بالخروج</string>
+    <string name="version">الاصدار</string>
+    <string name="social_media">وسائل التواصل الاجتماعي</string>
+    <string name="developer">مطور</string>
+    <string name="quiz">الاختبار </string>
+    <string name="personal_information">المعلومات الشخصية</string>
+    <string name="choose_your_account">choose your account</string>
+    <string name="help">العون</string>
+    <string name="register">التسجيل</string>
+    <string name="use_name">Use name that you want to be printed on the certificate</string>
+    <string name="attendants">attendants</string>
+    <string name="select_country">اختر بلدك الان</string>
 </resources>

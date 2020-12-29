@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.academy.users.UsersActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -58,7 +59,6 @@ public class Welcome extends AppCompatActivity{
         });
     }
 
-    //----------------------------------------------------------------------------------------------------------set Default language
     private void setLanguage() {
         SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
@@ -68,5 +68,10 @@ public class Welcome extends AppCompatActivity{
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, UsersActivity.class));
+        finish();
+    }
 }
 

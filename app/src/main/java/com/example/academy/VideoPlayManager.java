@@ -21,17 +21,14 @@ public class VideoPlayManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_video_play_manager);
         setTitle(getIntent().getExtras().getString("title"));
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         videoId = getIntent().getExtras().getString("link");
 
         initYouTubePlayerView();
-        /*WebView webView = findViewById(R.id.webview);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/"+ part +".html");*/
     }
 
     private void initYouTubePlayerView() {
@@ -78,5 +75,11 @@ public class VideoPlayManager extends AppCompatActivity {
             youTubePlayerView.exitFullScreen();
         else
             super.onBackPressed();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

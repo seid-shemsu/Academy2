@@ -38,6 +38,7 @@ import com.example.academy.R;
 import com.example.academy.Reader;
 import com.example.academy.VideoPlayManager;
 import com.example.academy.tabs.CourseObject;
+import com.example.academy.test.Quiz;
 import com.example.academy.test.Test;
 import com.example.academy.ui.home.CoursePartFragment;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -138,6 +139,12 @@ public class Detail extends Fragment {
                         editor_passed.putBoolean(course_code+part_number, true);
                         editor_passed.apply();
                     }
+                    try {
+                        mediaPlayer.pause();
+                    }
+                    catch (Exception e){
+
+                    }
                     setProgress();
                     startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name+part_number));
             }
@@ -175,35 +182,9 @@ public class Detail extends Fragment {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child(course_code+part_number);
-                final ArrayList<String> questions = new ArrayList<>();
-                final ArrayList<String> answers = new ArrayList<>();
-                test.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChildren()) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                if (snapshot.getKey().equals("questions"))
-                                    for (DataSnapshot snapshot1 : snapshot.getChildren())
-                                        questions.add(snapshot1.getValue().toString());
-                                else
-                                    for (DataSnapshot snapshot1 : snapshot.getChildren())
-                                        answers.add(snapshot1.getValue().toString());
-                            }
-                            startActivity(new Intent(getContext(), Test.class)
-                                    .putStringArrayListExtra("questions", questions)
-                                    .putStringArrayListExtra("answers", answers)
-                                    .putExtra("course_code", course_code)
-                                    .putExtra("quiz",part_number));
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                startActivity(new Intent(getContext(), Quiz.class)
+                        .putExtra("course_code", course_code)
+                        .putExtra("quiz", part_number));
             }
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -270,7 +251,7 @@ public class Detail extends Fragment {
                 progress.child("course_name").setValue(name);
                 progress.child("progress").setValue(p);
                 progress.child("img_url").setValue(img_url);
-                progress.child("lesson").setValue(part_number);
+                progress.child("lesson").setValue(Integer.parseInt(part_number) + 1) ;
             }
 
             @Override
@@ -289,13 +270,14 @@ public class Detail extends Fragment {
                 quiz.setVisibility(View.VISIBLE);
             else {
                 lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
-                lesson_editor.commit();
+                lesson_editor.apply();
                 editor_passed.putBoolean(course_code+part_number, true);
                 editor_passed.apply();
             }
             String root = Environment.getExternalStorageDirectory().toString();
             File dir = new File(root + "/africa/" + course_code + "/pdfs");
-            dir.mkdirs();
+            if (!dir.exists())
+                dir.mkdirs();
             final File file = new File( dir, course_code + part_number + ".html");
             if (file.isFile() && file.length() > 0) {
                 startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
@@ -308,8 +290,10 @@ public class Detail extends Fragment {
                 dialog.setContentView(R.layout.wait);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
+
                 try {
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
+                    if (!file.exists())
                     file.createNewFile();
                     storageReference.getFile(file)
                             .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -329,11 +313,15 @@ public class Detail extends Fragment {
                                 }
                             });
                 }
+                catch (IllegalArgumentException e){
+
+                }
                 catch (Exception e) {
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
-        } catch (NumberFormatException e) {
+        }
+        catch (Exception e) {
             Toast.makeText(getContext(), "ERROR 103\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import com.example.academy.users.UserObject;
+import com.example.academy.users.UsersDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -31,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.ask, R.id.about)
+                R.id.nav_home, R.id.ask, R.id.about, R.id.help)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -74,8 +76,11 @@ public class MainActivity extends AppCompatActivity {
         });
         ImageView imageView = header.findViewById(R.id.imageView);
         try {
+            UsersDatabase database = new UsersDatabase(this, "users");
+            String uri = database.getUser(sharedPreferences.getString("phone", ""));
+            database.close();
             Picasso.Builder builder = new Picasso.Builder(this);
-            builder.build().load(sharedPreferences.getString("uri", "")).into(imageView);
+            builder.build().load(uri).into(imageView);
         }
         catch (Exception e){
         }

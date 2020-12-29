@@ -64,7 +64,10 @@ public class HomeFragment extends Fragment {
                     String name = snapshot.child("name").getValue().toString();
                     String img_url = snapshot.child("img_url").getValue().toString();
                     double rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
-                    courseObjects.add(new CourseObject(name, img_url, rating, i++));
+                    int attendants = 0;
+                    if (snapshot.hasChild("attendants"))
+                        attendants = (int)(snapshot.child("attendants").getChildrenCount());
+                    courseObjects.add(new CourseObject(name, img_url, rating, i++, attendants));
                 }
                 FragmentManager fragmentManager = getFragmentManager();
                 CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);

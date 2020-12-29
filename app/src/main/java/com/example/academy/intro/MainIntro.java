@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.Button;
 
 import com.example.academy.R;
 import com.example.academy.Welcome;
+import com.example.academy.users.UsersActivity;
+import com.example.academy.users.UsersDatabase;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Locale;
@@ -53,7 +56,9 @@ public class MainIntro extends AppCompatActivity {
         changeStatusBarColor();
         button.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
-                startActivity(new Intent(MainIntro.this, Welcome.class));
+                SharedPreferences app = getSharedPreferences("app", MODE_PRIVATE);
+                app.edit().putBoolean("started", true).apply();
+                startActivity(new Intent(MainIntro.this, UsersActivity.class));
                 finish();
             }
         });

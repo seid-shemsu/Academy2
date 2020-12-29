@@ -15,10 +15,6 @@
     <string name="connet_internet">እባክዎ የኢንተርኔትዎን ግንኙነትዎን ያረጋግጡ።</string>
     <string name="registered_successfully">በትክክል ተመዝግበዋል።</string>
     <string name="name">ስም</string>
-    <string name="phone">ስልክ</string>
-    <string name="emial_if_any">ኢሜል (ካለ)</string>
-    <string name="personal_information">የራስ መረጃ</string>
-    <string name="register_new">ተመዝገብ</string>
     <string name="listen_audio">ድምፅ አዳምጥ</string>
     <string name="read_pdf">ፅሁፍ አንብብ</string>
     <string name="get_started">ጀምር</string>
@@ -26,17 +22,16 @@
     <string name="language">ቋንቋ</string>
     <string name="setting">መቼት</string>
     <string name="ask_question">ጥያቄ</string>
-    <string name="about">ስለ እኛ</string>
+    <string name="about">ስለ እኛ የበለጠ</string>
     <string name="enter_your_question_here">ጥያቄ እዚህ ጋር አስገባ</string>
     <string name="you_want_to_download_the_audio">ድምጽ ከ ኢንተርኔት ይውርድ?</string>
     <string name="file_size">የ ድምጹ መጠን ፡ 2.7 ሜ.ባ</string>
     <string name="download">አውርድ</string>
     <string name="cancel">አቋርጥ</string>
-    <string name="certificate">ሰርቲፊኬት</string>
+    <string name="certificate">የምስክር ወረቀት </string>
     <string name="log_out">ውጣ</string>
 
     <string-array name="country">
-        <item>ኢትዮጵያ</item>
         <item>አፍጋኒስታን</item>
         <item>አልባኒያ</item>
         <item>አልጄሪያ</item>
@@ -220,7 +215,7 @@
         <item>ዛምቢያ</item>
         <item>ዝምባቡዌ</item>
     </string-array>
-
+    <string name="ethiopia">ኢትዮጵያ</string>
 
     <string name="skip">ዝለል</string>
     <string name="learn">ማጥናት</string>
@@ -231,7 +226,6 @@
     <string name="learn_text">በድምጽ ወይም በማንበብ ወይም ዩቲዩብን በመመልከት ማጥናት ይችላሉ ፡፡</string>
     <string name="test_text">ለሙከራዎች እና ለመጨረሻ ፈተና እጆችዎን ቀድመው ያዘጋጁ ፡፡</string>
     <string name="reward_text">ኮርሱ ከተጠናቀቀ በኋላ የምስክር ወረቀት ይኖራል ፡፡</string>
-    <string name="hello_blank_fragment">hhhhhhhh</string>
     <string name="sign_up">ተመዝገብ</string>
     <string name="phone_number">ስልክ ቁጥር</string>
     <string name="courses">ኮርሶች</string>
@@ -273,4 +267,16 @@
     <string name="unregistered_number">ያልተመዘገበ ስልክ ቁጥር</string>
     <string name="name_required">ሙሉ ስም ያስፈልጋል</string>
     <string name="invalid_email">የማይሰራ ኢሜይል</string>
+    <string name="you_are_going_to_sign_out">ሊወጡ ነው</string>
+    <string name="version">ስሪት</string>
+    <string name="social_media">ማህበራዊ ሚድያ</string>
+    <string name="developer">ገንቢ</string>
+    <string name="quiz">መልመጃ</string>
+    <string name="personal_information">ግላዊ መረጃ</string>
+    <string name="choose_your_account">choose your account</string>
+    <string name="help">እርዳታ</string>
+    <string name="register">መዝግብ</string>
+    <string name="use_name">የምስክር ወርቀት ላይ እንዲፃፍ ሚፈልጉትን ስም ይጠቀሙ።</string>
+    <string name="attendants">attendants</string>
+    <string name="select_country">መኖርያ ሃገሮን ይምረጡ</string>
 </resources>

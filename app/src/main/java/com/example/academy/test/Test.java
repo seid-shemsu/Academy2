@@ -225,20 +225,6 @@ public class Test extends AppCompatActivity {
         return getIntent().getExtras().getStringArrayList("answers");
     }
 
-    private void saveToFirebase(int i, String date) {
-        SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(sharedPreferences.getString("phone", "null"));
-        if (!sharedPreferences.getString("phone", "null").equals("null")) {
-            databaseReference.child("score").setValue(Integer.toString(i));
-            databaseReference.child("certified").setValue("yes");
-            databaseReference.child("issuedDate").setValue(date);
-        } else {
-            Toast.makeText(this, "error 702", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-
     private boolean connectionCheck() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         assert connectivityManager != null;

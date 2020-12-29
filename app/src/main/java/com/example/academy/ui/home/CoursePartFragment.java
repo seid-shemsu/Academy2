@@ -23,6 +23,7 @@ import com.example.academy.PartAdapters.IconAdapter;
 import com.example.academy.PartAdapters.NumberAdapter;
 import com.example.academy.PartAdapters.TitleAdapter;
 import com.example.academy.R;
+import com.example.academy.test.Quiz;
 import com.example.academy.test.Test;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,7 +80,7 @@ public class CoursePartFragment extends Fragment {
             public void onClick(View v) {
                 SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
                 if (passed.getBoolean(course_code + i, false)){
-                    DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child("finals").child(course_code);
+                    /*DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child("finals").child(course_code);
                     final ArrayList<String> questions = new ArrayList<>();
                     final ArrayList<String> answers = new ArrayList<>();
                     test.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,7 +108,10 @@ public class CoursePartFragment extends Fragment {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
+                    });*/
+                    startActivity(new Intent(getContext(), Quiz.class)
+                            .putExtra("course_code", course_code)
+                            .putExtra("quiz", "final"));
                 }
                 else {
                     Toast.makeText(getContext(), getResources().getString(R.string.take_tests), Toast.LENGTH_SHORT).show();

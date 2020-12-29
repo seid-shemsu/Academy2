@@ -31,6 +31,7 @@
             android:textColor="@color/white"/>
     </LinearLayout>
     <Button
+        android:visibility="gone"
         android:id="@+id/start"
         android:layout_width="110dp"
         android:layout_height="40dp"
@@ -41,6 +42,7 @@
         android:text="@string/start"
         android:layout_marginTop="20dp"/>
     <Button
+        android:visibility="gone"
         android:id="@+id/cont"
         android:layout_width="110dp"
         android:layout_height="40dp"

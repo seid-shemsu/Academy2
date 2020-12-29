@@ -37,15 +37,17 @@ public class SingleCourseFragment extends Fragment {
     public SingleCourseFragment() {
         // Required empty public constructor
     }
+
     TextView course_name;
     Button start, cont;
     String name;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_single_course, container, false);
-        Bundle bundle = this.getArguments();
+        final Bundle bundle = this.getArguments();
         name = bundle.getString("course_name");
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         String lang = sharedPreferences.getString("lang", "am");
@@ -53,12 +55,32 @@ public class SingleCourseFragment extends Fragment {
         course_name = root.findViewById(R.id.course_name);
         start = root.findViewById(R.id.start);
         cont = root.findViewById(R.id.cont);
+        SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+        SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
+        passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
+        lesson.edit().putBoolean(getArguments().getString("course_code") + 1, true).apply();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("name"))
-                    course_name.setText(dataSnapshot.child("name").getValue().toString());
+                course_name.setText(dataSnapshot.child("name").getValue().toString());
+                /*start.setVisibility(View.VISIBLE);
+                cont.setVisibility(View.VISIBLE);*/
+                String course_code = bundle.getString("course_code");
+                SharedPreferences lesson = null;
+                try {
+                    lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                }
+                if (!lesson.getBoolean(course_code + "2", false)) {
+                    start.setVisibility(View.VISIBLE);
+                } else {
+                    cont.setVisibility(View.VISIBLE);
+                }
+
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -68,42 +90,16 @@ public class SingleCourseFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(getContext());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.clear_progress);
-                Button clear = dialog.findViewById(R.id.clear);
-                Button canel = dialog.findViewById(R.id.cancel);
-                clear.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
-                        SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
-                        SharedPreferences has_test = getContext().getSharedPreferences("has_quiz", Context.MODE_PRIVATE);
-                        has_test.edit().clear().apply();
-                        lesson.edit().clear().apply();
-                        passed.edit().clear().apply();
-                        passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
-                        lesson.edit().putBoolean(getArguments().getString("course_code") +1, true).apply();
-                        deleteProgress();
-                        Fragment coursePartFragment = new CoursePartFragment();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("course_name", name);
-                        bundle.putString("title", course_name.getText().toString());
-                        bundle.putString("course_code", getArguments().getString("course_code"));
-                        coursePartFragment.setArguments(bundle);
-                        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();
-                    }
-                });
-                canel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
+
+                addStudent(getArguments().getString("course_code"));
+                Fragment coursePartFragment = new CoursePartFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                Bundle bundle = new Bundle();
+                bundle.putString("course_name", name);
+                bundle.putString("title", course_name.getText().toString());
+                bundle.putString("course_code", getArguments().getString("course_code"));
+                coursePartFragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, coursePartFragment).addToBackStack(null).commit();
             }
 
         });
@@ -121,6 +117,26 @@ public class SingleCourseFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void addStudent(String course_code) {
+        SharedPreferences lang = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String phone = user.getString("phone", "");
+        if (lang.getString("lang", "am").equals("om")){
+            DatabaseReference om = FirebaseDatabase.getInstance().getReference().child("om").child("courses").child(course_code);
+            om.child("attendants").child(phone).setValue(user.getString("name", " "));
+
+        }
+        else {
+            DatabaseReference am = FirebaseDatabase.getInstance().getReference().child("am").child("courses").child(course_code);
+            DatabaseReference en = FirebaseDatabase.getInstance().getReference().child("en").child("courses").child(course_code);
+            DatabaseReference ar = FirebaseDatabase.getInstance().getReference().child("ar").child("courses").child(course_code);
+            am.child("attendants").child(phone).setValue(user.getString("name", " "));
+            en.child("attendants").child(phone).setValue(user.getString("name", " "));
+            ar.child("attendants").child(phone).setValue(user.getString("name", " "));
+        }
+
     }
 
     private void deleteProgress() {

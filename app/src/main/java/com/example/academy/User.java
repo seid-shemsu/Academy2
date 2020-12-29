@@ -5,6 +5,15 @@ public class User {
     private String phone;
     private String email;
     private String country;
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getEmail() {
         return email;
@@ -27,6 +36,14 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.country = country;
+    }
+
+    public User(String name, String phone, String email, String country, String gender) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.country = country;
+        this.gender = gender;
     }
 
     public String getName() {

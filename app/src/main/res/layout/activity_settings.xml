@@ -18,13 +18,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
+            app:cardElevation="5dp"
             app:cardCornerRadius="60dp">
 
             <ImageView
                 android:contentDescription="@string/profile"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/person"
+                android:src="@drawable/logo"
                 android:id="@+id/circle"/>
         </androidx.cardview.widget.CardView>
         <TextView
@@ -36,11 +37,22 @@
             android:gravity="center_horizontal"
             android:id="@+id/pp_change"
             android:layout_marginBottom="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/personal_information"
+            android:drawableStart="@drawable/user"
+            android:drawablePadding="10dp"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"/>
        <androidx.cardview.widget.CardView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            app:cardCornerRadius="10dp"
-           app:cardElevation="10dp"
+           app:cardElevation="5dp"
            android:layout_marginTop="15dp"
            android:layout_marginBottom="10dp"
            android:layout_marginEnd="5dp"
@@ -88,22 +100,23 @@
                        android:textSize="15sp"
                        android:paddingStart="0dp"
                        android:paddingEnd="0dp"
+                       android:focusable="false"
                        android:enabled="false"
                        android:layout_marginEnd="0dp"
                        android:id="@+id/name"/>
-                   <ImageView
+                   <!--<ImageView
                        android:contentDescription="@string/edit"
                        android:id="@+id/name_edit"
                        android:layout_width="0dp"
                        android:layout_weight="1"
                        android:layout_height="wrap_content"
                        android:src="@drawable/edit"
-                       android:layout_margin="5dp"/>
+                       android:layout_margin="5dp"/>-->
                </LinearLayout>
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="@string/phone"
+                   android:text="@string/phone_number"
                    android:textStyle="bold"
                    android:layout_marginStart="20dp"
                    android:textColor="@color/colorPrimary"/>
@@ -125,17 +138,18 @@
                        android:paddingEnd="0dp"
                        android:textSize="15sp"
                        android:enabled="false"
+                       android:focusable="false"
                        android:layout_marginEnd="0dp"
                        android:inputType="phone"
                        android:id="@+id/phone"/>
-                   <ImageView
+                   <!--<ImageView
                        android:contentDescription="@string/edit"
                        android:id="@+id/phone_edit"
                        android:layout_width="0dp"
                        android:layout_weight="1"
                        android:layout_height="wrap_content"
                        android:src="@drawable/edit"
-                       android:layout_margin="5dp"/>
+                       android:layout_margin="5dp"/>-->
                </LinearLayout>
                <TextView
                    android:layout_width="wrap_content"
@@ -161,17 +175,18 @@
                        android:paddingStart="0dp"
                        android:paddingEnd="0dp"
                        android:textSize="15sp"
+                       android:focusable="false"
                        android:enabled="false"
                        android:layout_marginEnd="0dp"
                        android:id="@+id/email"/>
-                   <ImageView
+                   <!--<ImageView
                        android:contentDescription="@string/edit"
                        android:id="@+id/email_edit"
                        android:layout_width="0dp"
                        android:layout_weight="1"
                        android:layout_height="wrap_content"
                        android:src="@drawable/edit"
-                       android:layout_margin="5dp"/>
+                       android:layout_margin="5dp"/>-->
                </LinearLayout>
                <TextView
                    android:layout_width="wrap_content"

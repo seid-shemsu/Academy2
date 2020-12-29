@@ -43,6 +43,7 @@ public class CourseProgressAdapter extends RecyclerView.Adapter<CourseProgressAd
         int progress = Integer.parseInt(currentObject.getProgress());
         holder.completion_progress.setText(progress + " % completed");
         holder.progress_bar.setProgress(progress);
+        holder.course_rate.setRating((float) currentObject.getRating());
     }
 
     @Override

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.academy.users.UsersDatabase;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ public class Login extends AppCompatActivity {
     Button signIn;
     EditText phone;
     Snackbar snackbar;
+    UsersDatabase usersDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class Login extends AppCompatActivity {
         setLanguage();
         setContentView(R.layout.activity_login);
         setTitle(getResources().getString(R.string.sign_in));
+        usersDatabase = new UsersDatabase(this, "users");
         phone = findViewById(R.id.login_phone);
         signIn = findViewById(R.id.sign_in);
         progressBar = findViewById(R.id.sign_in_progress_bar);
@@ -89,8 +92,10 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private void account_exist(String phone_number, final Button signIn, final CircularProgressBar progressBar) {
+    String name, phone_, uri = "";
 
+
+    private void account_exist(String phone_number, final Button signIn, final CircularProgressBar progressBar) {
         DatabaseReference mdata = FirebaseDatabase.getInstance().getReference().child("users").child(phone_number);
         mdata.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -103,9 +108,11 @@ public class Login extends AppCompatActivity {
                         switch (dataSnapshot1.getKey()) {
                             case "name":
                                 editor.putString("name", dataSnapshot1.getValue().toString());
+                                name = dataSnapshot1.getValue().toString();
                                 break;
                             case "phone":
                                 editor.putString("phone", dataSnapshot1.getValue().toString());
+                                phone_ = dataSnapshot1.getValue().toString();
                                 break;
                             case "email":
                                 editor.putString("email", dataSnapshot1.getValue().toString());
@@ -115,6 +122,7 @@ public class Login extends AppCompatActivity {
                         }
                     }
                     setProgresses();
+                    usersDatabase.insert(name, phone_, "");
                     editor.apply();
                     progressBar.setVisibility(View.GONE);
                     startActivity(new Intent(Login.this, MainActivity.class));

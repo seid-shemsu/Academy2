@@ -18,6 +18,10 @@
         android:name="com.example.academy.About"
         tools:layout="@layout/about"/>
     <fragment
+        android:id="@+id/help"
+        android:name="com.example.academy.help.HelpFragment"
+        tools:layout="@layout/help"/>
+    <fragment
         android:id="@+id/log_out"
         android:name="com.example.academy.Logout"
         tools:layout="@layout/logout"/>

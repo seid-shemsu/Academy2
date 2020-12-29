@@ -20,9 +20,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.academy.users.UsersDatabase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,13 +39,14 @@ import java.util.Locale;
 
 public class Register extends AppCompatActivity {
     EditText name, phone, email;
-    Spinner country;
+    Spinner country, gender;
     CircularProgressBar progressBar;
-    TextView code;
     Button register;
     Snackbar snackbar;
     SharedPreferences sharedPreferences;
     private DatabaseReference databaseReference;
+    UsersDatabase usersDatabase;
+    TextInputLayout nameInput, phoneInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,18 +55,31 @@ public class Register extends AppCompatActivity {
         setLanguage();
         setContentView(R.layout.registration);
         setTitle("registration");
+        usersDatabase = new UsersDatabase(this, "users");
+        nameInput = findViewById(R.id.nameInput);
+        phoneInput = findViewById(R.id.phoneInput);
         name = findViewById(R.id.name);
-        name.setHint(Html.fromHtml(getResources().getString(R.string.name) + "<font color =\"#ff0000\">" + "* " + "</font>"));
+        SharedPreferences lang = getSharedPreferences("lang", MODE_PRIVATE);
+        if (lang.getString("lang", "am").equals("ar")){
+            nameInput.setHint(Html.fromHtml("<font color =\"#ff0000\">" + "* " + "</font>" + getResources().getString(R.string.name)));
+            phoneInput.setHint(Html.fromHtml("<font color =\"#ff0000\">" + "* " + "</font>" + getResources().getString(R.string.phone_number)));
+        }
+        else {
+            nameInput.setHint(Html.fromHtml(getResources().getString(R.string.name) + "<font color =\"#ff0000\">" + "* " + "</font>"));
+            phoneInput.setHint(Html.fromHtml(getResources().getString(R.string.phone_number) + "<font color =\"#ff0000\">" + "* " + "</font>"));
+        }
         phone = findViewById(R.id.phone);
-        phone.setHint(Html.fromHtml(getResources().getString(R.string.phone) + "<font color =\"#ff0000\">" + "* " + "</font>"));
         email = findViewById(R.id.email);
         country = findViewById(R.id.country);
+        gender = findViewById(R.id.gender);
         //code = findViewById(R.id.code);
         progressBar = findViewById(R.id.progress_bar);
         register = findViewById(R.id.register);
         ArrayList<String> countries = new ArrayList<>();
         countries.addAll(Arrays.asList(getResources().getStringArray(R.array.country)));
         Collections.sort(countries);
+        countries.add(0, getResources().getString(R.string.ethiopia));
+        countries.add(0, getResources().getString(R.string.select_country));
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_item, countries);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         country.setAdapter(adapter);
@@ -84,7 +100,7 @@ public class Register extends AppCompatActivity {
                     if(check(name, phone, email)){
                         progressBar.setVisibility(View.VISIBLE);
                         register.setVisibility(View.GONE);
-                        RegisterToDatabase(name, email, phone, country, v, progressBar, register);
+                        RegisterToDatabase(name, email, phone, country, gender, progressBar, register);
                     }
                 }
                 else {
@@ -136,16 +152,24 @@ public class Register extends AppCompatActivity {
             email.setError(getResources().getString(R.string.invalid_email));
             return false;
         }
+        if (country.getSelectedItemPosition() == 0){
+            Toast.makeText(this, "select your country", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (gender.getSelectedItemPosition() == 0){
+            Toast.makeText(this, "select your gender", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
-    private void RegisterToDatabase(final EditText name, final EditText email, final EditText phone, final Spinner country, final View v, final CircularProgressBar progressBar, final Button register) {
+    private void RegisterToDatabase(final EditText name, final EditText email, final EditText phone, final Spinner country, final Spinner gender, final CircularProgressBar progressBar, final Button register) {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         final String fullPhone = phone.getText().toString();
         DatabaseReference mdata = FirebaseDatabase.getInstance().getReference().child("users").child(fullPhone);
-        final User user = new User(name.getText().toString(), fullPhone, email.getText().toString(), country.getSelectedItem().toString());
+        final User user = new User(name.getText().toString(), fullPhone, email.getText().toString(), country.getSelectedItem().toString(), gender.getSelectedItem().toString());
         mdata.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -160,7 +184,9 @@ public class Register extends AppCompatActivity {
                     editor.putString("phone", fullPhone);
                     editor.putString("email", email.getText().toString());
                     editor.putString("location", country.getSelectedItem().toString());
+                    editor.putString("gender", gender.getSelectedItem().toString());
                     editor.apply();
+                    usersDatabase.insert(name.getText().toString(), fullPhone, "");
                     databaseReference.child(fullPhone).setValue(user)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

@@ -94,7 +94,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_margin="10dp">
             <TextView
                 android:id="@+id/audio"
                 android:layout_width="145dp"

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.academy.users.UsersDatabase;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
@@ -30,6 +31,7 @@ public class Personal extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLanguage();
+        setTitle(getResources().getString(R.string.profile));
         setContentView(R.layout.activity_personal);
         tab = findViewById(R.id.tab);
         view = findViewById(R.id.viewpager);
@@ -83,8 +85,10 @@ public class Personal extends AppCompatActivity {
         email.setText(info.getString("email", ""));
         location.setText(info.getString("location", ""));
         try {
+            UsersDatabase database = new UsersDatabase(this, "users");
+            String uri = database.getUser(info.getString("phone", ""));
             Picasso.Builder builder = new Picasso.Builder(this);
-            builder.build().load(info.getString("uri", "")).into(image);
+            builder.build().load(uri).into(image);
         }
         catch (Exception e){
         }

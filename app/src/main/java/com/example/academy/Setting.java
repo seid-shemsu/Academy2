@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.academy.users.UsersDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
@@ -29,13 +30,14 @@ import java.util.Locale;
 
 public class Setting extends AppCompatActivity {
     private EditText name, email, phone;
-    private SharedPreferences userInfo, lang;
+    private SharedPreferences userInfo, lang, img;
     SharedPreferences.Editor langEdit, userEdit;
     Button save;
     TextView amh, ara, eng, language, pp;
     private ImageView image;
     int permission = 0, PICK_IMAGE_REQUEST = 1;
     Uri imgUri;
+    UsersDatabase usersDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,33 +45,13 @@ public class Setting extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLanguage();
         setContentView(R.layout.activity_settings);
+        setTitle(getResources().getString(R.string.app_name));
+        usersDatabase = new UsersDatabase(this, "users");
         userInfo = getSharedPreferences("userInfo", MODE_PRIVATE);
         lang = getSharedPreferences("lang", MODE_PRIVATE);
+        img = getSharedPreferences("image", MODE_PRIVATE);
         userEdit = userInfo.edit();
         langEdit = lang.edit();
-        ///////////////////////////////////////////////////////////////////////////
-        ImageView nameEdit = findViewById(R.id.name_edit);
-        ImageView phoneEdit = findViewById(R.id.phone_edit);
-        ImageView emailEdit = findViewById(R.id.email_edit);
-        nameEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name.setEnabled(true);
-            }
-        });
-        phoneEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                phone.setEnabled(true);
-            }
-        });
-        emailEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email.setEnabled(true);
-            }
-        });
-        /////////////////////////////////////////////////////////////////////////
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);
@@ -79,7 +61,9 @@ public class Setting extends AppCompatActivity {
         image = findViewById(R.id.circle);
         Picasso.Builder builder = new Picasso.Builder(this);
         try {
-            builder.build().load(userInfo.getString("uri", "")).into(image);
+            UsersDatabase database = new UsersDatabase(this, "users");
+            String uri = database.getUser(userInfo.getString("phone", ""));
+            builder.build().load(uri).into(image);
         } catch (Exception e) {
         }
         pp.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +83,8 @@ public class Setting extends AppCompatActivity {
                     userEdit.putString("phone", phone.getText().toString());
                     userEdit.apply();
                     langEdit.apply();
-                    setPic();
+                    if (imgUri != null)
+                        setDatabase();
                     startActivity(new Intent(Setting.this, MainActivity.class));
                     finish();
                 }
@@ -166,7 +151,8 @@ public class Setting extends AppCompatActivity {
         });
     }
 
-    private void setPic() {
+    private void setDatabase() {
+        usersDatabase.updateUser(name.getText().toString(), phone.getText().toString(),imgUri.toString());
     }
 
     private boolean getPermission(int permission) {
@@ -234,8 +220,8 @@ public class Setting extends AppCompatActivity {
                 }
             });
             builder.build().load(imgUri).into(image);
-            userEdit.putString("uri", imgUri.toString());
-            userEdit.apply();
+            SharedPreferences image = getSharedPreferences("image", MODE_PRIVATE);
+            image.edit().putString("uri", imgUri.toString()).apply();
         }
         else {
             Toast.makeText(this, "" + resultCode, Toast.LENGTH_SHORT).show();

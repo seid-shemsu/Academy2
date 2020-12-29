@@ -1,111 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
-    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:cpb_background_progressbar_color="@color/background"
-        app:cpb_background_progressbar_width="7dp"
-        app:cpb_progress_direction="to_right"
-        app:cpb_progressbar_color="@color/colorPrimary"
-        app:cpb_indeterminate_mode="true"
-        app:cpb_progressbar_width="5dp"
-        app:cpb_round_border="true"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/layout"
-        android:id="@+id/progress_bar" />
-
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:scaleType="centerInside"
-        android:contentDescription="@string/logo"
-        android:src="@drawable/logo" />
-
-    <LinearLayout
-        android:id="@+id/layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cpb_background_progressbar_color="@color/background"
+            app:cpb_background_progressbar_width="7dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progressbar_color="@color/colorPrimary"
+            app:cpb_indeterminate_mode="true"
+            app:cpb_progressbar_width="5dp"
+            app:cpb_round_border="true"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/layout"
+            android:id="@+id/progress_bar" />
 
-        <EditText
-            android:id="@+id/name"
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo" />
+
+        <!--<LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/background"
-            android:drawableStart="@drawable/user"
-            android:drawablePadding="10dp"
-            android:singleLine="true"
-            android:minHeight="40dp"
-            android:textCursorDrawable="@null" />
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background"
-            android:drawableStart="@drawable/phone"
-            android:drawablePadding="10dp"
-            android:layout_marginBottom="10dp"
-            android:inputType="phone"
-            android:minHeight="40dp"
-            android:textCursorDrawable="@null" />
+            android:layout_below="@id/logo"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/emial_if_any"
-            android:drawableStart="@drawable/mail"
-            android:background="@drawable/background"
-            android:drawablePadding="10dp"
-            android:layout_marginBottom="10dp"
-            android:minHeight="40dp"
-            android:singleLine="true"
-            android:textCursorDrawable="@null" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/background"
-            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/background"
+                android:drawableStart="@drawable/user"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:gravity="start|center_vertical"
+                android:minHeight="40dp"
+                android:textCursorDrawable="@null" />
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background"
+                android:drawableStart="@drawable/phone"
+                android:drawablePadding="10dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="phone"
+                android:minHeight="40dp"
+                android:gravity="start|center_vertical"
+                android:textCursorDrawable="@null" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:drawableLeft="@drawable/location" />
-
-            <Spinner
-                android:id="@+id/country"
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:drawableStart="@drawable/mail"
+                android:background="@drawable/background"
+                android:drawablePadding="10dp"
+                android:layout_marginBottom="10dp"
+                android:minHeight="40dp"
+                android:gravity="start|center_vertical"
+                android:singleLine="true"
+                android:textCursorDrawable="@null" />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:entries="@array/country" />
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/location" />
+
+                <Spinner
+                    android:id="@+id/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:entries="@array/country" />
+            </LinearLayout>
+
+        </LinearLayout>-->
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="bottom"
+                android:id="@+id/nameInput">
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/background"
+                    android:drawableStart="@drawable/user"
+                    android:drawablePadding="10dp"
+                    android:paddingStart="5dp"
+                    android:singleLine="true"
+                    android:gravity="start|center_vertical"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FA0505"
+                android:textSize="12sp"
+                android:drawableStart="@drawable/warning"
+                android:drawablePadding="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/use_name"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/phoneInput">
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/background"
+                    android:drawableStart="@drawable/phone"
+                    android:drawablePadding="10dp"
+                    android:inputType="phone"
+                    android:paddingStart="5dp"
+                    android:gravity="start|center_vertical"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp">
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:hint="@string/email"
+                    android:drawableStart="@drawable/mail"
+                    android:background="@drawable/background"
+                    android:drawablePadding="10dp"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="5dp"
+                    android:drawableLeft="@drawable/location" />
+
+                <Spinner
+                    android:id="@+id/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:entries="@array/country" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="5dp"
+                    android:drawableLeft="@drawable/gender" />
+
+                <Spinner
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:entries="@array/gender" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/progress_bar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/settingbtnbg"
+            android:text="@string/register"
+            android:textColor="#fff" />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/progress_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/buttonbg"
-        android:text="@string/register_new"
-        android:textColor="#fff" />
-</RelativeLayout>
+</ScrollView>

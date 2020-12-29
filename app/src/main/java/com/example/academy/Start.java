@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.academy.intro.MainIntro;
+import com.example.academy.users.UsersActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
@@ -26,10 +27,10 @@ public class Start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setLanguage();
         setContentView(R.layout.activity_start);
-        sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        if (sharedPreferences.getBoolean("registered", false)){
-            startActivity(new Intent(this, MainActivity.class));
+        if (sharedPreferences.getBoolean("started", false)){
+            startActivity(new Intent(this, UsersActivity.class));
             finish();
         }
         sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
