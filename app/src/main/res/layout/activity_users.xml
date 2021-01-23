@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".users.UsersActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/recycler"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="no account added yet"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:id="@+id/no_account"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="add new account"
+        android:textColor="@color/white"
+        android:layout_margin="15dp"
+        android:background="@drawable/settingbtnbg"
+        android:drawableStart="@drawable/add"
+        android:id="@+id/add"/>
+</RelativeLayout>

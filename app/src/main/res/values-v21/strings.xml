@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="register">register</string>
+    <string name="use_name">Use name that you want to be printed on the certificate</string>
+    <string name="attendants">attendants</string>
+</resources>

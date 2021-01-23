@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btnbgsolid"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text="watch video"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btnbgstroke"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="5dp"
+            android:text="read pdf"/>
+</LinearLayout>
