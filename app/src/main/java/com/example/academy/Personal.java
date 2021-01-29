@@ -25,6 +25,7 @@ public class Personal extends AppCompatActivity {
     ViewPager view;
     TextView name, email, location;
     ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +65,10 @@ public class Personal extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.settings){
+        if (item.getItemId() == R.id.settings) {
             startActivity(new Intent(this, Setting.class));
             finish();
-        }
-        else {
+        } else {
             onBackPressed();
         }
         return true;
@@ -77,7 +77,8 @@ public class Personal extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;    }
+        return true;
+    }
 
     private void setData() {
         SharedPreferences info = getSharedPreferences("userInfo", MODE_PRIVATE);
@@ -89,8 +90,7 @@ public class Personal extends AppCompatActivity {
             String uri = database.getUser(info.getString("phone", ""));
             Picasso.Builder builder = new Picasso.Builder(this);
             builder.build().load(uri).into(image);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
         }
     }
 

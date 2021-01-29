@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.academy.MainActivity;
 import com.example.academy.R;
@@ -43,14 +44,13 @@ public class SingleCourseFragment extends Fragment {
     String name;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_single_course, container, false);
         final Bundle bundle = this.getArguments();
         name = bundle.getString("course_name");
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
-        String lang = sharedPreferences.getString("lang", "am");
+        final SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        final String lang = sharedPreferences.getString("lang", "am");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(lang).child(name);
         course_name = root.findViewById(R.id.course_name);
         start = root.findViewById(R.id.start);
@@ -62,22 +62,25 @@ public class SingleCourseFragment extends Fragment {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                course_name.setText(dataSnapshot.child("name").getValue().toString());
+
                 /*start.setVisibility(View.VISIBLE);
                 cont.setVisibility(View.VISIBLE);*/
                 String course_code = bundle.getString("course_code");
                 SharedPreferences lesson = null;
-                try {
+                Toast.makeText(getContext(), dataSnapshot.child("name").getChildrenCount() + " " , Toast.LENGTH_SHORT).show();
+
+                try {String n = dataSnapshot.child("name").getValue().toString();
+                    course_name.setText(n);
                     lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+                    if (!lesson.getBoolean(course_code + "2", false)) {
+                        start.setVisibility(View.VISIBLE);
+                    } else {
+                        cont.setVisibility(View.VISIBLE);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
                 }
-                if (!lesson.getBoolean(course_code + "2", false)) {
-                    start.setVisibility(View.VISIBLE);
-                } else {
-                    cont.setVisibility(View.VISIBLE);
-                }
+
 
             }
 
@@ -123,12 +126,11 @@ public class SingleCourseFragment extends Fragment {
         SharedPreferences lang = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
-        if (lang.getString("lang", "am").equals("om")){
+        if (lang.getString("lang", "am").equals("om")) {
             DatabaseReference om = FirebaseDatabase.getInstance().getReference().child("om").child("courses").child(course_code);
             om.child("attendants").child(phone).setValue(user.getString("name", " "));
 
-        }
-        else {
+        } else {
             DatabaseReference am = FirebaseDatabase.getInstance().getReference().child("am").child("courses").child(course_code);
             DatabaseReference en = FirebaseDatabase.getInstance().getReference().child("en").child("courses").child(course_code);
             DatabaseReference ar = FirebaseDatabase.getInstance().getReference().child("ar").child("courses").child(course_code);
@@ -139,10 +141,5 @@ public class SingleCourseFragment extends Fragment {
 
     }
 
-    private void deleteProgress() {
-        SharedPreferences phone = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone.getString("phone", "")).child("progress");
-        user.child(getArguments().getString("course_code")).removeValue();
-    }
 
 }

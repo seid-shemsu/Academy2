@@ -95,5 +95,7 @@
     <string name="use_name">Use a name that you want to be printed on the certificate</string>
     <string name="attendants">attendants</string>
     <string name="select_country">select living country</string>
+    <string name="share">share</string>
+    <string name="finished">finished</string>
 
 </resources>

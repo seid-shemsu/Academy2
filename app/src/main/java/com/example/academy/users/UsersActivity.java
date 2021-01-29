@@ -1,14 +1,20 @@
 package com.example.academy.users;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +51,31 @@ public class UsersActivity extends AppCompatActivity {
                 finish();
             }
         });
-        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recycler.setLayoutManager(layoutManager);
+        final SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recycler);
+        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                View view = snapHelper.findSnapView(layoutManager);
+                int pos = layoutManager.getPosition(view);
+                RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(pos);
+                LinearLayout rl1 = viewHolder.itemView.findViewById(R.id.linear1);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                    rl1.animate().setDuration(150).scaleX(1.1f).scaleY(1.1f).setInterpolator(new AccelerateInterpolator()).start();
+                }
+                else{
+                    rl1.animate().setDuration(150).scaleX(0.90f).scaleY(0.90f).setInterpolator(new AccelerateInterpolator()).start();
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
         UsersDatabase usersDatabase = new UsersDatabase(this, "users");
         userObjects = usersDatabase.getAll();
         adapter = new UsersAdapter(this, userObjects);

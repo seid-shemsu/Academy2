@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.academy.MainActivity;
@@ -44,7 +45,8 @@ public class HomeFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        //recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         progressBar = root.findViewById(R.id.progress_bar);
         textView = root.findViewById(R.id.no_course);
         sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);

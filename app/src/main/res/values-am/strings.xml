@@ -273,10 +273,12 @@
     <string name="developer">ገንቢ</string>
     <string name="quiz">መልመጃ</string>
     <string name="personal_information">ግላዊ መረጃ</string>
-    <string name="choose_your_account">choose your account</string>
+    <string name="choose_your_account">መለያዎን ይምረጡ</string>
     <string name="help">እርዳታ</string>
     <string name="register">መዝግብ</string>
     <string name="use_name">የምስክር ወርቀት ላይ እንዲፃፍ ሚፈልጉትን ስም ይጠቀሙ።</string>
-    <string name="attendants">attendants</string>
+    <string name="attendants">ተማሪዎች</string>
     <string name="select_country">መኖርያ ሃገሮን ይምረጡ</string>
+    <string name="share">ያጋሩ</string>
+    <string name="finished">finished</string>
 </resources>

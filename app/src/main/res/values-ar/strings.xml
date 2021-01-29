@@ -283,10 +283,12 @@
     <string name="developer">مطور</string>
     <string name="quiz">الاختبار </string>
     <string name="personal_information">المعلومات الشخصية</string>
-    <string name="choose_your_account">choose your account</string>
+    <string name="choose_your_account">اختر حسابك</string>
     <string name="help">العون</string>
     <string name="register">التسجيل</string>
-    <string name="use_name">Use name that you want to be printed on the certificate</string>
-    <string name="attendants">attendants</string>
+    <string name="use_name">استخدم الاسم الذي تريد طباعته على الشهادة</string>
+    <string name="attendants">الحاضرين</string>
     <string name="select_country">اختر بلدك الان</string>
+    <string name="share">شارك</string>
+    <string name="finished">finished</string>
 </resources>

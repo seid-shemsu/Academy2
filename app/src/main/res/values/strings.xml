@@ -228,7 +228,6 @@
     <string name="log_out">Log out</string>
 
 
-
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="skip">Skip</string>
@@ -292,5 +291,9 @@
     <string name="register">register</string>
     <string name="use_name">Use a name that you want to be printed on the certificate</string>
     <string name="attendants">attendants</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="share">share</string>
+    <string name="finished">finished</string>
 
 </resources>
