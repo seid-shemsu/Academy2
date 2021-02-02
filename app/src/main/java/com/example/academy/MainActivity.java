@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
-
+        //Toast.makeText(this, getIntent().getExtras().getString("gender"), Toast.LENGTH_SHORT).show();
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -127,10 +127,20 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = header.findViewById(R.id.imageView);
         try {
             UsersDatabase database = new UsersDatabase(this, "users");
+            SharedPreferences sh = getSharedPreferences("userInfo", MODE_PRIVATE);
+            String gender = sh.getString("gender", "");
             String uri = database.getUser(sharedPreferences.getString("phone", ""));
             database.close();
             Picasso.Builder builder = new Picasso.Builder(this);
-            builder.build().load(uri).into(imageView);
+            if (uri.isEmpty()){
+                if (gender.equals("male"))
+                    builder.build().load(R.drawable.man).into(imageView);
+                else if (gender.equalsIgnoreCase("female"))
+                    builder.build().load(R.drawable.woman).into(imageView);
+            }
+            else
+                builder.build().load(uri).into(imageView);
+
         } catch (Exception e) {
         }
         imageView.setOnClickListener(new View.OnClickListener() {

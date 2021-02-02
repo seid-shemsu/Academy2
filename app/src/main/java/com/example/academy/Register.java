@@ -153,11 +153,11 @@ public class Register extends AppCompatActivity {
             return false;
         }
         if (country.getSelectedItemPosition() == 0){
-            Toast.makeText(this, "select your country", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.select_country), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (gender.getSelectedItemPosition() == 0){
-            Toast.makeText(this, "select your gender", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.select_gender), Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -169,7 +169,8 @@ public class Register extends AppCompatActivity {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         final String fullPhone = phone.getText().toString();
         DatabaseReference mdata = FirebaseDatabase.getInstance().getReference().child("users").child(fullPhone);
-        final User user = new User(name.getText().toString(), fullPhone, email.getText().toString(), country.getSelectedItem().toString(), gender.getSelectedItem().toString());
+        final String g = gender.getSelectedItemPosition() == 1 ? "male" : "female";
+        final User user = new User(name.getText().toString(), fullPhone, email.getText().toString(), country.getSelectedItem().toString(), g);
         mdata.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -184,9 +185,9 @@ public class Register extends AppCompatActivity {
                     editor.putString("phone", fullPhone);
                     editor.putString("email", email.getText().toString());
                     editor.putString("location", country.getSelectedItem().toString());
-                    editor.putString("gender", gender.getSelectedItem().toString());
+                    editor.putString("gender", g);
                     editor.apply();
-                    usersDatabase.insert(name.getText().toString(), fullPhone, "");
+                    usersDatabase.insert(name.getText().toString(), fullPhone, "", g);
                     databaseReference.child(fullPhone).setValue(user)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

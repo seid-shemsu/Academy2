@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    String name, phone_, uri = "";
+    String name, phone_, uri = "", gender;
 
 
     private void account_exist(String phone_number, final Button signIn, final CircularProgressBar progressBar) {
@@ -101,29 +101,34 @@ public class Login extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("registered", true);
+                    SharedPreferences sh = getSharedPreferences("userInfo", MODE_PRIVATE);
+                    sh.edit().putBoolean("registered", true).apply();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         switch (dataSnapshot1.getKey()) {
                             case "name":
-                                editor.putString("name", dataSnapshot1.getValue().toString());
+                                sh.edit().putString("name", dataSnapshot1.getValue().toString()).apply();
                                 name = dataSnapshot1.getValue().toString();
                                 break;
                             case "phone":
-                                editor.putString("phone", dataSnapshot1.getValue().toString());
+                                Toast.makeText(Login.this, dataSnapshot1.getValue().toString()+  "", Toast.LENGTH_SHORT).show();
+                                sh.edit().putString("phone", dataSnapshot1.getValue().toString()).apply();
                                 phone_ = dataSnapshot1.getValue().toString();
                                 break;
                             case "email":
-                                editor.putString("email", dataSnapshot1.getValue().toString());
+                                sh.edit().putString("email", dataSnapshot1.getValue().toString()).apply();
                                 break;
                             case "country":
-                                editor.putString("location", dataSnapshot1.getValue().toString());
+                                sh.edit().putString("location", dataSnapshot1.getValue().toString()).apply();
+                                break;
+                            case "gender":
+                                Toast.makeText(Login.this, dataSnapshot1.getValue().toString()+  "", Toast.LENGTH_SHORT).show();
+                                sh.edit().putString("gender", dataSnapshot1.getValue().toString()).apply();
+                                gender = dataSnapshot1.getValue().toString();
+                                break;
                         }
                     }
                     setProgresses();
-                    usersDatabase.insert(name, phone_, "");
-                    editor.apply();
+                    usersDatabase.insert(name, phone_, "", gender);
                     progressBar.setVisibility(View.GONE);
                     startActivity(new Intent(Login.this, MainActivity.class));
                     finish();

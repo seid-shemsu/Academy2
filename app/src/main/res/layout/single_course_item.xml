@@ -2,14 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_margin="15dp"
+    android:elevation="7dp"
+    android:background="@drawable/btnbgstroke"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
         app:cardCornerRadius="10dp"
-        android:layout_marginStart="7dp"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:id="@+id/card">
         <ImageView
             android:id="@+id/course_img"
@@ -20,13 +23,13 @@
 
     <TextView
         android:id="@+id/course_name"
-        android:layout_toEndOf="@id/card"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:textSize="20sp"
         android:gravity="start"
-        android:layout_marginTop="25dp"
+        android:layout_alignStart="@id/card"
+        android:layout_alignEnd="@id/card"
+        android:layout_margin="5dp"
+        android:layout_below="@id/card"
         android:textColor="@color/bunny"/>
 
     <RatingBar
@@ -37,26 +40,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:progressTint="@color/colorPrimary"
-        android:layout_marginBottom="10dp"
         android:numStars="5" />
+
     <LinearLayout
         android:id="@+id/ll"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/course_rate"
         android:layout_alignStart="@id/course_rate"
+        android:layout_marginBottom="3dp"
         android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/person"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/attendants"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/bunny"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/attendants"
-            android:layout_marginEnd="5dp"
-            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 </RelativeLayout>

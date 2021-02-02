@@ -67,7 +67,7 @@ public class SingleCourseFragment extends Fragment {
                 cont.setVisibility(View.VISIBLE);*/
                 String course_code = bundle.getString("course_code");
                 SharedPreferences lesson = null;
-                Toast.makeText(getContext(), dataSnapshot.child("name").getChildrenCount() + " " , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), dataSnapshot.child("name").getChildrenCount() + " " , Toast.LENGTH_SHORT).show();
 
                 try {String n = dataSnapshot.child("name").getValue().toString();
                     course_name.setText(n);

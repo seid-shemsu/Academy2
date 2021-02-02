@@ -45,7 +45,7 @@ public class Setting extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLanguage();
         setContentView(R.layout.activity_settings);
-        setTitle(getResources().getString(R.string.app_name));
+        setTitle(getResources().getString(R.string.setting));
         usersDatabase = new UsersDatabase(this, "users");
         userInfo = getSharedPreferences("userInfo", MODE_PRIVATE);
         lang = getSharedPreferences("lang", MODE_PRIVATE);
@@ -62,9 +62,19 @@ public class Setting extends AppCompatActivity {
         Picasso.Builder builder = new Picasso.Builder(this);
         try {
             UsersDatabase database = new UsersDatabase(this, "users");
+            SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+            String gender = sharedPreferences.getString("gender", "");
             String uri = database.getUser(userInfo.getString("phone", ""));
-            builder.build().load(uri).into(image);
-        } catch (Exception e) {
+            if (uri.isEmpty()){
+                if (gender.equalsIgnoreCase("male"))
+                    builder.build().load(R.drawable.man).into(image);
+                else if (gender.equalsIgnoreCase("female"))
+                    builder.build().load(R.drawable.woman).into(image);
+            }
+            else
+                builder.build().load(uri).into(image);
+        }
+        catch (Exception e) {
         }
         pp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +162,8 @@ public class Setting extends AppCompatActivity {
     }
 
     private void setDatabase() {
-        usersDatabase.updateUser(name.getText().toString(), phone.getText().toString(),imgUri.toString());
+        SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        usersDatabase.updateUser(name.getText().toString(), phone.getText().toString(),imgUri.toString(), sharedPreferences.getString("gender", "male"));
     }
 
     private boolean getPermission(int permission) {
@@ -233,6 +244,7 @@ public class Setting extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
+
     private void setLanguage() {
         SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));

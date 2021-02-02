@@ -87,9 +87,18 @@ public class Personal extends AppCompatActivity {
         location.setText(info.getString("location", ""));
         try {
             UsersDatabase database = new UsersDatabase(this, "users");
+            SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+            String gender = sharedPreferences.getString("gender", "");
             String uri = database.getUser(info.getString("phone", ""));
             Picasso.Builder builder = new Picasso.Builder(this);
-            builder.build().load(uri).into(image);
+            if (uri.isEmpty()){
+                if (gender.equals("male"))
+                    builder.build().load(R.drawable.man).into(image);
+                else if (gender.equalsIgnoreCase("female"))
+                    builder.build().load(R.drawable.woman).into(image);
+            }
+            else
+                builder.build().load(uri).into(image);
         } catch (Exception e) {
         }
     }

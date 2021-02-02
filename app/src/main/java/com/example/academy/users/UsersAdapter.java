@@ -60,6 +60,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
         }
         catch (Exception e){
         }
+        finally {
+            if (object.getUri().isEmpty()){
+                if (object.getGender().equals("female"))
+                    holder.pp.setImageDrawable(context.getResources().getDrawable(R.drawable.woman));
+                else
+                    holder.pp.setImageDrawable(context.getResources().getDrawable(R.drawable.man));
+                //Picasso.with(context).load(R.drawable.person).into(holder.pp);
+            }
+
+        }
     }
 
     @Override
@@ -124,6 +134,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
                                     break;
                                 case "country":
                                     editor.putString("location", dataSnapshot1.getValue().toString());
+                                    break;
+                                case "gender":
+                                    editor.putString("gender", dataSnapshot1.getValue().toString());
+                                    break;
                             }
                         }
                         setProgresses(phone);
@@ -149,12 +163,19 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
             dialog.setContentView(R.layout.user_option);
             dialog.setCanceledOnTouchOutside(false);
             Button remove = dialog.findViewById(R.id.remove);
+            Button cancel = dialog.findViewById(R.id.cancel);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     UsersDatabase usersDatabase = new UsersDatabase(context, "users");
                     usersDatabase.delete(userObjects.get(getAdapterPosition()).getPhone());
-                    Toast.makeText(context, "user removed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.user_removed, Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     removeUser(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());

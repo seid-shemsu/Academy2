@@ -187,6 +187,11 @@
         <item>زمبابوي</item>
     </string-array>
     <string name="ethiopia">أثيوبيا</string>
+    <string-array name="gender">
+        <item>جنس</item>
+        <item>الذكر</item>
+        <item>أنثى</item>
+    </string-array>
 
     <string name="app_name">أكاديمية أفريقيا</string>
     <string name="ok">طيب</string>
@@ -290,5 +295,11 @@
     <string name="attendants">الحاضرين</string>
     <string name="select_country">اختر بلدك الان</string>
     <string name="share">شارك</string>
-    <string name="finished">finished</string>
+    <string name="no_account_added_yet">لم يضف حساب بعد</string>
+    <string name="select_your_account">اختر حسابك</string>
+    <string name="select_gender">اختر جنسك</string>
+    <string name="add_new_account">إضافة حساب جديد</string>
+    <string name="you_are_going_to_remove_the_account">ستقوم بإزالة الحساب</string>
+    <string name="remove">إزالة</string>
+    <string name="user_removed">تمت إزالة الحساب</string>
 </resources>

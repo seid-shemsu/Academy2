@@ -216,6 +216,11 @@
         <item>ዝምባቡዌ</item>
     </string-array>
     <string name="ethiopia">ኢትዮጵያ</string>
+    <string-array name="gender">
+        <item>ፆታ</item>
+        <item>ወንድ</item>
+        <item>ሴት</item>
+    </string-array>
 
     <string name="skip">ዝለል</string>
     <string name="learn">ማጥናት</string>
@@ -280,5 +285,11 @@
     <string name="attendants">ተማሪዎች</string>
     <string name="select_country">መኖርያ ሃገሮን ይምረጡ</string>
     <string name="share">ያጋሩ</string>
-    <string name="finished">finished</string>
+    <string name="no_account_added_yet">መለያ ገና አልተጨመረም</string>
+    <string name="select_your_account">መለያዎን ይምረጡ</string>
+    <string name="select_gender">ጾታዎን ይምረጡr</string>
+    <string name="add_new_account">አዲስ መለያ ይጨምሩ</string>
+    <string name="you_are_going_to_remove_the_account">መለያውን ሊያጠፉት ነው</string>
+    <string name="remove">አጥፋ</string>
+    <string name="user_removed">መለያ ጠፍቷል</string>
 </resources>

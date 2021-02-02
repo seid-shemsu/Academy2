@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="220dp"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true"
     android:clickable="true"
-    android:id="@+id/linear1"
-    android:focusable="true"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
-    android:layout_marginBottom="15dp"
-    android:background="@drawable/background"
-    android:layout_marginTop="25dp">
+    android:id="@+id/linear1">
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:cardCornerRadius="75dp"
+        app:cardCornerRadius="35dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         app:cardElevation="10dp">
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
             android:id="@+id/pp"/>
     </androidx.cardview.widget.CardView>
@@ -35,8 +29,4 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="2dp"
         android:textColor="@color/bunny"/>
-    <View
-        android:layout_width="150dp"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"/>
 </LinearLayout>

@@ -19,7 +19,7 @@ public class UsersDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table users " +
-                "(name text primary key, phone text, uri text)");
+                "(name text primary key, phone text, uri text, gender text)");
     }
 
     @Override
@@ -28,12 +28,13 @@ public class UsersDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(String name, String phone, String uri) {
+    public void insert(String name, String phone, String uri, String gender) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("phone", phone);
         contentValues.put("uri", uri);
+        contentValues.put("gender", gender);
         db.insert("users", null, contentValues);
     }
 
@@ -57,22 +58,25 @@ public class UsersDatabase extends SQLiteOpenHelper {
             String name = res.getString(res.getColumnIndex("name"));
             String uri = res.getString(res.getColumnIndex("uri"));
             String phone = res.getString(res.getColumnIndex("phone"));
-            UserObject object = new UserObject(name, uri, phone);
+            String gender = res.getString(res.getColumnIndex("gender"));
+            UserObject object = new UserObject(name, uri, phone, gender);
             objects.add(object);
             res.moveToNext();
         }
         return objects;
     }
 
-    public boolean updateUser(String name, String phone, String uri) {
+    public boolean updateUser(String name, String phone, String uri, String gender) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("phone", phone);
         contentValues.put("uri", uri);
+        contentValues.put("gender", gender);
         db.update("users", contentValues, "name = ? ", new String[]{name});
         return true;
     }
+
     public void delete(String phone){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("users", "phone=?", new String[] {phone});

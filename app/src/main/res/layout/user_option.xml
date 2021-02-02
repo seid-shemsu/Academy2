@@ -6,7 +6,7 @@
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
         android:orientation="vertical">
@@ -16,22 +16,31 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/bunny"
             android:textSize="18sp"
-            android:text="account will be removed"
+            android:text="@string/you_are_going_to_remove_the_account"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="15dp"/>
         <Button
             android:id="@+id/remove"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnbgstroke"
+            android:text="@string/remove"
+            android:textColor="@color/colorPrimary"
+            android:drawableStart="@drawable/delete"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btnbgsolid"
-            android:text="remove"
+            android:text="@string/cancel"
             android:textColor="@color/white"
-            android:drawableStart="@drawable/delete"
-            android:drawablePadding="10dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:drawableStart="@drawable/cancel"
+            android:padding="10dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="15dp"/>
 
     </LinearLayout>
 

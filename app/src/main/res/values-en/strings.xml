@@ -96,6 +96,12 @@
     <string name="attendants">attendants</string>
     <string name="select_country">select living country</string>
     <string name="share">share</string>
-    <string name="finished">finished</string>
+    <string name="no_account_added_yet">no account added yet</string>
+    <string name="select_your_account">choose your account</string>
+    <string name="select_gender">select your gender</string>
+    <string name="add_new_account">add new account</string>
 
+    <string name="you_are_going_to_remove_the_account">you are going to remove the account</string>
+    <string name="remove">remove</string>
+    <string name="user_removed">account removed</string>
 </resources>
