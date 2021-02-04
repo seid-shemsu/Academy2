@@ -65,6 +65,35 @@ public class UsersActivity extends AppCompatActivity {
         usersDatabase.onUpgrade(db, 1, 1);*/
         recycler = findViewById(R.id.recycler);
         recycler.setHasFixedSize(true);
+        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recycler.setLayoutManager(layoutManager);
+        final SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recycler);
+        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                try {
+                    View view = snapHelper.findSnapView(layoutManager);
+                    int pos = layoutManager.getPosition(view);
+                    RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(pos);
+                    LinearLayout rl1 = viewHolder.itemView.findViewById(R.id.linear1);
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                        rl1.animate().setDuration(150).scaleX(1.1f).scaleY(1.1f).setInterpolator(new AccelerateInterpolator()).start();
+                    }
+                    else{
+                        rl1.animate().setDuration(150).scaleX(1).scaleY(1).setInterpolator(new AccelerateInterpolator()).start();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(UsersActivity.this, "", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
         add = findViewById(R.id.add);
         no_acc = findViewById(R.id.no_account);
         add.setOnClickListener(new View.OnClickListener() {
@@ -74,31 +103,7 @@ public class UsersActivity extends AppCompatActivity {
                 finish();
             }
         });
-        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recycler.setLayoutManager(layoutManager);
-        final SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(recycler);
-        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                View view = snapHelper.findSnapView(layoutManager);
-                int pos = layoutManager.getPosition(view);
-                RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(pos);
-                LinearLayout rl1 = viewHolder.itemView.findViewById(R.id.linear1);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE){
-                    rl1.animate().setDuration(150).scaleX(1.1f).scaleY(1.1f).setInterpolator(new AccelerateInterpolator()).start();
-                }
-                else{
-                    rl1.animate().setDuration(150).scaleX(0.90f).scaleY(0.90f).setInterpolator(new AccelerateInterpolator()).start();
-                }
-            }
 
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
         UsersDatabase usersDatabase = new UsersDatabase(this, "users");
         userObjects = usersDatabase.getAll();
         adapter = new UsersAdapter(this, userObjects);

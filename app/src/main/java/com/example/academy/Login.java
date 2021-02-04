@@ -110,7 +110,6 @@ public class Login extends AppCompatActivity {
                                 name = dataSnapshot1.getValue().toString();
                                 break;
                             case "phone":
-                                Toast.makeText(Login.this, dataSnapshot1.getValue().toString()+  "", Toast.LENGTH_SHORT).show();
                                 sh.edit().putString("phone", dataSnapshot1.getValue().toString()).apply();
                                 phone_ = dataSnapshot1.getValue().toString();
                                 break;
@@ -121,7 +120,6 @@ public class Login extends AppCompatActivity {
                                 sh.edit().putString("location", dataSnapshot1.getValue().toString()).apply();
                                 break;
                             case "gender":
-                                Toast.makeText(Login.this, dataSnapshot1.getValue().toString()+  "", Toast.LENGTH_SHORT).show();
                                 sh.edit().putString("gender", dataSnapshot1.getValue().toString()).apply();
                                 gender = dataSnapshot1.getValue().toString();
                                 break;

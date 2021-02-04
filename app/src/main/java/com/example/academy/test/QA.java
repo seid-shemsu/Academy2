@@ -20,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.academy.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QA extends RecyclerView.Adapter<QA.Holder> {
     Context context;
@@ -35,7 +37,7 @@ public class QA extends RecyclerView.Adapter<QA.Holder> {
         this.code = code;
         answers = new ArrayList<>();
         for (int i = 0; i < questions.size(); i++)
-            answers.add("101");
+            answers.add("100");
     }
 
     public QA(Context context, List<Object> questions, List<String> answers, List<String> default_answer, int code) {
@@ -55,6 +57,7 @@ public class QA extends RecyclerView.Adapter<QA.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
+        holder.setIsRecyclable(false);
         if (code == 0) {
             final Object object = questions.get(position);
             holder.q.setText(object.getQuestion());
@@ -66,8 +69,10 @@ public class QA extends RecyclerView.Adapter<QA.Holder> {
                 ch.setTextColor(context.getResources().getColor(R.color.colorPrimary));
                 ch.setId(i);
                 ch.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                if (i == Integer.parseInt(answers.get(position)))
+                if (i == Integer.parseInt(answers.get(position))){
                     ch.setChecked(true);
+                }
+
                 holder.group.addView(ch);
             }
             holder.group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

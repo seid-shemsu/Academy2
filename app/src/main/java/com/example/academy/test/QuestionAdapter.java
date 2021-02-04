@@ -25,8 +25,8 @@ public class QuestionAdapter extends ArrayAdapter<String>{
     List<String> answer = new ArrayList<>();
     RadioButton tr, fl;
     int type;
-    int[] answerCheck = new int[10];
-    String[] answered = new String[10];
+    int[] answerCheck = new int[100];
+    String[] answered = new String[100];
     LinearLayout linearLayout;
     ArrayList<String> questions;
 

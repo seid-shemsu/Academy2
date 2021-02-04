@@ -21,10 +21,10 @@ public class VideoPlayManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
         setContentView(R.layout.activity_video_play_manager);
-        setTitle(getIntent().getExtras().getString("title"));
+        //setTitle(getIntent().getExtras().getString("title"));
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         videoId = getIntent().getExtras().getString("link");
 
