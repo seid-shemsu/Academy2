@@ -4,6 +4,7 @@ package com.example.academy.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ import com.example.academy.PartAdapters.IconAdapter;
 import com.example.academy.PartAdapters.NumberAdapter;
 import com.example.academy.PartAdapters.TitleAdapter;
 import com.example.academy.R;
+import com.example.academy.database.DB;
+import com.example.academy.database.PartObject;
 import com.example.academy.test.Quiz;
 import com.example.academy.test.Test;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +37,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,9 +59,9 @@ public class CoursePartFragment extends Fragment {
     //private String[] numbersArray, titlesArray;
     private int i = 0;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setLanguage();
         View root = inflater.inflate(R.layout.fragment_course_part, container, false);
         number = root.findViewById(R.id.number_recycler);
         title = root.findViewById(R.id.title_recycler);
@@ -74,6 +78,8 @@ public class CoursePartFragment extends Fragment {
         course_code = getArguments().getString("course_code");
         course_title  = getArguments().getString("title");
         ((MainActivity) getActivity()).setActionBarTitle(course_title);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        String lang = sharedPreferences.getString("lang", "am");
         getItems();
         final_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +126,28 @@ public class CoursePartFragment extends Fragment {
         });
         return root;
     }
+    /*private void getFromDatabase(){
+        DB db = new DB(getContext());
+        List<PartObject> partObjects = db.getParts(name, getContext().getSharedPreferences("lang", Context.MODE_PRIVATE).getString("lang", "am"));
+        titles.clear();
+        numbers.clear();
+        icons.clear();
+        i = 0;
+        for (PartObject partObject : partObjects){
+            titles.add(partObject.getName());
+            numbers.add(partObject.getNumber());
+            icons.add(course_code + partObject.getNumber());
+        }
+        FragmentManager fragmentManager = getFragmentManager();
+        TitleAdapter titleAdapter = new TitleAdapter(getContext(), titles, fragmentManager, name, course_code);
+        NumberAdapter numberAdapter = new NumberAdapter(getContext(), numbers, course_code);
+        IconAdapter iconAdapter = new IconAdapter(getContext(), icons);
+        icon.setAdapter(iconAdapter);
+        number.setAdapter(numberAdapter);
+        title.setAdapter(titleAdapter);
+        final_btn.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.GONE);
+    }*/
     private void getItems(){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         String lang = sharedPreferences.getString("lang", "am");
@@ -156,6 +184,14 @@ public class CoursePartFragment extends Fragment {
 
             }
         });
+    }
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 
 }

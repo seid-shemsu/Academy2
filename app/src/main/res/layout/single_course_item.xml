@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_margin="15dp"
+    android:padding="10dp"
     android:elevation="7dp"
     android:background="@drawable/btnbgstroke"
     android:layout_height="wrap_content">
@@ -42,7 +43,7 @@
         android:progressTint="@color/colorPrimary"
         android:numStars="5" />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,5 +61,16 @@
             android:id="@+id/attendants"
             android:layout_marginStart="10dp"
             android:textColor="@color/bunny"/>
-    </LinearLayout>
+    </LinearLayout>-->
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/course_rate"
+        android:layout_alignLeft="@id/card"
+        android:layout_alignRight="@id/card"
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="@color/background"
+        android:progressTint="@color/colorPrimary" />
 </RelativeLayout>

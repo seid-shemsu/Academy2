@@ -21,7 +21,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/btnbgsolid"
-            android:text="watch video"
+            android:text="@string/watch_video"
             android:textColor="@color/white" />
 
         <Button
@@ -29,7 +29,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/btnbgstroke"
-            android:text="read pdf"
+            android:text="@string/read_pdf_help"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

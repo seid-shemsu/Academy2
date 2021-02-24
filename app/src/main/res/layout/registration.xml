@@ -35,74 +35,6 @@
             android:background="@drawable/btnbgstroke"
             android:src="@drawable/logo" />
 
-        <!--<LinearLayout
-            android:id="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/logo"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background"
-                android:drawableStart="@drawable/user"
-                android:drawablePadding="10dp"
-                android:singleLine="true"
-                android:gravity="start|center_vertical"
-                android:minHeight="40dp"
-                android:textCursorDrawable="@null" />
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background"
-                android:drawableStart="@drawable/phone"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="10dp"
-                android:inputType="phone"
-                android:minHeight="40dp"
-                android:gravity="start|center_vertical"
-                android:textCursorDrawable="@null" />
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:drawableStart="@drawable/mail"
-                android:background="@drawable/background"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="10dp"
-                android:minHeight="40dp"
-                android:gravity="start|center_vertical"
-                android:singleLine="true"
-                android:textCursorDrawable="@null" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/background"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/location" />
-
-                <Spinner
-                    android:id="@+id/country"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:entries="@array/country" />
-            </LinearLayout>
-
-        </LinearLayout>-->
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
@@ -116,7 +48,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:gravity="bottom"
+                android:gravity="bottom|start"
                 android:id="@+id/nameInput">
                 <EditText
                     android:id="@+id/name"
@@ -125,10 +57,12 @@
                     android:background="@drawable/background"
                     android:drawableStart="@drawable/user"
                     android:drawablePadding="10dp"
+                    android:inputType="text"
                     android:paddingStart="5dp"
-                    android:singleLine="true"
+                    android:paddingEnd="5dp"
+                    android:textAlignment="viewStart"
                     android:gravity="start|center_vertical"
-                    android:textCursorDrawable="@null" />
+                    android:textCursorDrawable="@null"  />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -140,11 +74,11 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/use_name"/>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="5dp"
+                android:gravity="start|bottom"
                 android:id="@+id/phoneInput">
                 <EditText
                     android:id="@+id/phone"
@@ -155,6 +89,8 @@
                     android:drawablePadding="10dp"
                     android:inputType="phone"
                     android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textAlignment="viewStart"
                     android:gravity="start|center_vertical"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -171,6 +107,7 @@
                     android:drawableStart="@drawable/mail"
                     android:background="@drawable/background"
                     android:drawablePadding="10dp"
+                    android:textAlignment="viewStart"
                     android:gravity="start|center_vertical"
                     android:paddingStart="5dp"
                     android:singleLine="true"

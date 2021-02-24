@@ -37,7 +37,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.Holder> {
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         SharedPreferences lessons = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
         SharedPreferences passed = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
-        if (lessons.getBoolean(course_code + (position +1), false) && !passed.getBoolean(course_code + (position +1), false)){
+        if (passed.getBoolean(course_code + (position), false) && !passed.getBoolean(course_code + (position +1), false)){
             holder.number.setBackground(context.getResources().getDrawable(R.drawable.number_bg));
             holder.number.setTextColor(context.getResources().getColor(R.color.white));
         }

@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.academy.database.DB;
 import com.example.academy.help.HelpFragment;
 import com.example.academy.users.UserObject;
 import com.example.academy.users.UsersActivity;
@@ -59,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
         setLanguage();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);/*
+        DB db = new DB(this);
+        db.onUpgrade(db.getWritableDatabase(), 1,2);
+        getSharedPreferences("course", MODE_PRIVATE).edit().clear().apply();*/
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
