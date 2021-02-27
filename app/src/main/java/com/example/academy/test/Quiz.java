@@ -87,6 +87,7 @@ public class Quiz extends AppCompatActivity {
                         if (connectionCheck()) {
                             if (res*100.0/default_answer.size() >= 70.0) {
                                 setCertificate();
+                                getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean("final_passed", true).apply();
                                 dialog.setContentView(R.layout.final_passed);
                                 TextView resultText = dialog.findViewById(R.id.result);
                                 String s = res + "/" + default_answer.size();

@@ -115,9 +115,13 @@ public class CoursePartFragment extends Fragment {
 
                         }
                     });*/
-                    startActivity(new Intent(getContext(), Quiz.class)
-                            .putExtra("course_code", course_code)
-                            .putExtra("quiz", "final"));
+                    if (!passed.getBoolean("final_passed", false)) {
+                        startActivity(new Intent(getContext(), Quiz.class)
+                                .putExtra("course_code", course_code)
+                                .putExtra("quiz", "final"));
+                    } else {
+                        Toast.makeText(getContext(), getContext().getString(R.string.final_exam_taken), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
                     Toast.makeText(getContext(), getResources().getString(R.string.take_tests), Toast.LENGTH_SHORT).show();
