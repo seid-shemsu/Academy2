@@ -14,15 +14,16 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:gravity="center"
-            android:text="@string/congratulation_n_you_have_complete_the_course_n_nthank_you"
-            android:textColor="@color/colorPrimaryDark"
+
+            android:text="@string/sorry_you_could_not_pass_the_final_exam"
+            android:textColor="#FD0808"
             android:textSize="20sp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_margin="10dp"
-            android:src="@drawable/passed" />
+            android:src="@drawable/failed" />
         <TextView
             android:id="@+id/result"
             android:layout_width="match_parent"
@@ -33,26 +34,17 @@
             android:textSize="20sp"/>
 
         <Button
-            android:id="@+id/asses"
+            android:id="@+id/back"
             android:layout_width="175dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:background="@drawable/btnbgsolid"
-            android:text="@string/asses_course"
+            android:backgroundTint="#FD0808"
+            android:text="@string/back_to_main"
             android:layout_marginBottom="10dp"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/answer"
-            android:layout_width="175dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/btnbgstroke"
-            android:text="@string/view_answers"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

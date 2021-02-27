@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="you have not started any course yet."
+        android:text="@string/you_have_not_started_any_course_yet"
         android:textColor="@color/colorPrimary"
         android:visibility="gone"
         android:id="@+id/no_course"/>

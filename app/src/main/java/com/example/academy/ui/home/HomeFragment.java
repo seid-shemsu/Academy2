@@ -2,6 +2,7 @@ package com.example.academy.ui.home;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +30,10 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences, userProgress;
     private DatabaseReference databaseReference;
     private List<CourseObject> courseObjects = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -40,8 +42,8 @@ public class HomeFragment extends Fragment {
     private List<Integer> codes = new ArrayList<>();
     private int i = 1;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setLanguage();
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -57,27 +59,51 @@ public class HomeFragment extends Fragment {
         return root;
     }
     private void addCourses(){
+        SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        final String phone = user.getString("phone", "");
+        //String p;
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 i = 1;
                 courseObjects.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    /*DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(snapshot.getKey());
+                    progress.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            try {
+                                //String p = "0" ;
+                                if (dataSnapshot.hasChild("progress")){
+                                    p = dataSnapshot.child("progress").getValue().toString() ;
+                                }
+                                int attendants = 0;
+                                if (snapshot.hasChild("attendants"))
+                                    attendants = (int)(snapshot.child("attendants").getChildrenCount());
+                            } catch (NumberFormatException e) {
+                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });*/
+
+                    userProgress = getContext().getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                    String p = userProgress.getString("progress", "0");
                     String name = snapshot.child("name").getValue().toString();
                     String img_url = snapshot.child("img_url").getValue().toString();
                     double rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
-                    int attendants = 0;
-                    if (snapshot.hasChild("attendants"))
-                        attendants = (int)(snapshot.child("attendants").getChildrenCount());
-                    courseObjects.add(new CourseObject(name, img_url, rating, i++, attendants));
+                    courseObjects.add(new CourseObject(name, img_url, rating, i++, p));
+                    FragmentManager fragmentManager = getFragmentManager();
+                    CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);
+                    recyclerView.setAdapter(courseAdapter);
+                    if (courseObjects.size() < 1 ){
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    progressBar.setVisibility(View.GONE);
                 }
-                FragmentManager fragmentManager = getFragmentManager();
-                CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);
-                recyclerView.setAdapter(courseAdapter);
-                if (courseObjects.size() < 1 ){
-                    textView.setVisibility(View.VISIBLE);
-                }
-                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -85,5 +111,13 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 }

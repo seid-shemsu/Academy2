@@ -199,8 +199,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        if (snapshot.hasChild("lesson"))
+                        if (snapshot.hasChild("lesson")){
                             putProgress(snapshot.getKey(), snapshot.child("lesson").getValue().toString());
+                            final SharedPreferences userProgress = context.getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                            userProgress.edit().putString("progress", snapshot.child("progress").getValue().toString()).apply();
+                        }
                     }
                 }
             }

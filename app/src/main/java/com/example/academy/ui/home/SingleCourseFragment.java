@@ -4,6 +4,7 @@ package com.example.academy.ui.home;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,48 +45,45 @@ public class SingleCourseFragment extends Fragment {
     TextView course_name;
     Button start, cont;
     String name;
-
+    String course_code;
+    SharedPreferences lesson;
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setLanguage();
         View root = inflater.inflate(R.layout.fragment_single_course, container, false);
         final Bundle bundle = this.getArguments();
         name = bundle.getString("course_name");
         final SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         final String lang = sharedPreferences.getString("lang", "am");
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(lang).child(name);
         course_name = root.findViewById(R.id.course_name);
         start = root.findViewById(R.id.start);
         cont = root.findViewById(R.id.cont);
-        SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+        course_code = bundle.getString("course_code");
+        lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
         SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
         passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
         lesson.edit().putBoolean(getArguments().getString("course_code") + 1, true).apply();
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(lang).child(name).child("name");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                /*start.setVisibility(View.VISIBLE);
-                cont.setVisibility(View.VISIBLE);*/
-                String course_code = bundle.getString("course_code");
-                SharedPreferences lesson = null;
-                //Toast.makeText(getContext(), dataSnapshot.child("name").getChildrenCount() + " " , Toast.LENGTH_SHORT).show();
-
-                try {String n = dataSnapshot.child("name").getValue().toString();
-                    course_name.setText(n);
-                    lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
-                    if (!lesson.getBoolean(course_code + "2", false)) {
-                        start.setVisibility(View.VISIBLE);
-                    } else {
-                        cont.setVisibility(View.VISIBLE);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                course_name.setText(dataSnapshot.getValue().toString());
+                if (!lesson.getBoolean(course_code + "2", false)) {
+                    start.setVisibility(View.VISIBLE);
+                } else {
+                    cont.setVisibility(View.VISIBLE);
                 }
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -93,7 +93,6 @@ public class SingleCourseFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addStudent(getArguments().getString("course_code"));
                 Fragment coursePartFragment = new CoursePartFragment();
                 FragmentManager fragmentManager = getFragmentManager();
@@ -127,13 +126,13 @@ public class SingleCourseFragment extends Fragment {
         SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
         if (lang.getString("lang", "am").equals("om")) {
-            DatabaseReference om = FirebaseDatabase.getInstance().getReference().child("om").child("courses").child(course_code);
+            DatabaseReference om = FirebaseDatabase.getInstance().getReference().child("courses").child("om").child(course_code);
             om.child("attendants").child(phone).setValue(user.getString("name", " "));
 
         } else {
-            DatabaseReference am = FirebaseDatabase.getInstance().getReference().child("am").child("courses").child(course_code);
-            DatabaseReference en = FirebaseDatabase.getInstance().getReference().child("en").child("courses").child(course_code);
-            DatabaseReference ar = FirebaseDatabase.getInstance().getReference().child("ar").child("courses").child(course_code);
+            DatabaseReference am = FirebaseDatabase.getInstance().getReference().child("courses").child("am").child(course_code);
+            DatabaseReference en = FirebaseDatabase.getInstance().getReference().child("courses").child("en").child(course_code);
+            DatabaseReference ar = FirebaseDatabase.getInstance().getReference().child("courses").child("ar").child(course_code);
             am.child("attendants").child(phone).setValue(user.getString("name", " "));
             en.child("attendants").child(phone).setValue(user.getString("name", " "));
             ar.child("attendants").child(phone).setValue(user.getString("name", " "));

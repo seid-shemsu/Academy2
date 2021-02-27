@@ -8,13 +8,19 @@ public class CourseObject {
 
     public CourseObject(String course_name, String img_url, double rating, int code, int students) {
         this.course_name = course_name;
+        this.img_url = img_url;
+        this.code = code;
+        this.rating = rating;
+        this.students = students;
+    }
+    public CourseObject(String course_name, String img_url, double rating, int code, String progress) {
+        this.course_name = course_name;
         this.progress = progress;
         this.img_url = img_url;
         this.code = code;
         this.rating = rating;
         this.students = students;
     }
-
     public CourseObject(String course_name, String progress, String img_url, double rating) {
         this.course_name = course_name;
         this.progress = progress;

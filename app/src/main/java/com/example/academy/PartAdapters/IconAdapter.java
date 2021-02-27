@@ -40,11 +40,15 @@ public class IconAdapter extends RecyclerView.Adapter<IconAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        if (lessons.getBoolean(icons.get(position), false)){
+        if (position != 0) {
+            if (passed.getBoolean(icons.get(position-1), false)){
+                holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.unlocked));
+            }
+            else
+                holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.locked));
+        } else {
             holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.unlocked));
         }
-        else
-            holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.locked));
 
         if (passed.getBoolean(icons.get(position), false))
             holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.circle_correct));

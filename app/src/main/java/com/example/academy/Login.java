@@ -1,5 +1,6 @@
 package com.example.academy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -152,8 +153,11 @@ public class Login extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        if (snapshot.hasChild("lesson"))
+                        if (snapshot.hasChild("lesson")){
                             putProgress(snapshot.getKey(), snapshot.child("lesson").getValue().toString());
+                            final SharedPreferences userProgress = getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                            userProgress.edit().putString("progress", snapshot.child("progress").getValue().toString()).apply();
+                        }
                     }
                 }
             }

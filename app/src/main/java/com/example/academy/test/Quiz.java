@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -34,6 +35,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Quiz extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -45,18 +47,21 @@ public class Quiz extends AppCompatActivity {
     Snackbar snackbar;
     String course_code, quiz;
     int res = 0;
-    private SharedPreferences passed, lessons;
+    private SharedPreferences passed;
     private SharedPreferences.Editor editor;
 
+    private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLanguage();
         setContentView(R.layout.activity_quiz);
         setTitle(getResources().getString(R.string.quiz));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
+        dialog = new Dialog(Quiz.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         submit = findViewById(R.id.submit);
         progressBar = findViewById(R.id.progress_bar);
@@ -75,43 +80,56 @@ public class Quiz extends AppCompatActivity {
                         if (qa.getAnswer().get(i).equalsIgnoreCase(default_answer.get(i)))
                             res++;
                     }
-                    final Dialog dialog = new Dialog(Quiz.this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     if (getIntent().getExtras().getString("quiz").contains("final")){
                         if (connectionCheck()) {
-                            setCertificate();
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            dialog.setContentView(R.layout.final_passed);
-                            Button ok = dialog.findViewById(R.id.asses);
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(Quiz.this, Asses.class)
-                                            .putExtra("course_code", course_code));
-                                    finish();
-
-                                }
-                            });
-                            Button result = dialog.findViewById(R.id.answer);
-                            result.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                    List<String> answers = qa.getAnswer();
-                                    qa = new QA(getApplicationContext(), objects, answers, default_answer, 1);
-                                    recyclerView.setAdapter(qa);
-                                    submit.setVisibility(View.GONE);
-                                }
-                            });
-                            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    res = 0;
-                                }
-                            });
+                            if (res*100.0/default_answer.size() >= 70.0) {
+                                setCertificate();
+                                dialog.setContentView(R.layout.final_passed);
+                                TextView resultText = dialog.findViewById(R.id.result);
+                                String s = res + "/" + default_answer.size();
+                                resultText.setText(s);
+                                Button ok = dialog.findViewById(R.id.asses);
+                                ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        startActivity(new Intent(Quiz.this, Asses.class).putExtra("course_code", course_code));
+                                        finish();
+                                    }
+                                });
+                                Button result = dialog.findViewById(R.id.answer);
+                                result.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                        List<String> answers = qa.getAnswer();
+                                        qa = new QA(getApplicationContext(), objects, answers, default_answer, 1);
+                                        recyclerView.setAdapter(qa);
+                                        submit.setVisibility(View.GONE);
+                                    }
+                                });
+                                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(DialogInterface dialog) {
+                                        res = 0;
+                                    }
+                                });
+                            } else {
+                                dialog.setContentView(R.layout.final_failed);
+                                TextView resultText = dialog.findViewById(R.id.result);
+                                String s = res + "/" + default_answer.size();
+                                resultText.setText(s);
+                                Button back = dialog.findViewById(R.id.back);
+                                back.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                        onBackPressed();
+                                    }
+                                });
+                            }
                             //editor.apply();
                             dialog.show();
                         }
@@ -125,15 +143,15 @@ public class Quiz extends AppCompatActivity {
                         }
                     }
                     else {
-                        lessons = getSharedPreferences("lessons", MODE_PRIVATE);
+                        //lessons = getSharedPreferences("lessons", MODE_PRIVATE);
+                        //editor = lessons.edit();
+                        //editor.putBoolean(course_code + (Integer.parseInt(quiz) +1), true);
+                        //editor.apply();
                         passed = getSharedPreferences("passed", MODE_PRIVATE);
-                        editor = lessons.edit();
-                        editor.putBoolean(course_code + (Integer.parseInt(quiz) +1), true);
-                        editor.apply();
                         editor = passed.edit();
                         editor.putBoolean(course_code+quiz, true);
                         editor.apply();
-                        setRate(res, default_answer.size());
+                        //setRate(res, default_answer.size());
                         dialog.setContentView(R.layout.passed);
                         TextView result = dialog.findViewById(R.id.result);
                         String s = res + "/" + default_answer.size();
@@ -169,14 +187,13 @@ public class Quiz extends AppCompatActivity {
             }
         });
     }
-    private void setRate(final int p, final int t) {
+    /*private void setRate(final int p, final int t) {
         SharedPreferences user = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
         final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(course_code);
         progress.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 try {
                     String totals = dataSnapshot.child("total").getValue().toString();
                     String scores = dataSnapshot.child("score").getValue().toString();
@@ -201,12 +218,9 @@ public class Quiz extends AppCompatActivity {
 
 
     }
-
+*/
     private void getQ(String part) {
-        final DatabaseReference data = FirebaseDatabase.getInstance().getReference()
-                .child("tests")
-                .child(part);
-
+        final DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("tests").child(part);
         data.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -289,4 +303,24 @@ public class Quiz extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dialog.dismiss();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss();
+    }
+
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
 }

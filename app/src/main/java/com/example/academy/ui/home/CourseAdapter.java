@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         final CourseObject courseObject = courseObjects.get(position);
         holder.course_name.setText(courseObject.getCourse_name());
         holder.course_rate.setRating((float) courseObject.getRating());
-        holder.attendants.setText(courseObject.getStudents() + "");
+        //holder.attendants.setText(courseObject.getStudents() + "");
+        holder.progressBar.setProgress(Integer.parseInt(courseObject.getProgress()));
         File img = context.getApplicationContext().getFileStreamPath(String.valueOf(courseObject.getCode()));
         if (img.exists()){
             holder.course_img.setImageBitmap(loadImage(context, String.valueOf(courseObject.getCode())));
@@ -88,18 +90,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         TextView course_name, attendants;
         RatingBar course_rate;
         FragmentManager fragmentManager;
-
+        ProgressBar progressBar;
         private ImageViewHolder(@NonNull View itemView, FragmentManager fragmentManager) {
             super(itemView);
             course_img = itemView.findViewById(R.id.course_img);
             course_name = itemView.findViewById(R.id.course_name);
             course_rate = itemView.findViewById(R.id.course_rate);
-            attendants = itemView.findViewById(R.id.attendants);
+            //attendants = itemView.findViewById(R.id.attendants);
+            progressBar = itemView.findViewById(R.id.progress_bar);
+
             this.fragmentManager = fragmentManager;
             course_rate.setOnClickListener(this);
             course_name.setOnClickListener(this);
             course_img.setOnClickListener(this);
-            attendants.setOnClickListener(this);
+            //attendants.setOnClickListener(this);
         }
 
         @Override

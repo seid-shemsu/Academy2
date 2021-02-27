@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,7 +55,7 @@ public class Register extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLanguage();
         setContentView(R.layout.registration);
-        setTitle("registration");
+        setTitle(getString(R.string.register));
         usersDatabase = new UsersDatabase(this, "users");
         nameInput = findViewById(R.id.nameInput);
         phoneInput = findViewById(R.id.phoneInput);

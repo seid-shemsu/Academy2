@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="you do not have any certificate yet."
+        android:text="@string/you_do_not_have_any_certificate_yet"
         android:textColor="@color/colorPrimary"
         android:visibility="gone"
         android:id="@+id/no_certificate"/>

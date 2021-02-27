@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -36,6 +37,7 @@ import com.example.academy.MainActivity;
 import com.example.academy.MusicManager;
 import com.example.academy.R;
 import com.example.academy.Reader;
+import com.example.academy.Share;
 import com.example.academy.VideoPlayManager;
 import com.example.academy.tabs.CourseObject;
 import com.example.academy.test.Quiz;
@@ -58,6 +60,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -91,6 +94,7 @@ public class Detail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setLanguage();
         View root = inflater.inflate(R.layout.fragment_detail, container, false);
         ImageView youtube = root.findViewById(R.id.youtube);
         audio = root.findViewById(R.id.audio);
@@ -107,46 +111,24 @@ public class Detail extends Fragment {
         editor_passed = passed.edit();
         lesson_editor = lessons.edit();
         quiz_editor = has_quiz.edit();
-        if (has_quiz.getBoolean(course_code+part_number, false) && lessons.getBoolean(course_code+part_number, false))
+        if (part_number.equalsIgnoreCase("1"))
+            lesson_editor.putBoolean(course_code + part_number, false).apply();
+        if (lessons.getBoolean(course_code + part_number, false))
             quiz.setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
-        DatabaseReference test = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
-        test.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("test")){
-                    quiz_editor.putBoolean(course_code+part_number, true);
-                    quiz_editor.apply();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
         getLinks();
         youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    if (has_quiz.getBoolean(course_code+part_number, false))
-                        quiz.setVisibility(View.VISIBLE);
-                    else {
-                        lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
-                        lesson_editor.apply();
-                        editor_passed.putBoolean(course_code+part_number, true);
-                        editor_passed.apply();
-                    }
-                    try {
-                        mediaPlayer.pause();
-                    }
-                    catch (Exception e){
-
-                    }
-                    setProgress();
-                    startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name+part_number));
+                lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true).apply();
+                //editor_passed.putBoolean(course_code + part_number, true).apply();
+                try {
+                    mediaPlayer.pause();
+                } catch (Exception e) {
+                }
+                setProgress();
+                startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name + part_number));
+                quiz.setVisibility(View.VISIBLE);
             }
         });
         audio.setOnClickListener(new View.OnClickListener() {
@@ -236,9 +218,11 @@ public class Detail extends Fragment {
     String name;
     String part;
     int p = 0;
+
     private void setProgress() {
-        SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        final SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
+        final SharedPreferences userProgress = getContext().getSharedPreferences(course_code, Context.MODE_PRIVATE);
         DatabaseReference course = FirebaseDatabase.getInstance().getReference(language).child("courses").child(course_code);
         final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(course_code);
         course.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -247,11 +231,15 @@ public class Detail extends Fragment {
                 img_url = dataSnapshot.child("img_url").getValue().toString();
                 name = dataSnapshot.child("name").getValue().toString();
                 part = dataSnapshot.child("parts").getValue().toString();
-                p = (int) ((double) Integer.parseInt(part_number) / ( double)Integer.parseInt(part) * 100);
-                progress.child("course_name").setValue(name);
-                progress.child("progress").setValue(p);
-                progress.child("img_url").setValue(img_url);
-                progress.child("lesson").setValue(Integer.parseInt(part_number) + 1) ;
+                p = (int) ((double) Integer.parseInt(part_number) / (double) Integer.parseInt(part) * 100);
+                if (p > Integer.parseInt(userProgress.getString("progress", "0"))){
+                    progress.child("course_name").setValue(name);
+                    progress.child("progress").setValue(p);
+                    progress.child("img_url").setValue(img_url);
+                    progress.child("lesson").setValue(Integer.parseInt(part_number) + 1);
+                    userProgress.edit().putString("progress", p + "").apply();
+                    userProgress.edit().putString("lesson", (Integer.parseInt(part_number) + 1) +"").apply();
+                }
             }
 
             @Override
@@ -259,42 +247,32 @@ public class Detail extends Fragment {
 
             }
         });
-        //CourseObject single_course = new CourseObject(course_name, Integer.toString(p), img_url);
-
-
     }
 
     private void downloadPdf() {
         try {
-            if (has_quiz.getBoolean(course_code+part_number, false))
-                quiz.setVisibility(View.VISIBLE);
-            else {
-                lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
-                lesson_editor.apply();
-                editor_passed.putBoolean(course_code+part_number, true);
-                editor_passed.apply();
-            }
+            lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true).apply();
+            //editor_passed.putBoolean(course_code + part_number, true).apply();
             String root = Environment.getExternalStorageDirectory().toString();
             File dir = new File(root + "/africa/" + course_code + "/pdfs");
             if (!dir.exists())
                 dir.mkdirs();
-            final File file = new File( dir, course_code + part_number + ".html");
+            final File file = new File(dir, course_code + part_number + ".html");
             if (file.isFile() && file.length() > 0) {
                 startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
                 setProgress();
-            }
-            else {
+                quiz.setVisibility(View.VISIBLE);
+            } else {
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setContentView(R.layout.wait);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-
                 try {
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
                     if (!file.exists())
-                    file.createNewFile();
+                        file.createNewFile();
                     storageReference.getFile(file)
                             .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                 @Override
@@ -302,6 +280,7 @@ public class Detail extends Fragment {
                                     dialog.dismiss();
                                     startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
                                     setProgress();
+                                    quiz.setVisibility(View.VISIBLE);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -312,16 +291,13 @@ public class Detail extends Fragment {
 
                                 }
                             });
-                }
-                catch (IllegalArgumentException e){
+                } catch (IllegalArgumentException e) {
 
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(getContext(), "ERROR 103\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
@@ -358,11 +334,10 @@ public class Detail extends Fragment {
             String root = Environment.getExternalStorageDirectory().toString();
             File dir = new File(root + "/africa/" + course_code + "/audios");
             dir.mkdirs();
-            final File file = new File( dir, course_code + part_number + ".ogg");
+            final File file = new File(dir, course_code + part_number + ".ogg");
             if (file.isFile() && file.length() > 0) {
                 play();
-            }
-            else {
+            } else {
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.confirmation);
@@ -398,7 +373,7 @@ public class Detail extends Fragment {
                                     .addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
                                         @Override
                                         public void onProgress(final FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            percent.setText(getResources().getString(R.string.downloading) +"...\n" + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount() + "%");
+                                            percent.setText(getResources().getString(R.string.downloading) + "...\n" + 100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount() + "%");
                                         }
 
                                     })
@@ -407,7 +382,6 @@ public class Detail extends Fragment {
                                         public void onFailure(@NonNull Exception e) {
                                             dialog.dismiss();
                                             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-
                                         }
                                     });
                         } catch (Exception e) {
@@ -430,14 +404,9 @@ public class Detail extends Fragment {
 
 
     private void play() {
-        if (has_quiz.getBoolean(course_code+ part_number, false))
-            quiz.setVisibility(View.VISIBLE);
-        else {
-            lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number) +1), true);
-            lesson_editor.commit();
-            editor_passed.putBoolean(course_code+part_number, true);
-            editor_passed.apply();
-        }
+
+        lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true);
+        lesson_editor.commit();
         setProgress();
         linearLayout.setVisibility(View.VISIBLE);
         playButton.setImageResource(R.drawable.pause);
@@ -446,7 +415,7 @@ public class Detail extends Fragment {
         try {
             String root = Environment.getExternalStorageDirectory().toString();
             File dir = new File(root + "/africa/" + course_code + "/audios");
-            final File file = new File( dir, course_code + part_number + ".ogg");
+            final File file = new File(dir, course_code + part_number + ".ogg");
             mediaPlayer.setDataSource(file.toString());
             mediaPlayer.prepare();
         } catch (final Exception e) {
@@ -474,6 +443,7 @@ public class Detail extends Fragment {
         );
         seekbar.setProgress(startTime);
         myHandler.postDelayed(UpdateSongTime, 100);
+        quiz.setVisibility(View.VISIBLE);
     }
 
     private Runnable UpdateSongTime = new Runnable() {
@@ -496,4 +466,12 @@ public class Detail extends Fragment {
         }
     };
 
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
 }

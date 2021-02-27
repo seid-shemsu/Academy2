@@ -30,6 +30,8 @@
         android:textColor="#000"
         android:textCursorDrawable="@null"
         android:layout_margin="25dp"
+        android:gravity="start|center_vertical"
+        android:textAlignment="viewStart"
         android:layout_centerHorizontal="true"
         android:textSize="17sp" />
 

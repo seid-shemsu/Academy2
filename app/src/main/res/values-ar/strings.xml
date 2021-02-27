@@ -189,7 +189,7 @@
     <string name="ethiopia">أثيوبيا</string>
     <string-array name="gender">
         <item>جنس</item>
-        <item>الذكر</item>
+        <item>ذكر</item>
         <item>أنثى</item>
     </string-array>
 
@@ -208,7 +208,7 @@
     <string name="registered_successfully">تم التسجيل بنجاح</string>
 
     <string name="listen_audio">استمع</string>
-    <string name="read_pdf">اقرء</string>
+    <string name="read_pdf">اقرأ</string>
     <string name="get_started">نقطة الانطلاق</string>
 
     <string name="language">اللغة</string>
@@ -289,11 +289,11 @@
     <string name="quiz">الاختبار </string>
     <string name="personal_information">المعلومات الشخصية</string>
     <string name="choose_your_account">اختر حسابك</string>
-    <string name="help">العون</string>
+    <string name="help">مساعدة</string>
     <string name="register">التسجيل</string>
     <string name="use_name">استخدم الاسم الذي تريد طباعته على الشهادة</string>
     <string name="attendants">الحاضرين</string>
-    <string name="select_country">اختر بلدك الان</string>
+    <string name="select_country">اختر بلدك المقيم</string>
     <string name="share">شارك</string>
     <string name="no_account_added_yet">لم يضف حساب بعد</string>
     <string name="select_your_account">اختر حسابك</string>
@@ -302,4 +302,12 @@
     <string name="you_are_going_to_remove_the_account">ستقوم بإزالة الحساب</string>
     <string name="remove">إزالة</string>
     <string name="user_removed">تمت إزالة الحساب</string>
+    <string name="watch_video">شاهد الفيديو</string>
+    <string name="read_pdf_help">اقرأ ملف بي دي إف</string>
+    <string name="minimum_word_length">الحد الأدنى لطول الكلمة</string>
+    <string name="pls_use_more_words">الرجاء استخدام المزيد من الكلمات</string>
+    <string name="you_do_not_have_any_certificate_yet">ليس لديك أي شهادة حتى الآن.</string>
+    <string name="you_have_not_started_any_course_yet">لم تبدأ أي دورة بعد.</string>
+    <string name="sorry_you_could_not_pass_the_final_exam">sorry you could not pass the final exam</string>
+    <string name="back_to_main">back to main</string>
 </resources>
