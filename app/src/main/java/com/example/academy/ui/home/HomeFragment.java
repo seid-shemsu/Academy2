@@ -89,19 +89,23 @@ public class HomeFragment extends Fragment {
                         }
                     });*/
 
-                    userProgress = getContext().getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
-                    String p = userProgress.getString("progress", "0");
-                    String name = snapshot.child("name").getValue().toString();
-                    String img_url = snapshot.child("img_url").getValue().toString();
-                    double rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
-                    courseObjects.add(new CourseObject(name, img_url, rating, i++, p));
-                    FragmentManager fragmentManager = getFragmentManager();
-                    CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);
-                    recyclerView.setAdapter(courseAdapter);
-                    if (courseObjects.size() < 1 ){
-                        textView.setVisibility(View.VISIBLE);
+                    try {
+                        userProgress = getContext().getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                        String p = userProgress.getString("progress", "0");
+                        String name = snapshot.child("name").getValue().toString();
+                        String img_url = snapshot.child("img_url").getValue().toString();
+                        double rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
+                        courseObjects.add(new CourseObject(name, img_url, rating, i++, p));
+                        FragmentManager fragmentManager = getFragmentManager();
+                        CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);
+                        recyclerView.setAdapter(courseAdapter);
+                        if (courseObjects.size() < 1 ){
+                            textView.setVisibility(View.VISIBLE);
+                        }
+                        progressBar.setVisibility(View.GONE);
+                    } catch (Exception e) {
                     }
-                    progressBar.setVisibility(View.GONE);
+
                 }
 
             }
@@ -119,5 +123,11 @@ public class HomeFragment extends Fragment {
         Locale.setDefault(locale);
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().finish();
     }
 }

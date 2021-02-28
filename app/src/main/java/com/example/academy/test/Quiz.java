@@ -67,7 +67,7 @@ public class Quiz extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         course_code = getIntent().getExtras().getString("course_code");
         quiz = getIntent().getExtras().getString("quiz");
-        String part = getIntent().getExtras().getString("course_code") + getIntent().getExtras().getString("quiz");
+        String part = getIntent().getExtras().getString("course_code") + "_" + getIntent().getExtras().getString("quiz");
         getQ(part);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

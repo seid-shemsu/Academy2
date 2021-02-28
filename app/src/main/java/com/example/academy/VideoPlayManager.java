@@ -1,9 +1,12 @@
 package com.example.academy;
 
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
+import java.util.Locale;
 
 public class VideoPlayManager extends AppCompatActivity {
     String videoId;
@@ -37,20 +42,23 @@ public class VideoPlayManager extends AppCompatActivity {
         // The player will automatically release itself when the activity is destroyed.
         // The player will automatically pause when the activity is stopped
         // If you don't add YouTubePlayerView as a lifecycle observer, you will have to release it manually.
-        getLifecycle().addObserver(youTubePlayerView);
-
-        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-            @Override
-            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                YouTubePlayerUtils.loadOrCueVideo(
-                        youTubePlayer,
-                        getLifecycle(),
-                        videoId,
-                        0f
-                );
-                addFullScreenListenerToPlayer();
-            }
-        });
+        try {
+            getLifecycle().addObserver(youTubePlayerView);
+            youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                    YouTubePlayerUtils.loadOrCueVideo(
+                            youTubePlayer,
+                            getLifecycle(),
+                            videoId,
+                            0f
+                    );
+                    addFullScreenListenerToPlayer();
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "go back and come back again", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void addFullScreenListenerToPlayer() {
@@ -81,5 +89,19 @@ public class VideoPlayManager extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setLanguage();
+    }
+    private void setLanguage() {
+        SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
+        Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
+        Configuration configuration = new Configuration();
+        Locale.setDefault(locale);
+        configuration.locale = locale;
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 }
