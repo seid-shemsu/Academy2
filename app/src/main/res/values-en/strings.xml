@@ -24,7 +24,7 @@
     <string name="setting">Settings</string>
     <string name="ask_question">Ask question</string>
     <string name="about">About us</string>
-    <string name="enter_your_question_here">Enter your question here</string>
+    <string name="enter_your_question_here">Enter your question completely</string>
     <string name="you_want_to_download_the_audio">You want to download the audio file?</string>
     <string name="file_size">File size : 2.7 MB</string>
     <string name="download">Download</string>
@@ -110,7 +110,9 @@
     <string name="pls_use_more_words">please use more words</string>
     <string name="you_do_not_have_any_certificate_yet">you do not have any certificate yet.</string>
     <string name="you_have_not_started_any_course_yet">you have not started any course yet.</string>
-    <string name="sorry_you_could_not_pass_the_final_exam">sorry you could not pass the final exam</string>
+    <string name="sorry_you_could_not_pass_the_final_exam">The degree of passing the exam is 70% or more</string>
     <string name="back_to_main">back to main</string>
     <string name="final_exam_taken">You already take the final exam</string>
+    <string name="complered">\" % completed\"</string>
+    <string name="no_question_have_been_loaded">no question have been loaded</string>
 </resources>

@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.academy.MainActivity;
@@ -56,6 +57,8 @@ public class CoursePartFragment extends Fragment {
     private List<String> numbers = new ArrayList<>();
     private List<String> icons = new ArrayList<>();
     private String name, course_code, course_title;
+
+    LinearLayout l;
     //private String[] numbersArray, titlesArray;
     private int i = 0;
     @Override
@@ -63,16 +66,17 @@ public class CoursePartFragment extends Fragment {
         // Inflate the layout for this fragment
         setLanguage();
         View root = inflater.inflate(R.layout.fragment_course_part, container, false);
-        number = root.findViewById(R.id.number_recycler);
+        //number = root.findViewById(R.id.number_recycler);
         title = root.findViewById(R.id.title_recycler);
-        icon = root.findViewById(R.id.icon_recycler);
+        //icon = root.findViewById(R.id.icon_recycler);
         final_btn = root.findViewById(R.id.final_btn);
         progress = root.findViewById(R.id.progress);
-        icon.setHasFixedSize(true);
-        number.setHasFixedSize(true);
+        l = root.findViewById(R.id.l);
+        //icon.setHasFixedSize(true);
+        //number.setHasFixedSize(true);
         title.setHasFixedSize(true);
-        icon.setLayoutManager(new LinearLayoutManager(getContext()));
-        number.setLayoutManager(new LinearLayoutManager(getContext()));
+        //icon.setLayoutManager(new LinearLayoutManager(getContext()));
+        //number.setLayoutManager(new LinearLayoutManager(getContext()));
         title.setLayoutManager(new LinearLayoutManager(getContext()));
         name = getArguments().getString("course_name");
         course_code = getArguments().getString("course_code");
@@ -173,12 +177,13 @@ public class CoursePartFragment extends Fragment {
                         }
                     }
                     FragmentManager fragmentManager = getFragmentManager();
-                    TitleAdapter titleAdapter = new TitleAdapter(getContext(), titles, fragmentManager, name, course_code);
-                    NumberAdapter numberAdapter = new NumberAdapter(getContext(), numbers, course_code);
-                    IconAdapter iconAdapter = new IconAdapter(getContext(), icons);
-                    icon.setAdapter(iconAdapter);
-                    number.setAdapter(numberAdapter);
+                    TitleAdapter titleAdapter = new TitleAdapter(getContext(), titles, icons, numbers, fragmentManager, name, course_code);
+                    //NumberAdapter numberAdapter = new NumberAdapter(getContext(), numbers, course_code);
+                    //IconAdapter iconAdapter = new IconAdapter(getContext(), icons);
+                    //icon.setAdapter(iconAdapter);
+                    //number.setAdapter(numberAdapter);
                     title.setAdapter(titleAdapter);
+                    l.setVisibility(View.VISIBLE);
                     final_btn.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.GONE);
                 }

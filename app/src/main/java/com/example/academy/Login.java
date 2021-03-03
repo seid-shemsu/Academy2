@@ -155,8 +155,10 @@ public class Login extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         if (snapshot.hasChild("lesson")){
                             putProgress(snapshot.getKey(), snapshot.child("lesson").getValue().toString());
-                            final SharedPreferences userProgress = getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                            final SharedPreferences userProgress = getSharedPreferences(phone_ + snapshot.getKey(), Context.MODE_PRIVATE);
                             userProgress.edit().putString("progress", snapshot.child("progress").getValue().toString()).apply();
+                            SharedPreferences started = getSharedPreferences("started", Context.MODE_PRIVATE);
+                            started.edit().putBoolean(snapshot.getKey(), true).apply();
                         }
                     }
                 }

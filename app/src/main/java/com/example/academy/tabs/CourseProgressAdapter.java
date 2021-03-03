@@ -41,7 +41,7 @@ public class CourseProgressAdapter extends RecyclerView.Adapter<CourseProgressAd
         holder.course_name.setText(currentObject.getCourse_name());
         Picasso.with(context).load(currentObject.getImg_url()).placeholder(R.drawable.kitab).into(holder.course_img);
         int progress = Integer.parseInt(currentObject.getProgress());
-        holder.completion_progress.setText(progress + " % completed");
+        holder.completion_progress.setText(progress + context.getResources().getString(R.string.complered));
         holder.progress_bar.setProgress(progress);
         holder.course_rate.setRating((float) currentObject.getRating());
     }

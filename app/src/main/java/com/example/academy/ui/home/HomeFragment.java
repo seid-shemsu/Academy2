@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
                     });*/
 
                     try {
-                        userProgress = getContext().getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                        userProgress = getContext().getSharedPreferences(phone + snapshot.getKey(), Context.MODE_PRIVATE);
                         String p = userProgress.getString("progress", "0");
                         String name = snapshot.child("name").getValue().toString();
                         String img_url = snapshot.child("img_url").getValue().toString();

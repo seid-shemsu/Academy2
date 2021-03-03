@@ -57,8 +57,8 @@ public class Ask_Fragment extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (question.getText().toString().trim().length() < 25){
-                    question.setError(getString(R.string.minimum_word_length));
+                if (question.getText().toString().trim().length() < 8 && question.getText().toString().contains(" ")){
+                    //question.setError(getString(R.string.minimum_word_length));
                     Toast.makeText(getContext(), getString(R.string.pls_use_more_words), Toast.LENGTH_SHORT).show();
                 }
                 else {

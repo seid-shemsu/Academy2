@@ -49,7 +49,7 @@ public class Quiz extends AppCompatActivity {
     int res = 0;
     private SharedPreferences passed;
     private SharedPreferences.Editor editor;
-
+    private TextView no;
     private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class Quiz extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.recycler);
+        no = findViewById(R.id.no);
         recyclerView.setHasFixedSize(true);
         dialog = new Dialog(Quiz.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -82,6 +83,7 @@ public class Quiz extends AppCompatActivity {
                     }
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCancelable(false);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     if (getIntent().getExtras().getString("quiz").contains("final")){
                         if (connectionCheck()) {
@@ -236,11 +238,17 @@ public class Quiz extends AppCompatActivity {
                         choices.add(snapshot1.getValue().toString());
                     }
                     objects.add(new Object(question, answer, choices));
+                }progressBar.setVisibility(View.GONE);
+
+                if (objects.size()==0){
+                    no.setVisibility(View.VISIBLE);
                 }
-                qa = new QA(Quiz.this, objects, 0);
-                recyclerView.setAdapter(qa);
-                progressBar.setVisibility(View.GONE);
-                submit.setVisibility(View.VISIBLE);
+                else {
+                    qa = new QA(Quiz.this, objects, 0);
+                    recyclerView.setAdapter(qa);
+                    submit.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override

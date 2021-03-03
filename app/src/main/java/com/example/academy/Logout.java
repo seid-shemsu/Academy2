@@ -62,30 +62,17 @@ public class Logout extends Fragment {
     }
 
     private void clearEverything() {
-        SharedPreferences userInfo, has_quiz, lessons, passed;
+        SharedPreferences userInfo, has_quiz, lessons, passed, started;
         userInfo = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         has_quiz = getContext().getSharedPreferences("has_quiz", Context.MODE_PRIVATE);
         lessons = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
         passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
-        getContext().getSharedPreferences("1", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("2", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("3", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("4", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("5", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("6", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("7", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("8", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("9", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("10", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("11", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("12", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("13", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("14", Context.MODE_PRIVATE).edit().clear().apply();
-        getContext().getSharedPreferences("15", Context.MODE_PRIVATE).edit().clear().apply();
+        started = getContext().getSharedPreferences("started", Context.MODE_PRIVATE);
         userInfo.edit().clear().apply();
         has_quiz.edit().clear().apply();
         lessons.edit().clear().apply();
         passed.edit().clear().apply();
+        started.edit().clear().apply();
         startActivity(new Intent(getContext(), UsersActivity.class));
         getActivity().finish();
     }

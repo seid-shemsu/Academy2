@@ -36,4 +36,11 @@
         android:text="@string/submit"
         android:textColor="@color/white"
         android:id="@+id/submit"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_question_have_been_loaded"
+        android:visibility="gone"
+        android:id="@+id/no"/>
 </RelativeLayout>

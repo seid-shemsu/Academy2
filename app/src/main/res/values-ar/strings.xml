@@ -215,7 +215,7 @@
     <string name="setting">الإعدادات</string>
     <string name="ask_question">ارسل سؤال</string>
     <string name="about"> من نحن</string>
-    <string name="enter_your_question_here">فضلا اكتب سؤالك هنا</string>
+    <string name="enter_your_question_here">أكتب سؤالك كاملا</string>
 
     <string name="saved_to_phone">الحفظ في ملف الصور</string>
     <string name="you_want_to_download_the_audio">هل ترغب بتحميل الملف الصوتي ؟</string>
@@ -308,7 +308,9 @@
     <string name="pls_use_more_words">الرجاء استخدام المزيد من الكلمات</string>
     <string name="you_do_not_have_any_certificate_yet">ليس لديك أي شهادة حتى الآن.</string>
     <string name="you_have_not_started_any_course_yet">لم تبدأ أي دورة بعد.</string>
-    <string name="sorry_you_could_not_pass_the_final_exam">sorry you could not pass the final exam</string>
-    <string name="back_to_main">back to main</string>
+    <string name="sorry_you_could_not_pass_the_final_exam">درجة اجتياز الاختبار ٧٠% فأكثر</string>
+    <string name="back_to_main">العودة إلى البداية</string>
     <string name="final_exam_taken">لقد أجريت الاختبار النهائي بالفعل</string>
+    <string name="complered">٪ منجز</string>
+    <string name="no_question_have_been_loaded">لم يتم تحميل أي سؤال</string>
 </resources>

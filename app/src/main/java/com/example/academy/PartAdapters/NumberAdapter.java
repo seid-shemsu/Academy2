@@ -41,7 +41,6 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.Holder> {
             holder.number.setBackground(context.getResources().getDrawable(R.drawable.number_bg));
             holder.number.setTextColor(context.getResources().getColor(R.color.white));
         }
-
         holder.number.setText(numbers.get(position));
     }
 

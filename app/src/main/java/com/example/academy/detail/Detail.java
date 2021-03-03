@@ -111,8 +111,8 @@ public class Detail extends Fragment {
         editor_passed = passed.edit();
         lesson_editor = lessons.edit();
         quiz_editor = has_quiz.edit();
-        if (part_number.equalsIgnoreCase("1"))
-            lesson_editor.putBoolean(course_code + part_number, false).apply();
+        /*if (part_number.equalsIgnoreCase("1"))
+            lesson_editor.putBoolean(course_code + part_number, false).apply();*/
         if (lessons.getBoolean(course_code + part_number, false))
             quiz.setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
@@ -167,6 +167,8 @@ public class Detail extends Fragment {
                 startActivity(new Intent(getContext(), Quiz.class)
                         .putExtra("course_code", course_code)
                         .putExtra("quiz", part_number));
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.popBackStack();
             }
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,7 +224,7 @@ public class Detail extends Fragment {
     private void setProgress() {
         final SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
-        final SharedPreferences userProgress = getContext().getSharedPreferences(course_code, Context.MODE_PRIVATE);
+        final SharedPreferences userProgress = getContext().getSharedPreferences(phone + course_code, Context.MODE_PRIVATE);
         DatabaseReference course = FirebaseDatabase.getInstance().getReference(language).child("courses").child(course_code);
         final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(course_code);
         course.addListenerForSingleValueEvent(new ValueEventListener() {

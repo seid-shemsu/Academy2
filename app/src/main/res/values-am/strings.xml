@@ -23,7 +23,7 @@
     <string name="setting">መቼት</string>
     <string name="ask_question">ጥያቄ</string>
     <string name="about">ስለ እኛ የበለጠ</string>
-    <string name="enter_your_question_here">ጥያቄ እዚህ ጋር አስገባ</string>
+    <string name="enter_your_question_here">ሙሉ ጥያቄውን ያስገቡ</string>
     <string name="you_want_to_download_the_audio">ድምጽ ከ ኢንተርኔት ይውርድ?</string>
     <string name="file_size">የ ድምጹ መጠን ፡ 2.7 ሜ.ባ</string>
     <string name="download">አውርድ</string>
@@ -292,13 +292,15 @@
     <string name="you_are_going_to_remove_the_account">መለያውን ሊያጠፉት ነው</string>
     <string name="remove">አጥፋ</string>
     <string name="user_removed">መለያ ጠፍቷል</string>
-    <string name="watch_video">watch video</string>
-    <string name="read_pdf_help">read pdf</string>
-    <string name="minimum_word_length">minimum word length</string>
-    <string name="pls_use_more_words">please use more words</string>
-    <string name="you_do_not_have_any_certificate_yet">you do not have any certificate yet.</string>
-    <string name="you_have_not_started_any_course_yet">you have not started any course yet.</string>
-    <string name="sorry_you_could_not_pass_the_final_exam">sorry you could not pass the final exam</string>
-    <string name="back_to_main">back to main</string>
+    <string name="watch_video">ቪዲዮ ይመልከቱ</string>
+    <string name="read_pdf_help">ፒዲኤፍ አንብብ</string>
+    <string name="minimum_word_length">ዝቅተኛ የቃል ርዝመት</string>
+    <string name="pls_use_more_words">እባክዎን ተጨማሪ ቃላትን ይጠቀሙ</string>
+    <string name="you_do_not_have_any_certificate_yet">እስካሁን ምንም የምስክር ወረቀት የለዎትም ፡፡</string>
+    <string name="you_have_not_started_any_course_yet">ገና ምንም ኮርስ አልጀመሩም ፡፡</string>
+    <string name="sorry_you_could_not_pass_the_final_exam">70% ሲያገኙ ፈተናውን ማለፍ ይችላሉ</string>
+    <string name="back_to_main">ወደ መጀመሪያ ተመለስ</string>
     <string name="final_exam_taken">ማጠቃለያ ፈተናውን ወስደዋል።</string>
+    <string name="complered">% ተጠናቅቋል</string>
+    <string name="no_question_have_been_loaded">ጥያቄ አልተጫነም</string>
 </resources>

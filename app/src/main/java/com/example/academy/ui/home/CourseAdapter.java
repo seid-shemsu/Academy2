@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +92,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         RatingBar course_rate;
         FragmentManager fragmentManager;
         ProgressBar progressBar;
+        RelativeLayout relative;
         private ImageViewHolder(@NonNull View itemView, FragmentManager fragmentManager) {
             super(itemView);
             course_img = itemView.findViewById(R.id.course_img);
@@ -98,18 +100,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
             course_rate = itemView.findViewById(R.id.course_rate);
             //attendants = itemView.findViewById(R.id.attendants);
             progressBar = itemView.findViewById(R.id.progress_bar);
+            relative = itemView.findViewById(R.id.relative);
 
             this.fragmentManager = fragmentManager;
             course_rate.setOnClickListener(this);
             course_name.setOnClickListener(this);
             course_img.setOnClickListener(this);
+            relative.setOnClickListener(this);
             //attendants.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            SharedPreferences lessons = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
-            lessons.edit().putBoolean(getAdapterPosition()+1 + "1", true).apply();
             SharedPreferences passed  = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
             passed.edit().putBoolean(getAdapterPosition()+1 + "0", true).apply();
             Fragment singleCourseFragment = new SingleCourseFragment();

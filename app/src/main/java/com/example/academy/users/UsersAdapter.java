@@ -84,7 +84,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
             super(itemView);
             name = itemView.findViewById(R.id.name);
             pp = itemView.findViewById(R.id.pp);
-            pp.setOnClickListener(this);
+            name.setOnClickListener(this);
             pp.setOnClickListener(this);
             pp.setOnLongClickListener(this);
         }
@@ -192,7 +192,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
             return false;
         }
     }
-    private void setProgresses(String phone) {
+    private void setProgresses(final String phone) {
         DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone).child("progress");
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -201,7 +201,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.Holder> {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         if (snapshot.hasChild("lesson")){
                             putProgress(snapshot.getKey(), snapshot.child("lesson").getValue().toString());
-                            final SharedPreferences userProgress = context.getSharedPreferences(snapshot.getKey(), Context.MODE_PRIVATE);
+                            final SharedPreferences userProgress = context.getSharedPreferences(phone + snapshot.getKey(), Context.MODE_PRIVATE);
                             userProgress.edit().putString("progress", snapshot.child("progress").getValue().toString()).apply();
                         }
                     }

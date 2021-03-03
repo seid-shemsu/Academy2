@@ -71,18 +71,23 @@ public class SingleCourseFragment extends Fragment {
         lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
         SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
         passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
-        lesson.edit().putBoolean(getArguments().getString("course_code") + 1, true).apply();
+        //lesson.edit().putBoolean(getArguments().getString("course_code") + 1, true).apply();
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(lang).child(name).child("name");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 course_name.setText(dataSnapshot.getValue().toString());
-                if (!lesson.getBoolean(course_code + "2", false)) {
+                /*if (!lesson.getBoolean(course_code + "2", false)) {
                     start.setVisibility(View.VISIBLE);
                 } else {
                     cont.setVisibility(View.VISIBLE);
-                }
+                }*/
+                SharedPreferences started = getContext().getSharedPreferences("started", Context.MODE_PRIVATE);
+                if (started.getBoolean(getArguments().getString("course_code"), false))
+                    cont.setVisibility(View.VISIBLE);
+                else
+                    start.setVisibility(View.VISIBLE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -93,6 +98,8 @@ public class SingleCourseFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences started = getContext().getSharedPreferences("started", Context.MODE_PRIVATE);
+                started.edit().putBoolean(getArguments().getString("course_code"), true).apply();
                 addStudent(getArguments().getString("course_code"));
                 Fragment coursePartFragment = new CoursePartFragment();
                 FragmentManager fragmentManager = getFragmentManager();
