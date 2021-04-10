@@ -195,6 +195,7 @@
         <item>Zambia</item>
         <item>Zimbabwe</item>
     </string-array>
+
     <string-array name="gender">
         <item>Gender</item>
         <item>Male</item>
@@ -310,7 +311,7 @@
     <string name="sorry_you_could_not_pass_the_final_exam">The degree of passing the exam is 70% or more</string>
     <string name="back_to_main">back to main</string>
     <string name="final_exam_taken">You already take the final exam</string>
-    <string name="complered">\" % completed\"</string>
+    <string name="complered">% completed</string>
     <string name="no_question_have_been_loaded">no question have been loaded</string>
 
 </resources>

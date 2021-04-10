@@ -4,6 +4,7 @@ package com.example.academy.detail;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -113,8 +114,9 @@ public class Detail extends Fragment {
         quiz_editor = has_quiz.edit();
         /*if (part_number.equalsIgnoreCase("1"))
             lesson_editor.putBoolean(course_code + part_number, false).apply();*/
-        if (lessons.getBoolean(course_code + part_number, false))
-            quiz.setVisibility(View.VISIBLE);
+        //changed due to change in policy
+        /*if (lessons.getBoolean(course_code + part_number, false))
+            quiz.setVisibility(View.VISIBLE);*/
         ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
         getLinks();
         youtube.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +130,8 @@ public class Detail extends Fragment {
                 }
                 setProgress();
                 startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name + part_number));
-                quiz.setVisibility(View.VISIBLE);
+                //quiz button set to invisible
+                //quiz.setVisibility(View.VISIBLE);
             }
         });
         audio.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +171,8 @@ public class Detail extends Fragment {
                         .putExtra("course_code", course_code)
                         .putExtra("quiz", part_number));
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.popBackStack();
+                fragmentManager.popBackStackImmediate();
+
             }
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -263,7 +267,7 @@ public class Detail extends Fragment {
             if (file.isFile() && file.length() > 0) {
                 startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
                 setProgress();
-                quiz.setVisibility(View.VISIBLE);
+                //quiz.setVisibility(View.VISIBLE);
             } else {
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -282,7 +286,7 @@ public class Detail extends Fragment {
                                     dialog.dismiss();
                                     startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
                                     setProgress();
-                                    quiz.setVisibility(View.VISIBLE);
+                                    //quiz.setVisibility(View.VISIBLE);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -445,7 +449,7 @@ public class Detail extends Fragment {
         );
         seekbar.setProgress(startTime);
         myHandler.postDelayed(UpdateSongTime, 100);
-        quiz.setVisibility(View.VISIBLE);
+        //quiz.setVisibility(View.VISIBLE);
     }
 
     private Runnable UpdateSongTime = new Runnable() {

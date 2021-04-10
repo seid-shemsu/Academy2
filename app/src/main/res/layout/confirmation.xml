@@ -60,7 +60,7 @@
 
             <Button
                 android:id="@+id/download"
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_margin="10dp"
                 android:layout_height="35dp"
                 android:paddingLeft="20dp"
@@ -71,7 +71,7 @@
 
             <Button
                 android:id="@+id/cancel"
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="35dp"
                 android:background="@drawable/btnbgstroke"
                 android:text="@string/cancel"

@@ -3,6 +3,7 @@ package com.example.academy.test;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class QA extends RecyclerView.Adapter<QA.Holder> {
             for (int i = 0; i < j; i++) {
                 RadioButton ch = new RadioButton(context);
                 ch.setText(object.getChoices().get(i));
+                ch.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
                 ch.setTextColor(context.getResources().getColor(R.color.colorPrimary));
                 ch.setId(i);
                 ch.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

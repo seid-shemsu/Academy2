@@ -38,13 +38,11 @@
                 android:gravity="bottom" />
 
             <RatingBar
-                android:id="@+id/rate"
+                android:id="@+id/course_rate"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginTop="2dp"
-                android:layout_weight=".5" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
 
     </LinearLayout>

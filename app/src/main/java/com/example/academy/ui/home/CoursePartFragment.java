@@ -57,6 +57,8 @@ public class CoursePartFragment extends Fragment {
     private List<String> numbers = new ArrayList<>();
     private List<String> icons = new ArrayList<>();
     private String name, course_code, course_title;
+    //LinearLayout lb;
+    TitleAdapter titleAdapter;
 
     LinearLayout l;
     //private String[] numbersArray, titlesArray;
@@ -70,6 +72,7 @@ public class CoursePartFragment extends Fragment {
         title = root.findViewById(R.id.title_recycler);
         //icon = root.findViewById(R.id.icon_recycler);
         final_btn = root.findViewById(R.id.final_btn);
+        //lb = root.findViewById(R.id.lb);
         progress = root.findViewById(R.id.progress);
         l = root.findViewById(R.id.l);
         //icon.setHasFixedSize(true);
@@ -88,8 +91,8 @@ public class CoursePartFragment extends Fragment {
         final_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
-                if (passed.getBoolean(course_code + i, false)){
+                SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
+                if (lesson.getBoolean(course_code + i, false)){
                     /*DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child("finals").child(course_code);
                     final ArrayList<String> questions = new ArrayList<>();
                     final ArrayList<String> answers = new ArrayList<>();
@@ -119,7 +122,7 @@ public class CoursePartFragment extends Fragment {
 
                         }
                     });*/
-                    if (!passed.getBoolean("final_passed", false)) {
+                    if (!lesson.getBoolean("final_passed", false)) {
                         startActivity(new Intent(getContext(), Quiz.class)
                                 .putExtra("course_code", course_code)
                                 .putExtra("quiz", "final"));
@@ -177,7 +180,7 @@ public class CoursePartFragment extends Fragment {
                         }
                     }
                     FragmentManager fragmentManager = getFragmentManager();
-                    TitleAdapter titleAdapter = new TitleAdapter(getContext(), titles, icons, numbers, fragmentManager, name, course_code);
+                    titleAdapter = new TitleAdapter(getContext(), titles, icons, numbers, fragmentManager, name, course_code);
                     //NumberAdapter numberAdapter = new NumberAdapter(getContext(), numbers, course_code);
                     //IconAdapter iconAdapter = new IconAdapter(getContext(), icons);
                     //icon.setAdapter(iconAdapter);
@@ -185,6 +188,7 @@ public class CoursePartFragment extends Fragment {
                     title.setAdapter(titleAdapter);
                     l.setVisibility(View.VISIBLE);
                     final_btn.setVisibility(View.VISIBLE);
+                    //lb.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.GONE);
                 }
             }
@@ -201,6 +205,22 @@ public class CoursePartFragment extends Fragment {
         Locale.setDefault(locale);
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            //Write down your refresh code here, it will call every time user come to this fragment.
+            //If you are using listview with custom adapter, just call notifyDataSetChanged().
+            if (getFragmentManager() != null) {
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .detach(this)
+                        .attach(this)
+                        .commit();
+            }
+        }
     }
 
 }

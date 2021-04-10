@@ -2,10 +2,12 @@ package com.example.academy.test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.example.academy.Asses;
 import com.example.academy.R;
 import com.example.academy.tabs.CertificateObject;
+import com.example.academy.ui.home.CoursePartFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,8 +58,9 @@ public class Quiz extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLanguage();
+        quiz = getIntent().getExtras().getString("quiz");
         setContentView(R.layout.activity_quiz);
-        setTitle(getResources().getString(R.string.quiz));
+        setTitle(quiz);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.recycler);
@@ -67,7 +71,7 @@ public class Quiz extends AppCompatActivity {
         submit = findViewById(R.id.submit);
         progressBar = findViewById(R.id.progress_bar);
         course_code = getIntent().getExtras().getString("course_code");
-        quiz = getIntent().getExtras().getString("quiz");
+
         String part = getIntent().getExtras().getString("course_code") + "_" + getIntent().getExtras().getString("quiz");
         getQ(part);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +93,7 @@ public class Quiz extends AppCompatActivity {
                         if (connectionCheck()) {
                             if (res*100.0/default_answer.size() >= 70.0) {
                                 setCertificate();
-                                getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean("final_passed", true).apply();
+                                getSharedPreferences("lessons", MODE_PRIVATE).edit().putBoolean("final_passed", true).apply();
                                 dialog.setContentView(R.layout.final_passed);
                                 TextView resultText = dialog.findViewById(R.id.result);
                                 String s = res + "/" + default_answer.size();
@@ -164,6 +168,7 @@ public class Quiz extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 finish();
+
                             }
                         });
                         Button check = dialog.findViewById(R.id.check);
@@ -175,12 +180,6 @@ public class Quiz extends AppCompatActivity {
                                 qa = new QA(getApplicationContext(), objects, answers, default_answer, 1);
                                 recyclerView.setAdapter(qa);
                                 submit.setVisibility(View.GONE);
-                            }
-                        });
-                        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialog) {
-                                res = 0;
                             }
                         });
                         dialog.show();

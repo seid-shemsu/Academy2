@@ -31,6 +31,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
     List<String> titles, icons, numbers;
     String name;
     String course_code;
+
     public TitleAdapter(Context context, List<String> titles, List<String> icons, List<String> numbers, FragmentManager fragmentManager, String name, String course_code) {
         this.context = context;
         this.titles = titles;
@@ -50,27 +51,27 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
+        //I have changed passed with lesson sharedPreference
         holder.title.setText(titles.get(position));
         //number
-        SharedPreferences lessons = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
         SharedPreferences passed = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
-        if (passed.getBoolean(course_code + (position), false) && !passed.getBoolean(course_code + (position +1), false)){
+        SharedPreferences lesson = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
+        if (lesson.getBoolean(course_code + (position), false) && !lesson.getBoolean(course_code + (position + 1), false)) {
             holder.number.setBackground(context.getResources().getDrawable(R.drawable.number_bg));
             holder.number.setTextColor(context.getResources().getColor(R.color.white));
         }
         holder.number.setText(numbers.get(position));
+
         //icon
         if (position != 0) {
-            if (passed.getBoolean(icons.get(position-1), false)){
+            if (lesson.getBoolean(icons.get(position - 1), false)) {
                 holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.unlocked));
-            }
-            else
+            } else
                 holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.locked));
         } else {
             holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.unlocked));
         }
-
-        if (passed.getBoolean(icons.get(position), false))
+        if (lesson.getBoolean(icons.get(position), false))
             holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.circle_correct));
 
     }
@@ -85,6 +86,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         ImageView icon;
         RelativeLayout linear;
         FragmentManager fragmentManager;
+
         public Holder(@NonNull View itemView, FragmentManager fragmentManager) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
@@ -101,7 +103,8 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         @Override
         public void onClick(View v) {
             SharedPreferences passed = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
-            if (passed.getBoolean(course_code + (getAdapterPosition()), false)){
+            SharedPreferences lesson = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
+            if (lesson.getBoolean(course_code + (getAdapterPosition()), false)) {
                 Fragment detail = new Detail();
                 Bundle bundle = new Bundle();
                 bundle.putString("part_number", Integer.toString(getAdapterPosition() + 1));
@@ -110,8 +113,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
                 bundle.putString("course_code", course_code);
                 detail.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, detail).addToBackStack(null).commit();
-            }
-            else {
+            } else {
                 Toast.makeText(context, context.getResources().getString(R.string.take_prev_lesson), Toast.LENGTH_SHORT).show();
             }
         }

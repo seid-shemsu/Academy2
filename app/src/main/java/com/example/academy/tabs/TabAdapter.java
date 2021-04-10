@@ -63,7 +63,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
             super(itemView);
             image = itemView.findViewById(R.id.img);
             name = itemView.findViewById(R.id.name);
-            rate = itemView.findViewById(R.id.rate);
+            rate = itemView.findViewById(R.id.course_rate);
             linear = itemView.findViewById(R.id.linear);
             linear.setOnClickListener(this);
             image.setOnClickListener(this);
