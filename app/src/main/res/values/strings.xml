@@ -313,5 +313,6 @@
     <string name="final_exam_taken">You already take the final exam</string>
     <string name="complered">% completed</string>
     <string name="no_question_have_been_loaded">no question have been loaded</string>
+    <string name="affan_oromo">Afaan oromoo</string>
 
 </resources>

@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Locale;
 
 public class Start extends AppCompatActivity {
-    TextView amh, ara, eng;
+    TextView amh, ara, eng, oro;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     FloatingActionButton fab;
@@ -38,6 +38,7 @@ public class Start extends AppCompatActivity {
         amh = findViewById(R.id.amharic);
         ara = findViewById(R.id.arabic);
         eng = findViewById(R.id.english);
+        oro = findViewById(R.id.oromo);
         fab = findViewById(R.id.fab);
         amh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +46,20 @@ public class Start extends AppCompatActivity {
                 amh.setBackgroundResource(R.drawable.langselected);
                 ara.setBackgroundResource(R.drawable.lang_bg);
                 eng.setBackgroundResource(R.drawable.lang_bg);
+                oro.setBackgroundResource(R.drawable.lang_bg);
                 permission = 1;
                 editor.putString("lang", "am");
+            }
+        });
+        oro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                oro.setBackgroundResource(R.drawable.langselected);
+                amh.setBackgroundResource(R.drawable.lang_bg);
+                ara.setBackgroundResource(R.drawable.lang_bg);
+                eng.setBackgroundResource(R.drawable.lang_bg);
+                permission = 1;
+                editor.putString("lang", "om");
             }
         });
         ara.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +68,7 @@ public class Start extends AppCompatActivity {
                 ara.setBackgroundResource(R.drawable.langselected);
                 amh.setBackgroundResource(R.drawable.lang_bg);
                 eng.setBackgroundResource(R.drawable.lang_bg);
+                oro.setBackgroundResource(R.drawable.lang_bg);
                 editor.putString("lang", "ar");
                 permission = 1;
             }
@@ -65,6 +79,7 @@ public class Start extends AppCompatActivity {
                 eng.setBackgroundResource(R.drawable.langselected);
                 ara.setBackgroundResource(R.drawable.lang_bg);
                 amh.setBackgroundResource(R.drawable.lang_bg);
+                oro.setBackgroundResource(R.drawable.lang_bg);
                 editor.putString("lang", "en");
                 permission = 1;
             }
