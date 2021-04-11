@@ -117,7 +117,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
             Fragment singleCourseFragment = new SingleCourseFragment();
             Bundle bundle = new Bundle();
             bundle.putString("course_name", courseObjects.get(getAdapterPosition()).getCourse_name());
-            bundle.putString("course_code", Integer.toString(getAdapterPosition()+1));
+            //bundle.putString("course_code", context.getSharedPreferences("lang", Context.MODE_PRIVATE).getString("lang", "am") + Integer.toString(getAdapterPosition()+1));
+            bundle.putString("course_code", courseObjects.get(getAdapterPosition()).getCode());
             singleCourseFragment.setArguments(bundle);
             courseObjects.clear();
             fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, singleCourseFragment).addToBackStack(null).commit();

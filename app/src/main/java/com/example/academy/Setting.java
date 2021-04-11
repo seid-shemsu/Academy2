@@ -103,13 +103,13 @@ public class Setting extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setContentView(R.layout.language_setting);
                 dialog.setCanceledOnTouchOutside(false);
-                //FloatingActionButton fab;
+                FloatingActionButton fab;
                 amh = dialog.findViewById(R.id.amharic);
                 ara = dialog.findViewById(R.id.arabic);
                 eng = dialog.findViewById(R.id.english);
                 oro = dialog.findViewById(R.id.oromo);
-                /*fab = dialog.findViewById(R.id.fab);
-                fab.setVisibility(View.GONE);*/
+                fab = dialog.findViewById(R.id.fab);
+                fab.setVisibility(View.GONE);
                 amh.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

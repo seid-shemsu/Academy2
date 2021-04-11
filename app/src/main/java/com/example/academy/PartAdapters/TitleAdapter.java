@@ -60,8 +60,11 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
             holder.number.setBackground(context.getResources().getDrawable(R.drawable.number_bg));
             holder.number.setTextColor(context.getResources().getColor(R.color.white));
         }
+        else {
+            holder.number.setTextColor(context.getResources().getColor(R.color.bunny));
+            holder.number.setBackground(null);
+        }
         holder.number.setText(numbers.get(position));
-
         //icon
         if (position != 0) {
             if (lesson.getBoolean(icons.get(position - 1), false)) {

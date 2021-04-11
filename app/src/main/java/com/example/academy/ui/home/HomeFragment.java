@@ -68,34 +68,14 @@ public class HomeFragment extends Fragment {
                 i = 1;
                 courseObjects.clear();
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    /*DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(snapshot.getKey());
-                    progress.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            try {
-                                //String p = "0" ;
-                                if (dataSnapshot.hasChild("progress")){
-                                    p = dataSnapshot.child("progress").getValue().toString() ;
-                                }
-                                int attendants = 0;
-                                if (snapshot.hasChild("attendants"))
-                                    attendants = (int)(snapshot.child("attendants").getChildrenCount());
-                            } catch (NumberFormatException e) {
-                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    });*/
-
                     try {
                         userProgress = getContext().getSharedPreferences(phone + snapshot.getKey(), Context.MODE_PRIVATE);
                         String p = userProgress.getString("progress", "0");
                         String name = snapshot.child("name").getValue().toString();
                         String img_url = snapshot.child("img_url").getValue().toString();
                         double rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
-                        courseObjects.add(new CourseObject(name, img_url, rating, i++, p));
+                        //courseObjects.add(new CourseObject(name, img_url, rating, i++, p));
+                        courseObjects.add(new CourseObject(name, img_url, rating, snapshot.getKey(), p));
                         FragmentManager fragmentManager = getFragmentManager();
                         CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager);
                         recyclerView.setAdapter(courseAdapter);

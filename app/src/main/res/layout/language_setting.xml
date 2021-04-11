@@ -75,6 +75,12 @@
                 android:background="@drawable/lang_bg"/>
         </LinearLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/check_white"
+            android:id="@+id/fab"/>
     </LinearLayout>
 
 

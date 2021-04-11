@@ -5,9 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Reader">
-    <WebView
+    <!--<WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/webview"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"/>-->
+    <com.github.barteksc.pdfviewer.PDFView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pdf"/>
 </RelativeLayout>

@@ -54,6 +54,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONObject;
@@ -263,9 +264,10 @@ public class Detail extends Fragment {
             File dir = new File(root + "/africa/" + course_code + "/pdfs");
             if (!dir.exists())
                 dir.mkdirs();
-            final File file = new File(dir, course_code + part_number + ".html");
+            final File file = new File(dir, course_code + part_number + ".pdf");
             if (file.isFile() && file.length() > 0) {
-                startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
+                startActivity(new Intent(getContext(), Reader.class)
+                        .putExtra("file", file.toString()));
                 setProgress();
                 //quiz.setVisibility(View.VISIBLE);
             } else {
@@ -276,6 +278,7 @@ public class Detail extends Fragment {
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
                 try {
+
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
                     if (!file.exists())
                         file.createNewFile();
@@ -297,10 +300,13 @@ public class Detail extends Fragment {
 
                                 }
                             });
-                } catch (IllegalArgumentException e) {
+                }
+                catch (IllegalArgumentException e) {
 
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception e) {
+                    if (e.getMessage().contains("StorageException"))
+                        Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
                 }
             }
         } catch (Exception e) {
@@ -350,21 +356,14 @@ public class Detail extends Fragment {
                 final Button download = dialog.findViewById(R.id.download);
                 final Button cancel = dialog.findViewById(R.id.cancel);
                 percent = dialog.findViewById(R.id.percent);
-                dialog.setCanceledOnTouchOutside(false);
+                dialog.setCancelable(false);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 download.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         download.setVisibility(View.GONE);
                         percent.setVisibility(View.VISIBLE);
-                        cancel.setText(getResources().getString(R.string.hide));
-                        cancel.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                                audio.setEnabled(false);
-                            }
-                        });
+                        cancel.setVisibility(View.GONE);
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference(audio_link);
                         try {
                             file.createNewFile();

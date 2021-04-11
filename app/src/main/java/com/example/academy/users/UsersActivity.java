@@ -41,7 +41,7 @@ public class UsersActivity extends AppCompatActivity {
     List<UserObject> userObjects;
     Button add;
     TextView no_acc;
-    TextView amh, ara, eng;
+    TextView amh, ara, eng, oro;
     int permission = 0;
     private SharedPreferences lang;
     SharedPreferences.Editor langEdit;
@@ -119,19 +119,38 @@ public class UsersActivity extends AppCompatActivity {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.setContentView(R.layout.language_setting);
+            dialog.setCanceledOnTouchOutside(false);
             FloatingActionButton fab;
             amh = dialog.findViewById(R.id.amharic);
             ara = dialog.findViewById(R.id.arabic);
             eng = dialog.findViewById(R.id.english);
+            oro = dialog.findViewById(R.id.oromo);
             fab = dialog.findViewById(R.id.fab);
+            //fab.setVisibility(View.GONE);
             amh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     amh.setBackgroundResource(R.drawable.langselected);
                     ara.setBackgroundResource(R.drawable.lang_bg);
                     eng.setBackgroundResource(R.drawable.lang_bg);
+                    oro.setBackgroundResource(R.drawable.lang_bg);
                     permission = 1;
                     langEdit.putString("lang", "am");
+                    //language.setText("አማርኛ");
+                    //dialog.dismiss();
+                }
+            });
+            oro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    oro.setBackgroundResource(R.drawable.langselected);
+                    amh.setBackgroundResource(R.drawable.lang_bg);
+                    ara.setBackgroundResource(R.drawable.lang_bg);
+                    eng.setBackgroundResource(R.drawable.lang_bg);
+                    permission = 1;
+                    langEdit.putString("lang", "om");
+                    //language.setText("Afaan oromoo");
+                    //dialog.dismiss();
                 }
             });
             ara.setOnClickListener(new View.OnClickListener() {
@@ -140,8 +159,11 @@ public class UsersActivity extends AppCompatActivity {
                     ara.setBackgroundResource(R.drawable.langselected);
                     amh.setBackgroundResource(R.drawable.lang_bg);
                     eng.setBackgroundResource(R.drawable.lang_bg);
-                    langEdit.putString("lang", "ar");
+                    oro.setBackgroundResource(R.drawable.lang_bg);
                     permission = 1;
+                    langEdit.putString("lang", "ar");
+                    //language.setText("العربية");
+                    //dialog.dismiss();
                 }
             });
             eng.setOnClickListener(new View.OnClickListener() {
@@ -150,8 +172,11 @@ public class UsersActivity extends AppCompatActivity {
                     eng.setBackgroundResource(R.drawable.langselected);
                     ara.setBackgroundResource(R.drawable.lang_bg);
                     amh.setBackgroundResource(R.drawable.lang_bg);
-                    langEdit.putString("lang", "en");
+                    oro.setBackgroundResource(R.drawable.lang_bg);
                     permission = 1;
+                    langEdit.putString("lang", "en");
+                    //language.setText("English");
+                    //dialog.dismiss();
                 }
             });
             fab.setOnClickListener(new View.OnClickListener() {
