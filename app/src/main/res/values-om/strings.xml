@@ -114,7 +114,9 @@
     <string name="no_question_have_been_loaded">gaafiin fe\'ame hin jiru</string>
     <string name="affan_oromo">Afaan oromoo</string>
     <string name="coming_soon">Yero dhihootti</string>
-    <string name="share_via">share via</string>
+    <string name="share_via">ergi via</string>
+    <string name="file_not_exist">file hin jiru</string>
+    <string name="try_again">Irra deebi\' i yaali</string>
 
     <string-array name="gender">
         <item>saala</item>

@@ -296,14 +296,14 @@ public class Detail extends Fragment {
                                 public void onFailure(@NonNull Exception e) {
                                     dialog.dismiss();
                                     if (e.getMessage().contains("location"))
-                                        Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), getString(R.string.file_not_exist), Toast.LENGTH_SHORT).show();
 
                                 }
                             });
                 }
                 catch (Exception e) {
-                    if (e.getMessage().contains("location"))
-                        Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    Toast.makeText(getContext(), getString(R.string.try_again), Toast.LENGTH_SHORT).show();
                 }
             }
         } catch (Exception e) {
@@ -384,11 +384,11 @@ public class Detail extends Fragment {
                                         public void onFailure(@NonNull Exception e) {
                                             dialog.dismiss();
                                             if (e.getMessage().contains("location"))
-                                                Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), getString(R.string.file_not_exist), Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         } catch (Exception e) {
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.try_again), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

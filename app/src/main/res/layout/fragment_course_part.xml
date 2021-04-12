@@ -25,19 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
-        android:layout_above="@id/final_btn"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal">
-        <!--<LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1.2"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/number_background">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/number_recycler"/>
-        </LinearLayout>-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -52,17 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <!--<LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="vertical">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/icon_recycler"/>
-        </LinearLayout>-->
     </LinearLayout>
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar

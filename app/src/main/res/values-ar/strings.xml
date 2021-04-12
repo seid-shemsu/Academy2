@@ -316,4 +316,6 @@
     <string name="affan_oromo">Afaan oromoo</string>
     <string name="coming_soon">قريبا</string>
     <string name="share_via">شارك عبر</string>
+    <string name="file_not_exist">الملف غير موجود</string>
+    <string name="try_again">حاول مرة أخري</string>
 </resources>

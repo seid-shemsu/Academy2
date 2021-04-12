@@ -69,7 +69,7 @@ public class Ask_Fragment extends Fragment {
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.show();
                     DatabaseReference questions = FirebaseDatabase.getInstance().getReference().child("questions");
-                    SimpleDateFormat smf = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat smf = new SimpleDateFormat("yyyy-MM-dd");
                     String date = smf.format(new Date());
                     questions.child(date).child(System.currentTimeMillis() + "").setValue(question.getText().toString())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {

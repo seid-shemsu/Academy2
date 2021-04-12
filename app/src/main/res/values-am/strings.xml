@@ -305,5 +305,7 @@
     <string name="no_question_have_been_loaded">ጥያቄ አልተጫነም</string>
     <string name="affan_oromo">Afaan oromoo</string>
     <string name="coming_soon">በቅርብ ቀን</string>
-    <string name="share_via">share via</string>
+    <string name="share_via">ያጋሩ</string>
+    <string name="file_not_exist">ፋይሉ አልተገኘም</string>
+    <string name="try_again">በድጋሚ ይሞክሩ</string>
 </resources>

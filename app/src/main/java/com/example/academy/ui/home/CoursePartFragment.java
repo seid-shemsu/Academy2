@@ -93,35 +93,6 @@ public class CoursePartFragment extends Fragment {
             public void onClick(View v) {
                 SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
                 if (lesson.getBoolean(course_code + i, false)){
-                    /*DatabaseReference test = FirebaseDatabase.getInstance().getReference().child("tests").child("finals").child(course_code);
-                    final ArrayList<String> questions = new ArrayList<>();
-                    final ArrayList<String> answers = new ArrayList<>();
-                    test.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.hasChildren()) {
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    if (snapshot.getKey().equals("questions"))
-                                        for (DataSnapshot snapshot1 : snapshot.getChildren())
-                                            questions.add(snapshot1.getValue().toString());
-                                    else
-                                        for (DataSnapshot snapshot1 : snapshot.getChildren())
-                                            answers.add(snapshot1.getValue().toString());
-                                }
-                                startActivity(new Intent(getContext(), Test.class)
-                                        .putStringArrayListExtra("questions", questions)
-                                        .putStringArrayListExtra("answers", answers)
-                                        .putExtra("course_code", course_code)
-                                        .putExtra("quiz","final"));
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });*/
                     if (!lesson.getBoolean("final_passed", false)) {
                         startActivity(new Intent(getContext(), Quiz.class)
                                 .putExtra("course_code", course_code)
