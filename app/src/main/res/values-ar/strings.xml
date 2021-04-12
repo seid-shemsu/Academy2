@@ -274,7 +274,7 @@
     <string name="answer_submitted">تم ارسال الإجابات</string>
     <string name="hide">إخفاء</string>
     <string name="downloading">جارى التحميل</string>
-    <string name="take_tests">أكمل جميع الاختبارات السابقةً</string>
+    <string name="take_tests">أكمل جميع الدروس اولا </string>
     <string name="take_prev_lesson">فضلا اكمل الجزء السابق أولا</string>
     <string name="question_sent">تم إرسال سؤالك بنجاح</string>
     <string name="sign_out">خروج</string>
@@ -314,4 +314,6 @@
     <string name="complered">٪ منجز</string>
     <string name="no_question_have_been_loaded">لم يتم تحميل أي سؤال</string>
     <string name="affan_oromo">Afaan oromoo</string>
+    <string name="coming_soon">قريبا</string>
+    <string name="share_via">شارك عبر</string>
 </resources>

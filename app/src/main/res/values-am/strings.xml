@@ -264,7 +264,7 @@
     <string name="answer_submitted">መልስ ገብቷል</string>
     <string name="hide">ደብቅ</string>
     <string name="downloading">በማውረድ ላይ</string>
-    <string name="take_tests">በመጀመሪያ ሁሉንም ፈተናዎች ይውሰዱ</string>
+    <string name="take_tests">በመጀመሪያ ሁሉንም ክፍሎች ይማሩ</string>
     <string name="take_prev_lesson">እባክዎን ቀዳሚውን ክፍል በመጀመሪያ ያስተላልፉ</string>
     <string name="question_sent">ጥያቄዎ በተሳካ ሁኔታ ተልኳል</string>
     <string name="sign_out">ውጣ</string>
@@ -304,4 +304,6 @@
     <string name="complered">% ተጠናቅቋል</string>
     <string name="no_question_have_been_loaded">ጥያቄ አልተጫነም</string>
     <string name="affan_oromo">Afaan oromoo</string>
+    <string name="coming_soon">በቅርብ ቀን</string>
+    <string name="share_via">share via</string>
 </resources>

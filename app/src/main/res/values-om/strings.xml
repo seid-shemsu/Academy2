@@ -113,6 +113,8 @@
     <string name="complered">% xumuramee jira</string>
     <string name="no_question_have_been_loaded">gaafiin fe\'ame hin jiru</string>
     <string name="affan_oromo">Afaan oromoo</string>
+    <string name="coming_soon">Yero dhihootti</string>
+    <string name="share_via">share via</string>
 
     <string-array name="gender">
         <item>saala</item>

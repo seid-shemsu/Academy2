@@ -278,7 +278,6 @@ public class Detail extends Fragment {
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
                 try {
-
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
                     if (!file.exists())
                         file.createNewFile();
@@ -296,16 +295,14 @@ public class Detail extends Fragment {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     dialog.dismiss();
-                                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                                    if (e.getMessage().contains("location"))
+                                        Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
 
                                 }
                             });
                 }
-                catch (IllegalArgumentException e) {
-
-                }
                 catch (Exception e) {
-                    if (e.getMessage().contains("StorageException"))
+                    if (e.getMessage().contains("location"))
                         Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -386,7 +383,8 @@ public class Detail extends Fragment {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             dialog.dismiss();
-                                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                                            if (e.getMessage().contains("location"))
+                                                Toast.makeText(getContext(), "file not exist", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         } catch (Exception e) {

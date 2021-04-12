@@ -72,7 +72,7 @@
     <string name="answer_submitted">Answer submitted</string>
     <string name="hide">Hide</string>
     <string name="downloading">Downloading</string>
-    <string name="take_tests">Take all tests first</string>
+    <string name="take_tests">Learn all parts first</string>
     <string name="take_prev_lesson">Please pass the previous part first</string>
     <string name="question_sent">Your question has been sent successfully</string>
     <string name="sign_out">Sign Out</string>
@@ -112,4 +112,6 @@
     <string name="complered">% completed</string>
     <string name="no_question_have_been_loaded">no question have been loaded</string>
     <string name="affan_oromo">Afaan oromoo</string>
+    <string name="coming_soon">coming soon</string>
+    <string name="share_via">share via</string>
 </resources>

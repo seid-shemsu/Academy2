@@ -22,6 +22,7 @@ import com.example.academy.users.UsersDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -57,6 +58,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -88,12 +90,20 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fm = getSupportFragmentManager();
                 switch (item.getItemId()){
                     case R.id.share:
+                        if(Build.VERSION.SDK_INT>=24){
+                            try{
+                                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                                m.invoke(null);
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+                        }
                         ApplicationInfo api = getApplicationContext().getApplicationInfo();
                         String path = api.sourceDir;
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("application/vnd.android.package-archive");
                         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(path)));
-                        startActivity(Intent.createChooser(intent, "share via"));
+                        startActivity(Intent.createChooser(intent, getString(R.string.share_via)));
                         break;
                     case R.id.ask:
                         Ask_Fragment ask_fragment = new Ask_Fragment();
@@ -250,5 +260,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.help);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    public void watch(View view) {
+        Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
     }
 }

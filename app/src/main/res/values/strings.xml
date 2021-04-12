@@ -314,5 +314,7 @@
     <string name="complered">% completed</string>
     <string name="no_question_have_been_loaded">no question have been loaded</string>
     <string name="affan_oromo">Afaan oromoo</string>
+    <string name="coming_soon">coming soon</string>
+    <string name="share_via">share via</string>
 
 </resources>
