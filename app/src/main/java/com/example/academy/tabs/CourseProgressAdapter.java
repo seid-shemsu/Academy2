@@ -1,6 +1,9 @@
 package com.example.academy.tabs;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.academy.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -37,9 +45,29 @@ public class CourseProgressAdapter extends RecyclerView.Adapter<CourseProgressAd
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        CourseObject currentObject = courseObjects.get(position);
+        final CourseObject currentObject = courseObjects.get(position);
         holder.course_name.setText(currentObject.getCourse_name());
-        Picasso.with(context).load(currentObject.getImg_url()).placeholder(R.drawable.kitab).into(holder.course_img);
+        File img = context.getApplicationContext().getFileStreamPath(String.valueOf(currentObject.getCode()));
+        if (img.exists())
+            holder.course_img.setImageBitmap(loadImage(context, String.valueOf(currentObject.getCode())));
+        else {
+            Picasso.with(context).load(currentObject.getImg_url()).placeholder(R.drawable.kitab).into(holder.course_img);
+            try {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Looper.prepare();
+                            saveImage(context, Picasso.with(context).load(currentObject.getImg_url()).get(), String.valueOf(currentObject.getCode()));
+                        } catch (IOException e) {
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).start();
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
         int progress = Integer.parseInt(currentObject.getProgress());
         holder.completion_progress.setText(progress + context.getResources().getString(R.string.complered));
         holder.progress_bar.setProgress(progress);
@@ -63,6 +91,30 @@ public class CourseProgressAdapter extends RecyclerView.Adapter<CourseProgressAd
             completion_progress = itemView.findViewById(R.id.completion_progress);
             course_rate = itemView.findViewById(R.id.course_rate);
             progress_bar = itemView.findViewById(R.id.progress_bar);
+        }
+    }
+
+    private Bitmap loadImage(Context context, String imageName) {
+        Bitmap bitmap = null;
+        FileInputStream fiStream;
+        try {
+            fiStream    = context.openFileInput(imageName);
+            bitmap      = BitmapFactory.decodeStream(fiStream);
+            fiStream.close();
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return bitmap;
+    }
+
+    private void saveImage(Context context, Bitmap b, String imageName) {
+        FileOutputStream foStream;
+        try {
+            foStream = context.openFileOutput(imageName, Context.MODE_PRIVATE);
+            b.compress(Bitmap.CompressFormat.PNG, 100, foStream);
+            foStream.close();
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

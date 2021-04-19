@@ -72,7 +72,8 @@ public class CertificateTab extends Fragment {
                         String name = snapshot.child("course_name").getValue().toString();
                         String rate = snapshot.child("rating").getValue().toString();
                         String img_url = snapshot.child("img_url").getValue().toString();
-                        certificates.add(new CertificateObject(name, img_url, Double.parseDouble(rate)));
+                        String code = snapshot.getKey();
+                        certificates.add(new CertificateObject(name, img_url, Double.parseDouble(rate), code));
                     }
                     TabAdapter tabAdapter = new TabAdapter(getContext(), certificates);
                     recyclerView.setAdapter(tabAdapter);

@@ -3,14 +3,17 @@ package com.example.academy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,11 +24,14 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.cert.Certificate;
 import java.util.Locale;
 
 public class ViewCertificate extends AppCompatActivity {
-    String img_url, course;
+    String img_url, course, code;
     ImageView image;
     Button save;
     TextView name;
@@ -40,6 +46,7 @@ public class ViewCertificate extends AppCompatActivity {
         setContentView(R.layout.activity_view_certificate);
         img_url = getIntent().getExtras().getString("img_url");
         course = getIntent().getExtras().getString("name");
+        code = getIntent().getExtras().getString("course_code");
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
         save = findViewById(R.id.save);
@@ -66,7 +73,29 @@ public class ViewCertificate extends AppCompatActivity {
         });
     }
     private void loadImage(){
-        Picasso.with(this).load(img_url).placeholder(R.drawable.kitab).into(image);
+        //Picasso.with(this).load(img_url).into(image);
+        File img = getApplicationContext().getFileStreamPath(String.valueOf(code + "certificate"));
+        if (img.exists()){
+            image.setImageBitmap(loadImage(this, String.valueOf(code + "certificate")));
+        }
+        else {
+            Picasso.with(this).load(img_url).into(image);
+            try {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Looper.prepare();
+                            saveImage(ViewCertificate.this, Picasso.with(ViewCertificate.this).load(img_url).get(), String.valueOf(code + "certificate"));
+                        } catch (IOException e) {
+                            Toast.makeText(ViewCertificate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).start();
+            } catch (Exception e) {
+                Toast.makeText(ViewCertificate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
         name.setVisibility(View.VISIBLE);
     }
     private void saveToPhone() {
@@ -94,6 +123,32 @@ public class ViewCertificate extends AppCompatActivity {
         v.draw(c);
         return b;
     }
+
+
+    private Bitmap loadImage(Context context, String imageName) {
+        Bitmap bitmap = null;
+        FileInputStream fiStream;
+        try {
+            fiStream    = context.openFileInput(imageName);
+            bitmap      = BitmapFactory.decodeStream(fiStream);
+            fiStream.close();
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return bitmap;
+    }
+
+    private void saveImage(Context context, Bitmap b, String imageName) {
+        FileOutputStream foStream;
+        try {
+            foStream = context.openFileOutput(imageName, Context.MODE_PRIVATE);
+            b.compress(Bitmap.CompressFormat.PNG, 100, foStream);
+            foStream.close();
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 
     @Override

@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".users.UsersActivity"/>
+        <activity android:name=".users.UsersActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".test.Quiz" />
         <activity android:name=".Asses" />
         <activity android:name=".ViewCertificate" />

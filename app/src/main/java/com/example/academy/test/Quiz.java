@@ -93,7 +93,7 @@ public class Quiz extends AppCompatActivity {
                         if (connectionCheck()) {
                             if (res*100.0/default_answer.size() >= 70.0) {
                                 setCertificate();
-                                getSharedPreferences("lessons", MODE_PRIVATE).edit().putBoolean("final_passed", true).apply();
+                                getSharedPreferences("lessons", MODE_PRIVATE).edit().putBoolean(course_code + "final_passed", true).apply();
                                 dialog.setContentView(R.layout.final_passed);
                                 TextView resultText = dialog.findViewById(R.id.result);
                                 String s = res + "/" + default_answer.size();
@@ -274,7 +274,7 @@ public class Quiz extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String rate = dataSnapshot.child("rate").getValue().toString();
-                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate)));
+                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code));
                         }
 
                         @Override

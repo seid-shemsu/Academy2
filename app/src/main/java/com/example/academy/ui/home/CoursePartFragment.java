@@ -93,7 +93,7 @@ public class CoursePartFragment extends Fragment {
             public void onClick(View v) {
                 SharedPreferences lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
                 if (lesson.getBoolean(course_code + i, false)){
-                    if (!lesson.getBoolean("final_passed", false)) {
+                    if (!lesson.getBoolean(course_code + "final_passed", false)) {
                         startActivity(new Intent(getContext(), Quiz.class)
                                 .putExtra("course_code", course_code)
                                 .putExtra("quiz", "final"));

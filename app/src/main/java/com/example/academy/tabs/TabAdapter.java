@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,10 @@ import com.example.academy.R;
 import com.example.academy.ViewCertificate;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
@@ -43,10 +46,32 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        CertificateObject object = certificates.get(position);
+        final CertificateObject object = certificates.get(position);
         holder.name.setText(object.getCourse_name());
         holder.rate.setRating((float) object.getRating());
-        Picasso.with(context).load(object.getImg_url()).placeholder(R.drawable.kitab).into(holder.image);
+        //Picasso.with(context).load(object.getImg_url()).placeholder(R.drawable.kitab).into(holder.image);
+        File img = context.getApplicationContext().getFileStreamPath(String.valueOf(object.getCode()));
+        if (img.exists()){
+            holder.image.setImageBitmap(loadImage(context, String.valueOf(object.getCode())));
+        }
+        else {
+            Picasso.with(context).load(object.getImg_url()).placeholder(R.drawable.kitab).into(holder.image);
+            try {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Looper.prepare();
+                            saveImage(context, Picasso.with(context).load(object.getImg_url()).get(), String.valueOf(object.getCode()));
+                        } catch (IOException e) {
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).start();
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -75,8 +100,32 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
         public void onClick(View v) {
             context.startActivity(new Intent(context, ViewCertificate.class)
                     .putExtra("name", certificates.get(getAdapterPosition()).getCourse_name())
+                    .putExtra("course_code", certificates.get(getAdapterPosition()).getCode())
                     .putExtra("img_url", certificates.get(getAdapterPosition()).getImg_url()));
         }
     }
 
+    private Bitmap loadImage(Context context, String imageName) {
+        Bitmap bitmap = null;
+        FileInputStream fiStream;
+        try {
+            fiStream    = context.openFileInput(imageName);
+            bitmap      = BitmapFactory.decodeStream(fiStream);
+            fiStream.close();
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return bitmap;
+    }
+
+    private void saveImage(Context context, Bitmap b, String imageName) {
+        FileOutputStream foStream;
+        try {
+            foStream = context.openFileOutput(imageName, Context.MODE_PRIVATE);
+            b.compress(Bitmap.CompressFormat.PNG, 100, foStream);
+            foStream.close();
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 }

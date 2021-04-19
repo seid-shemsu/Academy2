@@ -71,12 +71,13 @@ public class CoursesTab extends Fragment {
                         String name = snapshot.child("course_name").getValue().toString();
                         String img_url = snapshot.child("img_url").getValue().toString();
                         String progress = snapshot.child("progress").getValue().toString();
+                        String code = snapshot.getKey();
                         double rating = 0;
                         try {
                             rating = Double.parseDouble(snapshot.child("rate").getValue().toString());
                         } catch (Exception e) {
                         }
-                        courseObjects.add(new CourseObject(name, progress, img_url, rating));
+                        courseObjects.add(new CourseObject(name, img_url, rating, code, progress));
                     }
                     courseProgressAdapter = new CourseProgressAdapter(getContext(), courseObjects);
                     recyclerView.setAdapter(courseProgressAdapter);

@@ -6,13 +6,6 @@ public class CourseObject {
     double rating;
     int students;
 
-    public CourseObject(String course_name, String img_url, double rating, String code, int students) {
-        this.course_name = course_name;
-        this.img_url = img_url;
-        this.code = code;
-        this.rating = rating;
-        this.students = students;
-    }
     public CourseObject(String course_name, String img_url, double rating, String code, String progress) {
         this.course_name = course_name;
         this.progress = progress;
@@ -20,25 +13,6 @@ public class CourseObject {
         this.code = code;
         this.rating = rating;
         this.students = students;
-    }
-    public CourseObject(String course_name, String progress, String img_url, double rating) {
-        this.course_name = course_name;
-        this.progress = progress;
-        this.img_url = img_url;
-        this.rating = rating;
-    }
-
-    public CourseObject(String course_name, String img_url, double rating, String code) {
-        this.course_name = course_name;
-        this.img_url = img_url;
-        this.rating = rating;
-        this.code = code;
-    }
-
-    public CourseObject(String course_name, String progress, String img_url) {
-        this.course_name = course_name;
-        this.progress = progress;
-        this.img_url = img_url;
     }
 
     public String getCode() {

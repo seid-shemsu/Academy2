@@ -203,7 +203,7 @@ public class Test extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String rate = dataSnapshot.child("rate").getValue().toString();
-                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate)));
+                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code));
                         }
 
                         @Override
