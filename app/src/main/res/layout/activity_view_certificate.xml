@@ -29,7 +29,6 @@
             android:textAlignment="center"
             android:textColor="#614747"
             android:textSize="18sp"
-            android:visibility="gone"
             android:textStyle="bold" />
 
     </RelativeLayout>

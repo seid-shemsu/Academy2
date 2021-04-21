@@ -2,13 +2,29 @@ package com.example.academy.tabs;
 
 public class CertificateObject {
     String course_name, img_url, code;
-    double rating;
+    double rating, mark;
 
     public CertificateObject(String course_name, String img_url, double rating, String code) {
         this.course_name = course_name;
         this.img_url = img_url;
         this.rating = rating;
         this.code = code;
+    }
+
+    public CertificateObject(String course_name, String img_url, double rating, String code, Double mark) {
+        this.course_name = course_name;
+        this.img_url = img_url;
+        this.rating = rating;
+        this.code = code;
+        this.mark = mark;
+    }
+
+    public double getMark() {
+        return mark;
+    }
+
+    public void setMark(double mark) {
+        this.mark = mark;
     }
 
     public String getCode() {

@@ -2,13 +2,10 @@ package com.example.academy.test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +24,6 @@ import android.widget.Toast;
 import com.example.academy.Asses;
 import com.example.academy.R;
 import com.example.academy.tabs.CertificateObject;
-import com.example.academy.ui.home.CoursePartFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -92,7 +88,7 @@ public class Quiz extends AppCompatActivity {
                     if (getIntent().getExtras().getString("quiz").contains("final")){
                         if (connectionCheck()) {
                             if (res*100.0/default_answer.size() >= 70.0) {
-                                setCertificate();
+                                setCertificate(res*100.0/default_answer.size());
                                 getSharedPreferences("lessons", MODE_PRIVATE).edit().putBoolean(course_code + "final_passed", true).apply();
                                 dialog.setContentView(R.layout.final_passed);
                                 TextView resultText = dialog.findViewById(R.id.result);
@@ -257,7 +253,7 @@ public class Quiz extends AppCompatActivity {
         });
     }
 
-    private void setCertificate() {
+    private void setCertificate(final double mark) {
         SharedPreferences userInfo = getSharedPreferences("userInfo", MODE_PRIVATE);
         String phone = userInfo.getString("phone", "");
         final DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone).child("certificates").child(course_code);
@@ -274,7 +270,7 @@ public class Quiz extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String rate = dataSnapshot.child("rate").getValue().toString();
-                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code));
+                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, mark));
                         }
 
                         @Override

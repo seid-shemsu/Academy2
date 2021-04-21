@@ -1,7 +1,6 @@
 package com.example.academy;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,14 +19,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.cert.Certificate;
 import java.util.Locale;
 
 public class ViewCertificate extends AppCompatActivity {
@@ -74,9 +70,9 @@ public class ViewCertificate extends AppCompatActivity {
     }
     private void loadImage(){
         //Picasso.with(this).load(img_url).into(image);
-        File img = getApplicationContext().getFileStreamPath(String.valueOf(code + "certificate"));
+        File img = getApplicationContext().getFileStreamPath((code + "certificate"));
         if (img.exists()){
-            image.setImageBitmap(loadImage(this, String.valueOf(code + "certificate")));
+            image.setImageBitmap(loadImage(this, (code + "certificate")));
         }
         else {
             Picasso.with(this).load(img_url).into(image);
@@ -86,7 +82,7 @@ public class ViewCertificate extends AppCompatActivity {
                     public void run() {
                         try {
                             Looper.prepare();
-                            saveImage(ViewCertificate.this, Picasso.with(ViewCertificate.this).load(img_url).get(), String.valueOf(code + "certificate"));
+                            saveImage(ViewCertificate.this, Picasso.with(ViewCertificate.this).load(img_url).get(), (code + "certificate"));
                         } catch (IOException e) {
                             Toast.makeText(ViewCertificate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -148,8 +144,6 @@ public class ViewCertificate extends AppCompatActivity {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     @Override
     public boolean onSupportNavigateUp() {
