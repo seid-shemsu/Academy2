@@ -1,5 +1,6 @@
 package com.example.academy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Context;
@@ -14,11 +15,20 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,9 +40,16 @@ public class ViewCertificate extends AppCompatActivity {
     String img_url, course, code;
     ImageView image;
     Button save;
-    TextView name;
+    TextView name, mark;
     RelativeLayout relativeLayout;
     SharedPreferences sharedPreferences;
+    private void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +62,40 @@ public class ViewCertificate extends AppCompatActivity {
         code = getIntent().getExtras().getString("course_code");
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
+        mark = findViewById(R.id.mark);
         save = findViewById(R.id.save);
+        if (Build.VERSION.SDK_INT >= 23){
+            setMargins(name, 0, 210, 0, 0);
+        }
+        else {
+            setMargins(name, 0, 200, 0, 0);
+        }
         relativeLayout = findViewById(R.id.relative);
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         name.setText(sharedPreferences.getString("name", ""));
+        DatabaseReference date = FirebaseDatabase.getInstance().getReference("users")
+                .child(sharedPreferences.getString("phone", ""))
+                .child("certificates")
+                .child(code)
+                .child("mark");
+        date.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mark.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         loadImage();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= 23){
                     if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)  == PackageManager.PERMISSION_GRANTED &&  checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                        save.setEnabled(false);
                         saveToPhone();
                     }
                     else {
@@ -63,10 +104,12 @@ public class ViewCertificate extends AppCompatActivity {
                     }
                 }
                 else {
+                    save.setEnabled(false);
                     saveToPhone();
                 }
             }
         });
+
     }
     private void loadImage(){
         //Picasso.with(this).load(img_url).into(image);
@@ -75,7 +118,7 @@ public class ViewCertificate extends AppCompatActivity {
             image.setImageBitmap(loadImage(this, (code + "certificate")));
         }
         else {
-            Picasso.with(this).load(img_url).into(image);
+            Picasso.with(this).load(img_url).placeholder(R.drawable.certificate_bg).into(image);
             try {
                 new Thread(new Runnable() {
                     @Override
@@ -106,6 +149,7 @@ public class ViewCertificate extends AppCompatActivity {
             FileOutputStream fos = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             Toast.makeText(ViewCertificate.this, getResources().getString(R.string.saved_to_phone), Toast.LENGTH_SHORT).show();
+            save.setEnabled(true);
         } catch (Exception e) {
             Toast.makeText(ViewCertificate.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }

@@ -270,7 +270,8 @@ public class Quiz extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String rate = dataSnapshot.child("rate").getValue().toString();
-                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, mark));
+                            int markk = (int) mark;
+                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, (double)markk));
                         }
 
                         @Override

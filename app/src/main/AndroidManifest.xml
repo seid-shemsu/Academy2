@@ -22,12 +22,16 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".users.UsersActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".test.Quiz" />
-        <activity android:name=".Asses" />
-        <activity android:name=".ViewCertificate" />
+        <activity android:name=".test.Quiz"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Asses"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ViewCertificate"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".intro.MainIntro"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".test.Test"
             android:screenOrientation="portrait" />
