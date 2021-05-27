@@ -54,7 +54,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         //number
         SharedPreferences passed = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
         SharedPreferences lesson = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
-        if (lesson.getBoolean(course_code + (position), false) && !lesson.getBoolean(course_code + (position + 1), false)) {
+        if (passed.getBoolean(course_code + (position), false) && !passed.getBoolean(course_code + (position + 1), false)) {
             holder.number.setBackground(context.getResources().getDrawable(R.drawable.number_bg));
             holder.number.setTextColor(context.getResources().getColor(R.color.white));
         }
@@ -65,14 +65,16 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         holder.number.setText(numbers.get(position));
         //icon
         if (position != 0) {
-            if (lesson.getBoolean(icons.get(position - 1), false)) {
+            if (passed.getBoolean(icons.get(position - 1), false)) {
                 holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.unlocked));
-            } else
+            }
+            else
                 holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.locked));
-        } else {
+        }
+        else {
             holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.unlocked));
         }
-        if (lesson.getBoolean(icons.get(position), false))
+        if (passed.getBoolean(icons.get(position), false))
             holder.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.circle_correct));
 
     }
@@ -105,7 +107,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         public void onClick(View v) {
             SharedPreferences passed = context.getSharedPreferences("passed", Context.MODE_PRIVATE);
             SharedPreferences lesson = context.getSharedPreferences("lessons", Context.MODE_PRIVATE);
-            if (lesson.getBoolean(course_code + (getAdapterPosition()), false)) {
+            if (passed.getBoolean(course_code + (getAdapterPosition()), false)) {
                 Fragment detail = new Detail();
                 Bundle bundle = new Bundle();
                 bundle.putString("part_number", Integer.toString(getAdapterPosition() + 1));

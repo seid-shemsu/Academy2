@@ -85,6 +85,7 @@ public class Quiz extends AppCompatActivity {
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.setCancelable(false);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    //code for final exam
                     if (getIntent().getExtras().getString("quiz").contains("final")){
                         if (connectionCheck()) {
                             if (res*100.0/default_answer.size() >= 70.0) {
@@ -145,15 +146,10 @@ public class Quiz extends AppCompatActivity {
                             }).show();
                         }
                     }
+                    //code for quizzes
                     else {
-                        //lessons = getSharedPreferences("lessons", MODE_PRIVATE);
-                        //editor = lessons.edit();
-                        //editor.putBoolean(course_code + (Integer.parseInt(quiz) +1), true);
-                        //editor.apply();
-                        passed = getSharedPreferences("passed", MODE_PRIVATE);
-                        editor = passed.edit();
-                        editor.putBoolean(course_code+quiz, true);
-                        editor.apply();
+
+                        getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean(course_code+quiz, true).apply();
                         //setRate(res, default_answer.size());
                         dialog.setContentView(R.layout.passed);
                         TextView result = dialog.findViewById(R.id.result);
@@ -185,6 +181,7 @@ public class Quiz extends AppCompatActivity {
             }
         });
     }
+
     /*private void setRate(final int p, final int t) {
         SharedPreferences user = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
@@ -217,6 +214,7 @@ public class Quiz extends AppCompatActivity {
 
     }
 */
+
     private void getQ(String part) {
         final DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("tests").child(part);
         data.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -237,6 +235,7 @@ public class Quiz extends AppCompatActivity {
 
                 if (objects.size()==0){
                     no.setVisibility(View.VISIBLE);
+                    getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean(course_code+quiz, true).apply();
                 }
                 else {
                     qa = new QA(Quiz.this, objects, 0);

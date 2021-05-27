@@ -103,6 +103,7 @@ public class CoursePartFragment extends Fragment {
         });
         return root;
     }
+
     /*private void getFromDatabase(){
         DB db = new DB(getContext());
         List<PartObject> partObjects = db.getParts(name, getContext().getSharedPreferences("lang", Context.MODE_PRIVATE).getString("lang", "am"));
@@ -125,6 +126,7 @@ public class CoursePartFragment extends Fragment {
         final_btn.setVisibility(View.VISIBLE);
         progress.setVisibility(View.GONE);
     }*/
+
     private void getItems(){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         String lang = sharedPreferences.getString("lang", "am");
@@ -172,6 +174,7 @@ public class CoursePartFragment extends Fragment {
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

@@ -110,8 +110,8 @@ public class Detail extends Fragment {
         /*if (part_number.equalsIgnoreCase("1"))
             lesson_editor.putBoolean(course_code + part_number, false).apply();*/
         //changed due to change in policy
-        /*if (lessons.getBoolean(course_code + part_number, false))
-            quiz.setVisibility(View.VISIBLE);*/
+        if (lessons.getBoolean(course_code + part_number, false))
+            quiz.setVisibility(View.VISIBLE);
         ((MainActivity) getActivity()).setActionBarTitle(getArguments().getString("title"));
         getLinks();
         youtube.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class Detail extends Fragment {
                 setProgress();
                 startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name + part_number));
                 //quiz button set to invisible
-                //quiz.setVisibility(View.VISIBLE);
+                quiz.setVisibility(View.VISIBLE);
             }
         });
         audio.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +188,6 @@ public class Detail extends Fragment {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
 
             }
 
@@ -252,7 +251,6 @@ public class Detail extends Fragment {
 
     private void downloadPdf() {
         try {
-
             lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true).apply();
             //editor_passed.putBoolean(course_code + part_number, true).apply();
             String root = Environment.getExternalStorageDirectory().toString();
@@ -264,7 +262,7 @@ public class Detail extends Fragment {
                 startActivity(new Intent(getContext(), Reader.class)
                         .putExtra("file", file.toString()));
                 setProgress();
-                //quiz.setVisibility(View.VISIBLE);
+                quiz.setVisibility(View.VISIBLE);
             } else {
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -283,7 +281,7 @@ public class Detail extends Fragment {
                                     dialog.dismiss();
                                     startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
                                     setProgress();
-                                    //quiz.setVisibility(View.VISIBLE);
+                                    quiz.setVisibility(View.VISIBLE);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -446,7 +444,7 @@ public class Detail extends Fragment {
         );
         seekbar.setProgress(startTime);
         myHandler.postDelayed(UpdateSongTime, 100);
-        //quiz.setVisibility(View.VISIBLE);
+        quiz.setVisibility(View.VISIBLE);
     }
 
     private Runnable UpdateSongTime = new Runnable() {
