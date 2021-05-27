@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,24 +98,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/social_media"
-                    android:textSize="18sp"
-                    android:layout_margin="15dp"
-                    android:textColor="@color/bunny"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:gravity="center_vertical"
                     android:paddingBottom="10dp"
                     android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/social_media"
+                        android:textSize="18sp"
+                        android:layout_margin="15dp"
+                        android:textColor="@color/bunny"/>
                     <ImageView
                         android:id="@+id/img_tg"
                         android:layout_width="40dp"
@@ -127,23 +130,12 @@
                         android:layout_height="40dp"
                         android:src="@drawable/facebook"
                         android:layout_margin="10dp"/>
-                    <ImageView
-                        android:id="@+id/img_insta"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/instagram"
-                        android:layout_margin="10dp"/>
+
                     <ImageView
                         android:id="@+id/img_you"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/youtube"
-                        android:layout_margin="10dp"/>
-                    <ImageView
-                        android:id="@+id/img_twit"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/twitter"
                         android:layout_margin="10dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -153,6 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,6 +167,26 @@
                     android:drawablePadding="15dp"
                     android:layout_marginBottom="10dp"
                     tools:ignore="HardcodedText" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/call"
+                    android:layout_marginStart="25dp"
+                    android:onClick="call"
+                    android:drawablePadding="15dp"
+                    android:layout_marginBottom="10dp"
+                    tools:ignore="HardcodedText"
+                    app:drawableStartCompat="@drawable/phone" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/telegram"
+                    android:layout_marginStart="25dp"
+                    android:onClick="telegram"
+                    android:drawablePadding="15dp"
+                    android:layout_marginBottom="10dp"
+                    tools:ignore="HardcodedText"
+                    app:drawableStartCompat="@drawable/send" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

@@ -116,4 +116,6 @@
     <string name="share_via">share via</string>
     <string name="file_not_exist">file not exist</string>
     <string name="try_again">try again</string>
+    <string name="call">call</string>
+    <string name="telegram">telegram</string>
 </resources>

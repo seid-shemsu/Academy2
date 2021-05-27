@@ -117,6 +117,8 @@
     <string name="share_via">ergi via</string>
     <string name="file_not_exist">file hin jiru</string>
     <string name="try_again">Irra deebi\' i yaali</string>
+    <string name="call">bilbili</string>
+    <string name="telegram">telegram</string>
 
     <string-array name="gender">
         <item>saala</item>

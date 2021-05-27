@@ -6,27 +6,27 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.academy.ui.home.HomeFragment"
+        android:name="com.izhar.academy.ui.home.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/ask"
-        android:name="com.example.academy.Ask_Fragment"
+        android:name="com.izhar.academy.Ask_Fragment"
         tools:layout="@layout/ask"/>
     <fragment
         android:id="@+id/about"
-        android:name="com.example.academy.About"
+        android:name="com.izhar.academy.About"
         tools:layout="@layout/about"/>
     <fragment
         android:id="@+id/help"
-        android:name="com.example.academy.help.HelpFragment"
+        android:name="com.izhar.academy.help.HelpFragment"
         tools:layout="@layout/help"/>
     <!--<fragment
         android:id="@+id/share"
-        android:name="com.example.academy.Share"
+        android:name="izharcademy.Share"
         tools:layout="@layout/fragment_share"/>-->
     <fragment
         android:id="@+id/log_out"
-        android:name="com.example.academy.Logout"
+        android:name="com.izhar.academy.Logout"
         tools:layout="@layout/logout"/>
 </navigation>

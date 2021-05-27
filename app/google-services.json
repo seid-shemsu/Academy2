@@ -53,43 +53,6 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:980186517481:android:70cea998b8911af311c578",
-        "android_client_info": {
-          "package_name": "com.example.adminafrica"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "980186517481-a8hb5odpbgfukpc5j4nhj8maa7i3bp1j.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.adminafrica",
-            "certificate_hash": "adabf803210ece0ad4a5f7103cd8388b3e833974"
-          }
-        },
-        {
-          "client_id": "980186517481-iq1keohgj1l98eu1716mo0fqrgtmq90j.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCHow6waDgusd-SSmQitPGjwa0vcHZS26E"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "980186517481-iq1keohgj1l98eu1716mo0fqrgtmq90j.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:980186517481:android:c3aa42c55e49088811c578",
         "android_client_info": {
           "package_name": "com.example.africaacademy"
@@ -127,20 +90,41 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:980186517481:android:2f65fe6b175e615b11c578",
+        "mobilesdk_app_id": "1:980186517481:android:16c221001dbf2a8511c578",
         "android_client_info": {
-          "package_name": "com.example.question"
+          "package_name": "com.izhar.academy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "980186517481-73drr5k31plci2d2p2eeab592crjmgfb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.question",
-            "certificate_hash": "adabf803210ece0ad4a5f7103cd8388b3e833974"
-          }
-        },
+          "client_id": "980186517481-iq1keohgj1l98eu1716mo0fqrgtmq90j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHow6waDgusd-SSmQitPGjwa0vcHZS26E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980186517481-iq1keohgj1l98eu1716mo0fqrgtmq90j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980186517481:android:ca171f534cc2dafb11c578",
+        "android_client_info": {
+          "package_name": "com.izhar.africaadmin"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "980186517481-iq1keohgj1l98eu1716mo0fqrgtmq90j.apps.googleusercontent.com",
           "client_type": 3
