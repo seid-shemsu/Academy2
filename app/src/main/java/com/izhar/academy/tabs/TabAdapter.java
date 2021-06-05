@@ -49,9 +49,9 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
         holder.name.setText(object.getCourse_name());
         holder.rate.setRating((float) object.getRating());
         //Picasso.with(context).load(object.getImg_url()).placeholder(R.drawable.kitab).into(holder.image);
-        File img = context.getApplicationContext().getFileStreamPath(String.valueOf(object.getCode()));
+        File img = context.getApplicationContext().getFileStreamPath("course" +  object.getCode());
         if (img.exists()){
-            holder.image.setImageBitmap(loadImage(context, String.valueOf(object.getCode())));
+            holder.image.setImageBitmap(loadImage(context, "course" +  object.getCode()));
         }
         else {
             Picasso.with(context).load(object.getImg_url()).placeholder(R.drawable.kitab).into(holder.image);
@@ -61,7 +61,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
                     public void run() {
                         try {
                             Looper.prepare();
-                            saveImage(context, Picasso.with(context).load(object.getImg_url()).get(), String.valueOf(object.getCode()));
+                            saveImage(context, Picasso.with(context).load(object.getImg_url()).get(), "course" +  object.getCode());
                         } catch (IOException e) {
                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -121,7 +121,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.Holder> {
         FileOutputStream foStream;
         try {
             foStream = context.openFileOutput(imageName, Context.MODE_PRIVATE);
-            b.compress(Bitmap.CompressFormat.PNG, 100, foStream);
+            b.compress(Bitmap.CompressFormat.JPEG, 80, foStream);
             foStream.close();
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -102,6 +102,7 @@ public class Start extends AppCompatActivity {
     private boolean getPermission(int permission) {
         return permission == 1;
     }
+
     private void setLanguage() {
         SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));

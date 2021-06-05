@@ -246,22 +246,8 @@ public class MainActivity extends AppCompatActivity {
     public void watch(View view) {
         Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
     }
-    public void call(View view){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
-            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:0923610732")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-        else
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
-    }
     public void telegram(View view){
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/s_4905")));
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults.length > 0){
-            if (requestCode == 1)
-                call(new View(this));
-        }
-    }
 }

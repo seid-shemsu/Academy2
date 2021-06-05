@@ -310,4 +310,5 @@
     <string name="try_again">በድጋሚ ይሞክሩ</string>
     <string name="call">ይደውሉ</string>
     <string name="telegram">ቴሌግራም</string>
+    <string name="sorry_your_certificate_is_not_ready_yet">ይቅርታ የምስክር ወረቀትዎ ገና አልተዘጋጀም</string>
 </resources>

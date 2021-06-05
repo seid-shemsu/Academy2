@@ -89,7 +89,9 @@ public class Quiz extends AppCompatActivity {
                     if (getIntent().getExtras().getString("quiz").contains("final")){
                         if (connectionCheck()) {
                             if (res*100.0/default_answer.size() >= 70.0) {
-                                setCertificate(res*100.0/default_answer.size());
+                                double m = res*100.0/default_answer.size();
+                                int mark = (int) m;
+                                setCertificate(mark);
                                 getSharedPreferences("lessons", MODE_PRIVATE).edit().putBoolean(course_code + "final_passed", true).apply();
                                 dialog.setContentView(R.layout.final_passed);
                                 TextView resultText = dialog.findViewById(R.id.result);
@@ -182,38 +184,6 @@ public class Quiz extends AppCompatActivity {
         });
     }
 
-    /*private void setRate(final int p, final int t) {
-        SharedPreferences user = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String phone = user.getString("phone", "");
-        final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(course_code);
-        progress.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try {
-                    String totals = dataSnapshot.child("total").getValue().toString();
-                    String scores = dataSnapshot.child("score").getValue().toString();
-                    int score = Integer.parseInt(scores ) + p;
-                    int total = Integer.parseInt(totals) + t;
-                    progress.child("total").setValue(Integer.toString(total));
-                    progress.child("score").setValue(Integer.toString(score));
-                    progress.child("rate").setValue(Double.toString((double)score/((double)total/5)));
-                } catch (Exception e) {
-                    progress.child("total").setValue(Integer.toString(t));
-                    progress.child("score").setValue(Integer.toString(p));
-                    progress.child("rate").setValue(Double.toString((double) p /((double) t /5)));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        //CourseObject single_course = new CourseObject(course_name, Integer.toString(p), img_url);
-
-
-    }
-*/
 
     private void getQ(String part) {
         final DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("tests").child(part);
@@ -252,32 +222,26 @@ public class Quiz extends AppCompatActivity {
         });
     }
 
-    private void setCertificate(final double mark) {
+    private void setCertificate(final int mark) {
         SharedPreferences userInfo = getSharedPreferences("userInfo", MODE_PRIVATE);
-        String phone = userInfo.getString("phone", "");
+        final String phone = userInfo.getString("phone", "");
         final DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone).child("certificates").child(course_code);
-        DatabaseReference cert = FirebaseDatabase.getInstance().getReference().child("certificates").child(course_code);
+        DatabaseReference cert = FirebaseDatabase.getInstance().getReference().child(course_code.substring(0,2)).child("courses").child(course_code);
+        final String id = System.currentTimeMillis() + "";
+        final DatabaseReference certificateRequest = FirebaseDatabase.getInstance().getReference("certificateRequest").child(id);
         cert.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     final String img_url = dataSnapshot.child("img_url").getValue().toString();
-                    SharedPreferences lang = getSharedPreferences("lang", MODE_PRIVATE);
-                    DatabaseReference course = FirebaseDatabase.getInstance().getReference().child(lang.getString("lang", "am")).child("courses").child(course_code);
-                    course.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String name = dataSnapshot.child("name").getValue().toString();
-                            String rate = dataSnapshot.child("rate").getValue().toString();
-                            int markk = (int) mark;
-                            user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, (double)markk));
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    String name = dataSnapshot.child("name").getValue().toString();
+                    String rate = dataSnapshot.child("rate").getValue().toString();
+                    certificateRequest.child("id").setValue(id);
+                    certificateRequest.child("mark").setValue(mark);
+                    certificateRequest.child("name").setValue(getSharedPreferences("userInfo", MODE_PRIVATE).getString("name", ""));
+                    certificateRequest.child("code").setValue(course_code);
+                    certificateRequest.child("phone").setValue(phone);
+                    user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, (double)mark));
                 }
             }
 

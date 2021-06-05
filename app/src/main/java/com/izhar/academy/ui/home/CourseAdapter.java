@@ -57,9 +57,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         holder.course_rate.setRating((float) courseObject.getRating());
         //holder.attendants.setText(courseObject.getStudents() + "");
         holder.progressBar.setProgress(Integer.parseInt(courseObject.getProgress()));
-        File img = context.getApplicationContext().getFileStreamPath(String.valueOf(courseObject.getCode()));
+        File img = context.getApplicationContext().getFileStreamPath("course" +  courseObject.getCode());
         if (img.exists()){
-            holder.course_img.setImageBitmap(loadImage(context, String.valueOf(courseObject.getCode())));
+            holder.course_img.setImageBitmap(loadImage(context, "course" +  courseObject.getCode()));
         }
         else {
             Picasso.with(context).load(courseObject.getImg_url()).placeholder(R.drawable.kitab).into(holder.course_img);
@@ -69,7 +69,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
                     public void run() {
                         try {
                             Looper.prepare();
-                            saveImage(context, Picasso.with(context).load(courseObject.getImg_url()).get(), String.valueOf(courseObject.getCode()));
+                            saveImage(context, Picasso.with(context).load(courseObject.getImg_url()).get(), "course" +  courseObject.getCode());
                         } catch (IOException e) {
                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -143,7 +143,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         FileOutputStream foStream;
         try {
             foStream = context.openFileOutput(imageName, Context.MODE_PRIVATE);
-            b.compress(Bitmap.CompressFormat.PNG, 100, foStream);
+            b.compress(Bitmap.CompressFormat.JPEG, 80, foStream);
             foStream.close();
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();

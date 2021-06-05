@@ -206,7 +206,7 @@
 
 
     <string name="attemt_all_question">please attempt  all the question.</string>
-    <string name="saved_to_phone">saved to Pictures folder</string>
+    <string name="saved_to_phone">saved to africa/certificates folder</string>
     <string name="view_answers">view answers</string>
     <string name="sign_in">sign in</string>
     <string name="connet_internet">please connect to internet</string>
@@ -320,5 +320,6 @@
     <string name="try_again">try again</string>
     <string name="call">call</string>
     <string name="telegram">telegram</string>
+    <string name="sorry_your_certificate_is_not_ready_yet">Sorry, your certificate is not ready yet.</string>
 
 </resources>
