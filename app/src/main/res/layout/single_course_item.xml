@@ -44,25 +44,6 @@
         android:progressTint="@color/colorPrimary"
         android:numStars="5" />
 
-    <!--<LinearLayout
-        android:id="@+id/ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/course_rate"
-        android:layout_alignStart="@id/course_rate"
-        android:layout_marginBottom="3dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/person"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/attendants"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/bunny"/>
-    </LinearLayout>-->
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +51,7 @@
         android:layout_alignLeft="@id/card"
         android:layout_alignRight="@id/card"
         android:id="@+id/progress_bar"
+        android:visibility="gone"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_gravity="center_vertical"
         android:backgroundTint="@color/background"

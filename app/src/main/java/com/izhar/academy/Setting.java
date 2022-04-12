@@ -64,10 +64,7 @@ public class Setting extends AppCompatActivity {
             String gender = sharedPreferences.getString("gender", "");
             String uri = database.getUser(userInfo.getString("phone", ""));
             if (uri.isEmpty()) {
-                if (gender.equalsIgnoreCase("male"))
-                    builder.build().load(R.drawable.man).into(image);
-                else if (gender.equalsIgnoreCase("female"))
-                    builder.build().load(R.drawable.woman).into(image);
+                    builder.build().load(R.drawable.logo__).into(image);
             } else
                 builder.build().load(uri).into(image);
         } catch (Exception e) {

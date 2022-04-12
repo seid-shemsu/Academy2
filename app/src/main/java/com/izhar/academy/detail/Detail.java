@@ -74,7 +74,7 @@ public class Detail extends Fragment {
     private SharedPreferences.Editor lesson_editor, quiz_editor, editor_passed;
     private TextView audio;
     private Button quiz;
-    private String language, course_name, part_number, course_code;
+    private String language, course_name, part_number, course_code, semester;
     private String youtube_link, audio_link, pdf_link;
     //music player elements
     private LinearLayout linearLayout;
@@ -98,6 +98,7 @@ public class Detail extends Fragment {
         quiz = root.findViewById(R.id.quiz);
         SharedPreferences lang = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         language = lang.getString("lang", "am");
+        semester = getArguments().getString("semester");
         course_name = getArguments().getString("course_name");
         course_code = getArguments().getString("course_code");
         part_number = getArguments().getString("part_number");
@@ -123,7 +124,7 @@ public class Detail extends Fragment {
                     mediaPlayer.pause();
                 } catch (Exception e) {
                 }
-                setProgress();
+                //setProgress();
                 startActivity(new Intent(getContext(), VideoPlayManager.class).putExtra("link", youtube_link).putExtra("title", course_name + part_number));
                 //quiz button set to invisible
                 quiz.setVisibility(View.VISIBLE);
@@ -261,7 +262,7 @@ public class Detail extends Fragment {
             if (file.isFile() && file.length() > 0) {
                 startActivity(new Intent(getContext(), Reader.class)
                         .putExtra("file", file.toString()));
-                setProgress();
+                //setProgress();
                 quiz.setVisibility(View.VISIBLE);
             } else {
                 final Dialog dialog = new Dialog(getContext());
@@ -280,7 +281,7 @@ public class Detail extends Fragment {
                                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                     dialog.dismiss();
                                     startActivity(new Intent(getContext(), Reader.class).putExtra("file", file.toString()));
-                                    setProgress();
+                                    //setProgress();
                                     quiz.setVisibility(View.VISIBLE);
                                 }
                             })
@@ -308,7 +309,7 @@ public class Detail extends Fragment {
 
     private void getLinks() {
         try {
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child(course_name).child(part_number);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("new").child("am").child(semester).child(course_name).child(part_number);
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -408,7 +409,7 @@ public class Detail extends Fragment {
 
         lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true);
         lesson_editor.commit();
-        setProgress();
+        //setProgress();
         linearLayout.setVisibility(View.VISIBLE);
         playButton.setImageResource(R.drawable.pause);
         mediaPlayer = null;

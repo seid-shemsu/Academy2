@@ -39,7 +39,7 @@ public class SingleCourseFragment extends Fragment {
 
     TextView course_name;
     Button start, cont;
-    String name;
+    String name, semester;
     String course_code;
     SharedPreferences lesson;
     private void setLanguage() {
@@ -57,6 +57,7 @@ public class SingleCourseFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_single_course, container, false);
         final Bundle bundle = this.getArguments();
         name = bundle.getString("course_name");
+        semester = bundle.getString("semester");
         final SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         final String lang = sharedPreferences.getString("lang", "am");
         course_name = root.findViewById(R.id.course_name);
@@ -67,27 +68,12 @@ public class SingleCourseFragment extends Fragment {
         SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
         passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
         lesson.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(lang).child(name).child("name");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                course_name.setText(dataSnapshot.getValue().toString());
-                if (!lesson.getBoolean(course_code + "1", false)) {
-                    start.setVisibility(View.VISIBLE);
-                } else {
-                    cont.setVisibility(View.VISIBLE);
-                }
-                /*SharedPreferences started = getContext().getSharedPreferences("started", Context.MODE_PRIVATE);
-                if (started.getBoolean(getArguments().getString("course_code"), false))
-                    cont.setVisibility(View.VISIBLE);
-                else
-                    start.setVisibility(View.VISIBLE);*/
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        course_name.setText(name);
+        if (!lesson.getBoolean(course_code + "1", false)) {
+            start.setVisibility(View.VISIBLE);
+        } else {
+            cont.setVisibility(View.VISIBLE);
+        }
         ((MainActivity) getActivity()).setActionBarTitle(name);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +82,7 @@ public class SingleCourseFragment extends Fragment {
                 started.edit().putBoolean(getArguments().getString("course_code"), true).apply();
                 addStudent(getArguments().getString("course_code"));
                 Bundle bundle = new Bundle();
+                bundle.putString("semester", semester);
                 bundle.putString("course_name", name);
                 bundle.putString("title", course_name.getText().toString());
                 bundle.putString("course_code", getArguments().getString("course_code"));
@@ -113,6 +100,7 @@ public class SingleCourseFragment extends Fragment {
                 Fragment coursePartFragment = new CoursePartFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 Bundle bundle = new Bundle();
+                bundle.putString("semester", semester);
                 bundle.putString("course_name", name);
                 bundle.putString("title", course_name.getText().toString());
                 bundle.putString("course_code", getArguments().getString("course_code"));

@@ -35,11 +35,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
     private FragmentManager fragmentManager;
     private Context context;
     private List<CourseObject> courseObjects;
-
-    public CourseAdapter(Context context, List<CourseObject> courseObjects, FragmentManager fragmentManager){
+    private String semester;
+    public CourseAdapter(Context context, List<CourseObject> courseObjects, FragmentManager fragmentManager, String semester){
         this.context = context;
         this.courseObjects = courseObjects;
         this.fragmentManager = fragmentManager;
+        this.semester = semester;
     }
 
 
@@ -116,6 +117,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
             passed.edit().putBoolean(getAdapterPosition()+1 + "0", true).apply();
             Fragment singleCourseFragment = new SingleCourseFragment();
             Bundle bundle = new Bundle();
+            bundle.putString("semester", semester);
             bundle.putString("course_name", courseObjects.get(getAdapterPosition()).getCourse_name());
             //bundle.putString("course_code", context.getSharedPreferences("lang", Context.MODE_PRIVATE).getString("lang", "am") + Integer.toString(getAdapterPosition()+1));
             bundle.putString("course_code", courseObjects.get(getAdapterPosition()).getCode());

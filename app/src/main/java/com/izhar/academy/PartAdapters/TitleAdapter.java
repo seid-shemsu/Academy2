@@ -28,9 +28,9 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
     Context context;
     List<String> titles, icons, numbers;
     String name;
-    String course_code;
+    String course_code, semester;
 
-    public TitleAdapter(Context context, List<String> titles, List<String> icons, List<String> numbers, FragmentManager fragmentManager, String name, String course_code) {
+    public TitleAdapter(Context context, List<String> titles, List<String> icons, List<String> numbers, FragmentManager fragmentManager, String name, String course_code, String semester) {
         this.context = context;
         this.titles = titles;
         this.fragmentManager = fragmentManager;
@@ -38,6 +38,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         this.course_code = course_code;
         this.icons = icons;
         this.numbers = numbers;
+        this.semester = semester;
     }
 
     @NonNull
@@ -110,6 +111,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
             if (passed.getBoolean(course_code + (getAdapterPosition()), false)) {
                 Fragment detail = new Detail();
                 Bundle bundle = new Bundle();
+                bundle.putString("semester", semester);
                 bundle.putString("part_number", Integer.toString(getAdapterPosition() + 1));
                 bundle.putString("course_name", name);
                 bundle.putString("title", titles.get(getAdapterPosition()));

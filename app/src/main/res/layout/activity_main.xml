@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/bg__"
     tools:openDrawer="start">
 
     <include
@@ -23,7 +24,7 @@
         app:itemTextColor="@color/colorPrimary"
         app:itemIconTint="@color/colorPrimary"
         app:itemIconPadding="8dp"
-        android:background="@drawable/background"
+        android:background="#1B2D38"
         app:menu="@menu/activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

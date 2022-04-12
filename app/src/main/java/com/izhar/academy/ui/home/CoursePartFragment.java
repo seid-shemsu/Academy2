@@ -51,10 +51,9 @@ public class CoursePartFragment extends Fragment {
     private List<String> titles = new ArrayList<>();
     private List<String> numbers = new ArrayList<>();
     private List<String> icons = new ArrayList<>();
-    private String name, course_code, course_title;
+    private String name, course_code, course_title, semester;
     //LinearLayout lb;
     TitleAdapter titleAdapter;
-
     LinearLayout l;
     //private String[] numbersArray, titlesArray;
     private int i = 0;
@@ -77,6 +76,7 @@ public class CoursePartFragment extends Fragment {
         //number.setLayoutManager(new LinearLayoutManager(getContext()));
         title.setLayoutManager(new LinearLayoutManager(getContext()));
         name = getArguments().getString("course_name");
+        semester = getArguments().getString("semester");
         course_code = getArguments().getString("course_code");
         course_title  = getArguments().getString("title");
         ((MainActivity) getActivity()).setActionBarTitle(course_title);
@@ -127,7 +127,7 @@ public class CoursePartFragment extends Fragment {
         progress.setVisibility(View.GONE);
     }*/
 
-    private void getItems(){
+    /*private void getItems(){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         String lang = sharedPreferences.getString("lang", "am");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(lang).child(name);
@@ -158,6 +158,51 @@ public class CoursePartFragment extends Fragment {
                     final_btn.setVisibility(View.VISIBLE);
                     //lb.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }*/
+    private void getItems(){
+
+        System.out.println(semester + "\n" + name);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
+        String lang = sharedPreferences.getString("lang", "am");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("new").child("am").child(semester).child(name);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()){
+                    titles.clear();
+                    numbers.clear();
+                    icons.clear();
+                    i = 0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        if (snapshot.hasChildren()){
+                            i++;
+                            titles.add(snapshot.child("name").getValue().toString());
+                            numbers.add(Integer.toString(i));
+                            icons.add(course_code + i);
+                        }
+                    }
+                    FragmentManager fragmentManager = getFragmentManager();
+                    titleAdapter = new TitleAdapter(getContext(), titles, icons, numbers, fragmentManager, name, course_code, semester);
+                    //NumberAdapter numberAdapter = new NumberAdapter(getContext(), numbers, course_code);
+                    //IconAdapter iconAdapter = new IconAdapter(getContext(), icons);
+                    //icon.setAdapter(iconAdapter);
+                    //number.setAdapter(numberAdapter);
+                    title.setAdapter(titleAdapter);
+                    l.setVisibility(View.VISIBLE);
+                    final_btn.setVisibility(View.VISIBLE);
+                    //lb.setVisibility(View.VISIBLE);
+                    progress.setVisibility(View.GONE);
+                }
+                else {
+                    progress.setVisibility(View.GONE);
+
                 }
             }
             @Override

@@ -69,13 +69,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 FragmentManager fm = getSupportFragmentManager();
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.share:
-                        if(Build.VERSION.SDK_INT>=24){
-                            try{
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            try {
                                 Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
                                 m.invoke(null);
-                            }catch(Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 drawer.close();
-               return true;
+                return true;
             }
 
 
@@ -145,13 +145,9 @@ public class MainActivity extends AppCompatActivity {
             String uri = database.getUser(sharedPreferences.getString("phone", ""));
             database.close();
             Picasso.Builder builder = new Picasso.Builder(this);
-            if (uri.isEmpty()){
-                if (gender.equals("male"))
-                    builder.build().load(R.drawable.man).into(imageView);
-                else if (gender.equalsIgnoreCase("female"))
-                    builder.build().load(R.drawable.woman).into(imageView);
-            }
-            else
+            if (uri.isEmpty()) {
+                builder.build().load(R.drawable.logo__).into(imageView);
+            } else
                 builder.build().load(uri).into(imageView);
 
         } catch (Exception e) {
@@ -164,8 +160,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
     @Override
@@ -221,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
     private void clearEverything() {
         SharedPreferences userInfo, has_quiz, lessons, passed;
         userInfo = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -231,9 +226,10 @@ public class MainActivity extends AppCompatActivity {
         has_quiz.edit().clear().apply();
         lessons.edit().clear().apply();
         passed.edit().clear().apply();
-        startActivity(new Intent(this , UsersActivity.class));
+        startActivity(new Intent(this, UsersActivity.class));
         finish();
     }
+
     private void dialogHelp() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -246,7 +242,8 @@ public class MainActivity extends AppCompatActivity {
     public void watch(View view) {
         Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
     }
-    public void telegram(View view){
+
+    public void telegram(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/s_4905")));
     }
 

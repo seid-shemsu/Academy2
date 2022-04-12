@@ -1,4 +1,4 @@
-package com.izhar.academy.ui.home;
+package com.izhar.academy.semester;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,81 +14,61 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.izhar.academy.MainActivity;
-import com.izhar.academy.R;
-import com.izhar.academy.tabs.CourseObject;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.izhar.academy.MainActivity;
+import com.izhar.academy.R;
+import com.izhar.academy.tabs.CourseObject;
+import com.izhar.academy.ui.home.CourseAdapter;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class HomeFragment extends Fragment {
-    private SharedPreferences sharedPreferences, userProgress;
-    private DatabaseReference databaseReference;
-    private List<CourseObject> courseObjects = new ArrayList<>();
+public class SemesterFragment extends Fragment {
+    private List<SemesterObject> semesterObjects = new ArrayList<>();
     private RecyclerView recyclerView;
     private CircularProgressBar progressBar;
-    private TextView textView;
-    private List<Integer> codes = new ArrayList<>();
-    private int i = 1;
-    String semester;
+    DatabaseReference databaseReference;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLanguage();
-        final View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final Bundle bundle = this.getArguments();
-        semester = bundle.getString("semester");
+        final View root = inflater.inflate(R.layout.fragment_semester, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         progressBar = root.findViewById(R.id.progress_bar);
-        textView = root.findViewById(R.id.no_course);
-        sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
-        String language = sharedPreferences.getString("lang", "am");
-        //databaseReference = FirebaseDatabase.getInstance().getReference().child(language).child("courses");
-        databaseReference = FirebaseDatabase.getInstance().getReference("new").child("am").child(semester).child("courses");
+        databaseReference = FirebaseDatabase.getInstance().getReference("new").child("am").child("semesters");
         ((MainActivity) getActivity()).setActionBarTitle(getContext().getResources().getString(R.string.app_name));
         addCourses();
         return root;
     }
     private void addCourses(){
-        SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        final String phone = user.getString("phone", "");
-        //String p;
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                i = 1;
-                courseObjects.clear();
+                semesterObjects.clear();
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()){
                     try {
-                        userProgress = getContext().getSharedPreferences(phone + snapshot.getKey(), Context.MODE_PRIVATE);
-                        String p = userProgress.getString("progress", "0");
                         String name = snapshot.child("name").getValue().toString();
-                        String img_url = snapshot.child("image").getValue().toString();
-                        double rating = 3.8;
-                        //courseObjects.add(new CourseObject(name, img_url, rating, i++, p));
-                        courseObjects.add(new CourseObject(name, img_url, rating, snapshot.getKey(), p));
-
+                        String img_url = snapshot.child("img").getValue().toString();
+                        semesterObjects.add(new SemesterObject(name, img_url));
+                        FragmentManager fragmentManager = getFragmentManager();
+                        SemesterAdapter semesterAdapter = new SemesterAdapter(getContext(), semesterObjects, fragmentManager);
+                        recyclerView.setAdapter(semesterAdapter);
+                        progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
                     }
+
                 }
-                FragmentManager fragmentManager = getFragmentManager();
-                CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseObjects, fragmentManager, semester);
-                recyclerView.setAdapter(courseAdapter);
-                if (courseObjects.size() < 1 ){
-                    textView.setVisibility(View.VISIBLE);
-                }
-                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -97,6 +77,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void setLanguage() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("lang", Context.MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));
@@ -106,4 +87,9 @@ public class HomeFragment extends Fragment {
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().finish();
+    }
 }

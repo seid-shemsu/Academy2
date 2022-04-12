@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg__"
     android:orientation="vertical">
 
     <ImageView
@@ -12,8 +12,7 @@
         android:layout_marginTop="100dp"
         android:scaleType="centerInside"
         android:id="@+id/img"
-        android:background="@drawable/btnbgstroke"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo__" />
 
     <Button
         android:id="@+id/login"
