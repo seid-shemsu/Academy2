@@ -163,11 +163,13 @@ public class Detail extends Fragment {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.popBackStackImmediate();
+
                 startActivity(new Intent(getContext(), Quiz.class)
                         .putExtra("course_code", course_code)
                         .putExtra("quiz", part_number));
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.popBackStackImmediate();
+
 
             }
         });

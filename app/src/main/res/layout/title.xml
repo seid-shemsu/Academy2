@@ -27,7 +27,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/bunny"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
         </LinearLayout>
 

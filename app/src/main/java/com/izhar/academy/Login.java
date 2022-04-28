@@ -35,8 +35,6 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLanguage();
         setContentView(R.layout.activity_login);
         setTitle(getResources().getString(R.string.sign_in));
@@ -44,6 +42,11 @@ public class Login extends AppCompatActivity {
         phone = findViewById(R.id.login_phone);
         signIn = findViewById(R.id.sign_in);
         progressBar = findViewById(R.id.sign_in_progress_bar);
+        SharedPreferences userInfo = getSharedPreferences("userInfo", MODE_PRIVATE);
+        if (userInfo.getBoolean("registered", false)){
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

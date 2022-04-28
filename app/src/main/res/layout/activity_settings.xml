@@ -19,6 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:cardElevation="5dp"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="60dp">
 
             <ImageView
@@ -33,6 +34,7 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/colorPrimary"
             android:text="@string/change_profile_picture"
+            android:enabled="false"
             android:gravity="center_horizontal"
             android:id="@+id/pp_change"
             android:layout_marginBottom="5dp"/>

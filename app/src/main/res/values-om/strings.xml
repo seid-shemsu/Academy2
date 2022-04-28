@@ -120,6 +120,7 @@
     <string name="call">bilbili</string>
     <string name="telegram">telegram</string>
     <string name="sorry_your_certificate_is_not_ready_yet">Dhifama, waraqaa ragaan kessaan yeroof hin qophofnee.</string>
+    <string name="no_message">No new message.</string>
 
     <string-array name="gender">
         <item>saala</item>

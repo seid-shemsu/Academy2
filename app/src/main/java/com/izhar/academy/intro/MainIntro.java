@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.izhar.academy.Login;
 import com.izhar.academy.R;
 import com.izhar.academy.users.UsersActivity;
 import com.google.android.material.tabs.TabLayout;
@@ -55,7 +56,7 @@ public class MainIntro extends AppCompatActivity {
             @Override public void onClick(View view) {
                 SharedPreferences app = getSharedPreferences("app", MODE_PRIVATE);
                 app.edit().putBoolean("started", true).apply();
-                startActivity(new Intent(MainIntro.this, UsersActivity.class));
+                startActivity(new Intent(MainIntro.this, Login.class));
                 finish();
             }
         });

@@ -21,6 +21,7 @@ public class VideoPlayManager extends AppCompatActivity {
     String videoId;
     private YouTubePlayerView youTubePlayerView;
     private FullScreenHelper fullScreenHelper = new FullScreenHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,7 @@ public class VideoPlayManager extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         if (youTubePlayerView.isFullScreen())
@@ -94,6 +96,7 @@ public class VideoPlayManager extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         setLanguage();
     }
+
     private void setLanguage() {
         SharedPreferences sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
         Locale locale = new Locale(sharedPreferences.getString("lang", "am"));

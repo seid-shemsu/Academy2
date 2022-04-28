@@ -1,10 +1,14 @@
 package com.izhar.academy.semester;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -24,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.izhar.academy.MainActivity;
 import com.izhar.academy.R;
+import com.izhar.academy.message.MessageActivity;
 import com.izhar.academy.tabs.CourseObject;
 import com.izhar.academy.ui.home.CourseAdapter;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
@@ -40,6 +45,7 @@ public class SemesterFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLanguage();
+        setHasOptionsMenu(true);
         final View root = inflater.inflate(R.layout.fragment_semester, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -92,4 +98,21 @@ public class SemesterFragment extends Fragment {
         super.onDestroy();
         getActivity().finish();
     }
+    /*TextView count;
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.message, menu);
+        final MenuItem menuItem = menu.findItem(R.id.message);
+        View actionView = menuItem.getActionView();
+        count = (TextView) actionView.findViewById(R.id.count);
+        count.setText("2");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.message){
+            startActivity(new Intent(getContext(), MessageActivity.class));
+        }
+        return true;
+    }*/
 }

@@ -64,7 +64,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="7dp"
-            android:progressTint="@color/colorPrimary"
+            android:progressTint="@color/colorPrimaryDark"
             android:scrollbarSize="5dp"
             android:thumbTint="@color/white" />
 
@@ -112,7 +112,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp">
+            android:layout_margin="15dp">
             <TextView
                 android:id="@+id/audio"
                 android:layout_width="145dp"
@@ -149,8 +149,8 @@
         android:layout_height="40dp"
         android:layout_below="@id/linear"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:background="@drawable/exambg"
+        android:backgroundTint="@color/bunny"
         android:text="@string/take_quiz"
         android:visibility="gone"
         android:textColor="@color/white" />

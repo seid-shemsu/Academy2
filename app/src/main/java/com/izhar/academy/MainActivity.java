@@ -14,10 +14,18 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.izhar.academy.message.MessageActivity;
+import com.izhar.academy.message.MessageAdapter;
+import com.izhar.academy.message.MessageObject;
 import com.izhar.academy.users.UsersActivity;
 import com.izhar.academy.users.UsersDatabase;
 
 import android.os.StrictMode;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -182,6 +190,48 @@ public class MainActivity extends AppCompatActivity {
 
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    TextView count;
+    ImageView msg;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.message, menu);
+        View actionView = menu.getItem(0).getActionView();
+        count = actionView.findViewById(R.id.count);
+        msg = actionView.findViewById(R.id.mail);
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MessageActivity.class));
+            }
+        });
+        count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MessageActivity.class));
+            }
+        });
+        setMessage();
+        return true;
+    }
+
+    private void setMessage() {
+        FirebaseDatabase.getInstance().getReference("new").child("Messages")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChildren()) {
+                            count.setText(snapshot.getChildrenCount() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override

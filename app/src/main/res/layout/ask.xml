@@ -36,7 +36,6 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="15dp"
-                    android:backgroundTint="@color/background"
                     android:minHeight="200dp"
                     tools:targetApi="lollipop">
                     <EditText

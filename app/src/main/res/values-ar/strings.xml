@@ -321,4 +321,5 @@
     <string name="call">اتصل</string>
     <string name="telegram">تلجرام</string>
     <string name="sorry_your_certificate_is_not_ready_yet">عذرا، شهادتك ليست جاهزة بعد.</string>
+    <string name="no_message">No new message.</string>
 </resources>

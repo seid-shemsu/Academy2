@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/bg__"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
             <LinearLayout
@@ -31,7 +32,7 @@
                             android:scaleType="centerInside"
                             android:layout_margin="10dp"
                             android:background="@drawable/btnbgstroke"
-                            android:src="@drawable/logo"/>
+                            android:src="@drawable/logo__"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -43,7 +44,7 @@
                             android:gravity="start"
                             android:layout_marginTop="20dp"
                             android:layout_marginStart="10dp"
-                            android:textColor="@color/bunny"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="20sp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -80,7 +81,7 @@
                             android:gravity="start"
                             android:layout_marginTop="20dp"
                             android:layout_marginStart="10dp"
-                            android:textColor="@color/bunny"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="20sp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -117,7 +118,7 @@
                         android:text="@string/social_media"
                         android:textSize="18sp"
                         android:layout_margin="15dp"
-                        android:textColor="@color/bunny"/>
+                        android:textColor="@color/colorPrimaryDark"/>
                     <ImageView
                         android:id="@+id/img_tg"
                         android:layout_width="40dp"
@@ -157,7 +158,7 @@
                     android:text="@string/developer"
                     android:textSize="17sp"
                     android:layout_margin="15dp"
-                    android:textColor="@color/bunny"/>
+                    android:textColor="@color/colorPrimaryDark"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

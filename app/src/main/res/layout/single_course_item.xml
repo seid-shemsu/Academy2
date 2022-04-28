@@ -27,33 +27,35 @@
         android:id="@+id/course_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:layout_below="@id/card"
         android:layout_alignStart="@id/card"
         android:layout_alignEnd="@id/card"
         android:layout_margin="5dp"
-        android:layout_below="@id/card"
-        android:textColor="@color/bunny"/>
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
 
     <RatingBar
         android:id="@+id/course_rate"
-        android:layout_alignStart="@id/course_name"
-        android:layout_below="@id/course_name"
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/course_name"
+        android:layout_alignStart="@id/course_name"
+        android:numStars="5"
         android:progressTint="@color/colorPrimary"
-        android:numStars="5" />
+        android:visibility="gone" />
 
     <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/course_rate"
         android:layout_alignLeft="@id/card"
         android:layout_alignRight="@id/card"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_gravity="center_vertical"
         android:backgroundTint="@color/background"
-        android:progressTint="@color/colorPrimary" />
+        android:progressTint="@color/colorPrimary"
+        android:visibility="gone" />
 </RelativeLayout>

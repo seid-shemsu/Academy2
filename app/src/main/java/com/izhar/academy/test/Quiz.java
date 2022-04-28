@@ -50,6 +50,7 @@ public class Quiz extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private TextView no;
     private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +76,7 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if (qa.getAnswer().contains("100")) {
                     Toast.makeText(Quiz.this, R.string.attemt_all_question, Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     for (int i = 0; i < qa.getAnswer().size(); i++) {
                         if (qa.getAnswer().get(i).equalsIgnoreCase(default_answer.get(i)))
                             res++;
@@ -86,10 +86,10 @@ public class Quiz extends AppCompatActivity {
                     dialog.setCancelable(false);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     //code for final exam
-                    if (getIntent().getExtras().getString("quiz").contains("final")){
+                    if (getIntent().getExtras().getString("quiz").contains("final")) {
                         if (connectionCheck()) {
-                            if (res*100.0/default_answer.size() >= 70.0) {
-                                double m = res*100.0/default_answer.size();
+                            if (res * 100.0 / default_answer.size() >= 70.0) {
+                                double m = res * 100.0 / default_answer.size();
                                 int mark = (int) m;
                                 setCertificate(mark);
                                 getSharedPreferences("lessons", MODE_PRIVATE).edit().putBoolean(course_code + "final_passed", true).apply();
@@ -138,8 +138,7 @@ public class Quiz extends AppCompatActivity {
                             }
                             //editor.apply();
                             dialog.show();
-                        }
-                        else {
+                        } else {
                             snackbar = Snackbar.make(v, getResources().getString(R.string.connet_internet), Snackbar.LENGTH_INDEFINITE);
                             snackbar.setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
                                 @Override
@@ -151,7 +150,7 @@ public class Quiz extends AppCompatActivity {
                     //code for quizzes
                     else {
 
-                        getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean(course_code+quiz, true).apply();
+                        getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean(course_code + quiz, true).apply();
                         //setRate(res, default_answer.size());
                         dialog.setContentView(R.layout.passed);
                         TextView result = dialog.findViewById(R.id.result);
@@ -201,13 +200,13 @@ public class Quiz extends AppCompatActivity {
                         choices.add(snapshot1.getValue().toString());
                     }
                     objects.add(new Object(question, answer, choices));
-                }progressBar.setVisibility(View.GONE);
-
-                if (objects.size()==0){
-                    no.setVisibility(View.VISIBLE);
-                    getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean(course_code+quiz, true).apply();
                 }
-                else {
+                progressBar.setVisibility(View.GONE);
+
+                if (objects.size() == 0) {
+                    no.setVisibility(View.VISIBLE);
+                    getSharedPreferences("passed", MODE_PRIVATE).edit().putBoolean(course_code + quiz, true).apply();
+                } else {
                     qa = new QA(Quiz.this, objects, 0);
                     recyclerView.setAdapter(qa);
                     submit.setVisibility(View.VISIBLE);
@@ -226,7 +225,7 @@ public class Quiz extends AppCompatActivity {
         SharedPreferences userInfo = getSharedPreferences("userInfo", MODE_PRIVATE);
         final String phone = userInfo.getString("phone", "");
         final DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(phone).child("certificates").child(course_code);
-        DatabaseReference cert = FirebaseDatabase.getInstance().getReference().child(course_code.substring(0,2)).child("courses").child(course_code);
+        DatabaseReference cert = FirebaseDatabase.getInstance().getReference().child(course_code.substring(0, 2)).child("courses").child(course_code);
         final String id = System.currentTimeMillis() + "";
         final DatabaseReference certificateRequest = FirebaseDatabase.getInstance().getReference("certificateRequest").child(id);
         cert.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -241,7 +240,7 @@ public class Quiz extends AppCompatActivity {
                     certificateRequest.child("name").setValue(getSharedPreferences("userInfo", MODE_PRIVATE).getString("name", ""));
                     certificateRequest.child("code").setValue(course_code);
                     certificateRequest.child("phone").setValue(phone);
-                    user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, (double)mark));
+                    user.setValue(new CertificateObject(name, img_url, Double.parseDouble(rate), course_code, (double) mark));
                 }
             }
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.izhar.academy.intro.MainIntro;
 import com.izhar.academy.users.UsersActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,10 +28,16 @@ public class Start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setLanguage();
         setContentView(R.layout.activity_start);
+        try {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            database.setPersistenceEnabled(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         if (sharedPreferences.getBoolean("started", false)){
-            startActivity(new Intent(this, UsersActivity.class));
+            startActivity(new Intent(this, Login.class));
             finish();
         }
         sharedPreferences = getSharedPreferences("lang", MODE_PRIVATE);
