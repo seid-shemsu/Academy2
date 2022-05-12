@@ -66,10 +66,10 @@ public class SingleCourseFragment extends Fragment {
         course_code = bundle.getString("course_code");
         lesson = getContext().getSharedPreferences("lessons", Context.MODE_PRIVATE);
         SharedPreferences passed = getContext().getSharedPreferences("passed", Context.MODE_PRIVATE);
-        passed.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
-        lesson.edit().putBoolean(getArguments().getString("course_code") + 0, true).apply();
+        passed.edit().putBoolean(semester + getArguments().getString("course_code") + 0, true).apply();
+        lesson.edit().putBoolean(semester + getArguments().getString("course_code") + 0, true).apply();
         course_name.setText(name);
-        if (!lesson.getBoolean(course_code + "1", false)) {
+        if (!lesson.getBoolean(semester + course_code + "1", false)) {
             start.setVisibility(View.VISIBLE);
         } else {
             cont.setVisibility(View.VISIBLE);
@@ -79,8 +79,8 @@ public class SingleCourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPreferences started = getContext().getSharedPreferences("started", Context.MODE_PRIVATE);
-                started.edit().putBoolean(getArguments().getString("course_code"), true).apply();
-                addStudent(getArguments().getString("course_code"));
+                started.edit().putBoolean(semester + getArguments().getString("course_code"), true).apply();
+                addStudent(semester + getArguments().getString("course_code"));
                 Bundle bundle = new Bundle();
                 bundle.putString("semester", semester);
                 bundle.putString("course_name", name);

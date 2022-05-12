@@ -15,7 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+/*
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;*/
 import com.izhar.academy.MainActivity;
 import com.izhar.academy.R;
 import com.izhar.academy.tabs.CourseObject;
@@ -40,11 +45,22 @@ public class HomeFragment extends Fragment {
     private List<Integer> codes = new ArrayList<>();
     private int i = 1;
     String semester;
-
+    //AdView mAdView;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLanguage();
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         final Bundle bundle = this.getArguments();
+        /*MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = root.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);*/
+
+
         semester = bundle.getString("semester");
         recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

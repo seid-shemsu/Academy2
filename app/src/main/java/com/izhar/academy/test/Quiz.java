@@ -43,8 +43,9 @@ public class Quiz extends AppCompatActivity {
     List<String> default_answer = new ArrayList<>();
     List<Object> objects = new ArrayList<>();
     QA qa;
+
     Snackbar snackbar;
-    String course_code, quiz;
+    String course_code, quiz, semester;
     int res = 0;
     private SharedPreferences passed;
     private SharedPreferences.Editor editor;
@@ -67,9 +68,10 @@ public class Quiz extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         submit = findViewById(R.id.submit);
         progressBar = findViewById(R.id.progress_bar);
+        semester = getIntent().getExtras().getString("semester");
         course_code = getIntent().getExtras().getString("course_code");
 
-        String part = getIntent().getExtras().getString("course_code") + "_" + getIntent().getExtras().getString("quiz");
+        String part = semester + "_" + course_code +  "_" + quiz;
         getQ(part);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

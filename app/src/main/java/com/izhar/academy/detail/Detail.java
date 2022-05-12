@@ -86,12 +86,12 @@ public class Detail extends Fragment {
     private ImageButton playButton;
     public static int oneTimeOnly = 0;
     private List<List<String>> choices = new ArrayList<>();
-
+    View root;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setLanguage();
-        View root = inflater.inflate(R.layout.fragment_detail, container, false);
+        root = inflater.inflate(R.layout.fragment_detail, container, false);
         ImageView youtube = root.findViewById(R.id.youtube);
         audio = root.findViewById(R.id.audio);
         TextView pdf = root.findViewById(R.id.pdf);
@@ -118,7 +118,7 @@ public class Detail extends Fragment {
         youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true).apply();
+                lesson_editor.putBoolean(semester + course_code + (Integer.parseInt(part_number)), true).apply();
                 //editor_passed.putBoolean(course_code + part_number, true).apply();
                 try {
                     mediaPlayer.pause();
@@ -163,12 +163,13 @@ public class Detail extends Fragment {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.popBackStackImmediate();
-
                 startActivity(new Intent(getContext(), Quiz.class)
                         .putExtra("course_code", course_code)
+                        .putExtra("semester", semester)
                         .putExtra("quiz", part_number));
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.popBackStackImmediate();
 
 
             }
@@ -225,9 +226,9 @@ public class Detail extends Fragment {
     private void setProgress() {
         final SharedPreferences user = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String phone = user.getString("phone", "");
-        final SharedPreferences userProgress = getContext().getSharedPreferences(phone + course_code, Context.MODE_PRIVATE);
+        final SharedPreferences userProgress = getContext().getSharedPreferences(phone + semester+ course_code, Context.MODE_PRIVATE);
         DatabaseReference course = FirebaseDatabase.getInstance().getReference(language).child("courses").child(course_code);
-        final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(course_code);
+        final DatabaseReference progress = FirebaseDatabase.getInstance().getReference("users").child(phone).child("progress").child(semester).child(course_code);
         course.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -254,7 +255,7 @@ public class Detail extends Fragment {
 
     private void downloadPdf() {
         try {
-            lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true).apply();
+            lesson_editor.putBoolean(semester + course_code + (Integer.parseInt(part_number)), true).apply();
             //editor_passed.putBoolean(course_code + part_number, true).apply();
             String root = Environment.getExternalStorageDirectory().toString();
             File dir = new File(root + "/africa/" + course_code + "/pdfs");
@@ -409,7 +410,7 @@ public class Detail extends Fragment {
 
     private void play() {
 
-        lesson_editor.putBoolean(course_code + (Integer.parseInt(part_number)), true);
+        lesson_editor.putBoolean(semester + course_code + (Integer.parseInt(part_number)), true);
         lesson_editor.commit();
         //setProgress();
         linearLayout.setVisibility(View.VISIBLE);
@@ -478,4 +479,11 @@ public class Detail extends Fragment {
         configuration.locale = locale;
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
+    Context context;
 }

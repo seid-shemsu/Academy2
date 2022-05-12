@@ -56,24 +56,22 @@ public class SemesterFragment extends Fragment {
         addCourses();
         return root;
     }
-    private void addCourses(){
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+    private void addCourses() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 semesterObjects.clear();
-                for (final DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    try {
-                        String name = snapshot.child("name").getValue().toString();
-                        String img_url = snapshot.child("img").getValue().toString();
-                        semesterObjects.add(new SemesterObject(name, img_url));
-                        FragmentManager fragmentManager = getFragmentManager();
-                        SemesterAdapter semesterAdapter = new SemesterAdapter(getContext(), semesterObjects, fragmentManager);
-                        recyclerView.setAdapter(semesterAdapter);
-                        progressBar.setVisibility(View.GONE);
-                    } catch (Exception e) {
-                    }
-
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String name = snapshot.child("name").getValue().toString();
+                    String img_url = snapshot.child("img").getValue().toString();
+                    semesterObjects.add(new SemesterObject(name, img_url));
+                    Toast.makeText(getContext(), "" + snapshot.getKey(), Toast.LENGTH_SHORT).show();
                 }
+                FragmentManager fragmentManager = getFragmentManager();
+                SemesterAdapter semesterAdapter = new SemesterAdapter(getContext(), semesterObjects, fragmentManager);
+                recyclerView.setAdapter(semesterAdapter);
+                progressBar.setVisibility(View.GONE);
 
             }
 

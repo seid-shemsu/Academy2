@@ -34,4 +34,5 @@
         android:textColor="@color/colorPrimary"
         android:visibility="gone"
         android:id="@+id/no_course"/>
+
 </RelativeLayout>
