@@ -1,23 +1,17 @@
 package com.izhar.academy.semester;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,9 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.izhar.academy.MainActivity;
 import com.izhar.academy.R;
-import com.izhar.academy.message.MessageActivity;
-import com.izhar.academy.tabs.CourseObject;
-import com.izhar.academy.ui.home.CourseAdapter;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
@@ -66,7 +57,6 @@ public class SemesterFragment extends Fragment {
                     String name = snapshot.child("name").getValue().toString();
                     String img_url = snapshot.child("img").getValue().toString();
                     semesterObjects.add(new SemesterObject(name, img_url));
-                    Toast.makeText(getContext(), "" + snapshot.getKey(), Toast.LENGTH_SHORT).show();
                 }
                 FragmentManager fragmentManager = getFragmentManager();
                 SemesterAdapter semesterAdapter = new SemesterAdapter(getContext(), semesterObjects, fragmentManager);

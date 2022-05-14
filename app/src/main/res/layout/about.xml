@@ -1,94 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg__"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/bg__">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            
+
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerInside"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/btnbgstroke"
-                            android:src="@drawable/logo__"/>
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/btnbgstroke"
+                        app:tint="@color/colorPrimaryDark"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/logo__" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:gravity="start"
-                            android:layout_marginTop="20dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="start"
+                            android:text="@string/app_name"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp" />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="\@africa tv"
+                            android:layout_marginStart="10dp"
                             android:gravity="start"
-                            android:layout_marginStart="10dp"/>
+                            android:textColor="@color/background"
+                            android:text="\@AFRICA TV" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:gravity="center"
-                        android:layout_margin="10dp">
+                        android:layout_margin="10dp"
+                        android:gravity="center">
 
                         <ImageView
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/info"/>
+                            android:layout_gravity="center"
+                            android:src="@drawable/info" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/version"
-                            android:gravity="start"
-                            android:layout_marginTop="20dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="start"
+                            android:text="@string/version"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp" />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="1.0"
+                            android:layout_marginStart="10dp"
                             android:gravity="start"
-                            android:layout_marginStart="10dp"/>
+                            android:textColor="@color/background"
+                            android:text="1.0" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -101,6 +116,7 @@
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,34 +126,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/social_media"
-                        android:textSize="18sp"
                         android:layout_margin="15dp"
-                        android:textColor="@color/colorPrimaryDark"/>
-                    <ImageView
-                        android:id="@+id/img_tg"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/telegram"
-                        android:layout_margin="10dp"/>
-                    <ImageView
-                        android:id="@+id/img_fb"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/facebook"
-                        android:layout_margin="10dp"/>
+                        android:text="@string/social_media"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/img_tg"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            app:background="@color/colorPrimaryDark"
+                            android:src="@drawable/telegram" />
 
-                    <ImageView
-                        android:id="@+id/img_you"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/youtube"
-                        android:layout_margin="10dp"/>
+                        <ImageView
+                            android:id="@+id/img_fb"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:background="@color/colorPrimaryDark"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/facebook" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -148,36 +168,27 @@
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/developer"
-                    android:textSize="17sp"
                     android:layout_margin="15dp"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="17sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="seidshemsu4866@gmail.com"
-                    android:drawableStart="@drawable/mail"
-                    android:layout_marginStart="25dp"
-                    android:drawablePadding="15dp"
-                    android:layout_marginBottom="10dp"
-                    tools:ignore="HardcodedText" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/telegram"
-                    android:layout_marginStart="25dp"
-                    android:onClick="telegram"
-                    android:drawablePadding="15dp"
-                    android:layout_marginBottom="10dp"
-                    tools:ignore="HardcodedText"
-                    app:drawableStartCompat="@drawable/send" />
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/background"
+                    android:text="@string/about_us"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -186,6 +197,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:cardElevation="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

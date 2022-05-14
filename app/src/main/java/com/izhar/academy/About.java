@@ -17,14 +17,8 @@ public class About  extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.about, container, false);
         tg = root.findViewById(R.id.img_tg);
         fb = root.findViewById(R.id.img_fb);
-        //tw = root.findViewById(R.id.img_twit);
-        yt = root.findViewById(R.id.img_you);
-        //in = root.findViewById(R.id.img_insta);
         tg.setOnClickListener(this);
         fb.setOnClickListener(this);
-        //tw.setOnClickListener(this);
-        yt.setOnClickListener(this);
-        //in.setOnClickListener(this);
         return root;
     }
 
@@ -32,13 +26,10 @@ public class About  extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.img_tg:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/Africa_Academy1")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Ethioafricaacademy")));
                 break;
             case R.id.img_fb:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com/Africa_Academy1")));
-                break;
-            case R.id.img_you:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UCOY5oCke6jNy2Fpl-pe7EmA")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/Ethioafricaacademy/")));
                 break;
         }
     }

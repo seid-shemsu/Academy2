@@ -11,6 +11,10 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_semester" />
     <fragment
+        android:id="@+id/notification"
+        android:name="com.izhar.academy.notification.Notification"
+        tools:layout="@layout/fragment_notification"/>
+    <fragment
         android:id="@+id/ask"
         android:name="com.izhar.academy.Ask_Fragment"
         tools:layout="@layout/ask"/>

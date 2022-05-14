@@ -120,7 +120,12 @@
     <string name="call">bilbili</string>
     <string name="telegram">telegram</string>
     <string name="sorry_your_certificate_is_not_ready_yet">Dhifama, waraqaa ragaan kessaan yeroof hin qophofnee.</string>
-    <string name="no_message">No new message.</string>
+    <string name="no_message">አዲስ መልእክት የለም።</string>
+    <string name="notification">Notification</string>
+    <string name="about_us">የ አፍሪካ አካዳሚ ትክክለኛውን እስላማዊ ግንዛቤ ቁርአን እና ሃዲስን በምንጭነት በመጠቀም ለ አፍሪካ ማህበረሰብ የሚያቀርብ የርቀት ትምህርት ነው ፡፡
+የ ትምህርት ፕሮግራም ቀርጾ ለ እውቀት ፈላጊዎች በ ኢንተርኔት በ ማህበራዊ ድህረ ገጾች እና በ አፍሪካ ቲቪ ማቅረብን አላማ ያደረገ ነው፡፡
+የ ርቀት ትምህርቱንም አካዳሚያችን የ ሚጠቀመው ኮርሶቹን በ ቀላሉ እና በ ኦንላይን ማድረስ በአጭሩ (Massive Open Online Course)
+አካዳሚያችን 100% ኤሌክትሮኒክስ ሲሆን በማን ኛውም ወቅት ተማሪው በ ኮምፑዩተር ወይም በ ስማርት ስልክ ገብቶ መከታተል ይችላል ፡፡ ትምህርቶቹን እንዲሁም መልመጃዎችን በቀላሉ ሊገለልገሉ ይችላሉ</string>
 
     <string-array name="gender">
         <item>saala</item>

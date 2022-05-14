@@ -324,5 +324,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="no_message">No new message.</string>
+    <string name="notification">Notification</string>
+    <string name="about_us">የ አፍሪካ አካዳሚ ትክክለኛውን እስላማዊ ግንዛቤ ቁርአን እና ሃዲስን በምንጭነት በመጠቀም ለ አፍሪካ ማህበረሰብ የሚያቀርብ የርቀት ትምህርት ነው ፡፡
+የ ትምህርት ፕሮግራም ቀርጾ ለ እውቀት ፈላጊዎች በ ኢንተርኔት በ ማህበራዊ ድህረ ገጾች እና በ አፍሪካ ቲቪ ማቅረብን አላማ ያደረገ ነው፡፡
+የ ርቀት ትምህርቱንም አካዳሚያችን የ ሚጠቀመው ኮርሶቹን በ ቀላሉ እና በ ኦንላይን ማድረስ በአጭሩ (Massive Open Online Course)
+አካዳሚያችን 100% ኤሌክትሮኒክስ ሲሆን በማን ኛውም ወቅት ተማሪው በ ኮምፑዩተር ወይም በ ስማርት ስልክ ገብቶ መከታተል ይችላል ፡፡ ትምህርቶቹን እንዲሁም መልመጃዎችን በቀላሉ ሊገለልገሉ ይችላሉ</string>
 
 </resources>

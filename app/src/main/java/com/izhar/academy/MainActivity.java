@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.izhar.academy.message.MessageActivity;
 import com.izhar.academy.message.MessageAdapter;
 import com.izhar.academy.message.MessageObject;
+import com.izhar.academy.notification.Notification;
 import com.izhar.academy.users.UsersActivity;
 import com.izhar.academy.users.UsersDatabase;
 
@@ -94,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
                         intent.setType("application/vnd.android.package-archive");
                         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(path)));
                         startActivity(Intent.createChooser(intent, getString(R.string.share_via)));
+                        break;
+                    case R.id.notification:
+                        Notification notification = new Notification();
+                        fm.beginTransaction().replace(R.id.nav_host_fragment, notification).addToBackStack(null).commit();
                         break;
                     case R.id.ask:
                         Ask_Fragment ask_fragment = new Ask_Fragment();
@@ -193,47 +198,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
     }
 
-    TextView count;
-    ImageView msg;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.message, menu);
-        View actionView = menu.getItem(0).getActionView();
-        count = actionView.findViewById(R.id.count);
-        msg = actionView.findViewById(R.id.mail);
-        msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MessageActivity.class));
-            }
-        });
-        count.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MessageActivity.class));
-            }
-        });
-        setMessage();
-        return true;
-    }
-
-    private void setMessage() {
-        FirebaseDatabase.getInstance().getReference("new").child("Messages")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChildren()) {
-                            count.setText(snapshot.getChildrenCount() + "");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
 
     @Override
     public void onBackPressed() {

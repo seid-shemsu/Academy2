@@ -28,12 +28,12 @@ public class Start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setLanguage();
         setContentView(R.layout.activity_start);
-        try {
+        /*try {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             database.setPersistenceEnabled(true);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         if (sharedPreferences.getBoolean("started", false)){

@@ -52,7 +52,7 @@ public class SemesterAdapter extends RecyclerView.Adapter<SemesterAdapter.ImageV
         if (img.exists()) {
             holder.img.setImageBitmap(loadImage(context, semesterObject.getName()));
         } else {
-            Picasso.with(context).load(semesterObject.getImg()).placeholder(R.drawable.kitab).into(holder.img);
+            Picasso.with(context).load(semesterObject.getImg()).into(holder.img);
             try {
                 new Thread(new Runnable() {
                     @Override

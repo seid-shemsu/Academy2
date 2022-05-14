@@ -7,6 +7,10 @@
     <group
         android:checkableBehavior="single">
         <item
+            android:id="@+id/notification"
+            android:icon="@drawable/notifications"
+            android:title="@string/notification"/>
+        <item
             android:id="@+id/ask"
             android:icon="@drawable/ask"
             android:title="@string/ask_question"/>
